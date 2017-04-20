@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, Inversoft Inc., All Rights Reserved
+ * Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.inversoft.json.ToString;
 import com.inversoft.passport.domain.event.EventType;
@@ -88,11 +87,6 @@ public class Webhook implements Buildable<Webhook> {
   public int hashCode() {
     return Objects.hash(applicationIds, connectTimeout, description, global, headers, httpAuthenticationPassword, httpAuthenticationUsername,
                         readTimeout, sslCertificate, url);
-  }
-
-  @JsonIgnore
-  public boolean isTestable() {
-    return data.eventsEnabled.entrySet().stream().anyMatch(e -> e.getValue() != null && e.getValue());
   }
 
   public void normalize() {
