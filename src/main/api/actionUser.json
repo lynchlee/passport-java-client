@@ -31,8 +31,8 @@
         "    the id of the action, any options and the duration (if applicable)."
       ],
       "type": "body",
-      "javaType": "ActionResponse",
-      "csharpType": "ActionResponse",
+      "javaType": "ActionRequest",
+      "csharpType": "ActionRequest",
       "rubyType": "OpenStruct, Hash",
       "phpType": "array"
     }

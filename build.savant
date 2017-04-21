@@ -114,7 +114,7 @@ target(name: "update-client", description: "Updates the client libraries using t
   }
 
   new File("src/main/java/com/inversoft/passport/client/PassportClient.java").text = new groovy.text.SimpleTemplateEngine()
-      .createTemplate(f)
+      .createTemplate(new File("src/main/api/clients/java.client"))
       .make(apis)
       .toString()
 }

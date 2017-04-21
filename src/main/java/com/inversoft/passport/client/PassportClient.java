@@ -2654,7 +2654,7 @@ public class PassportClient {
    * experiencing a failure, the response will contain an Exception, which could be an IOException.
    */
   public ClientResponse<Void, Void> verifyEmail(String verificationId) {
-    return start(Void.TYPE, Void.TYPE).uri("/api/user/verify-email")
+    return startVoid(Void.TYPE).uri("/api/user/verify-email")
                                .urlSegment(verificationId)
                                .post()
                                .go();
@@ -2681,7 +2681,7 @@ public class PassportClient {
    * contain an Exception, which could be an IOException.
    */
   public ClientResponse<Void, Errors> verifyTwoFactor(TwoFactorRequest request) {
-    return start(Void.TYPE, Errors.class).uri("/api/two-factor")
+    return start(Void.TYPE).uri("/api/two-factor")
                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
                            .post()
                            .go();
@@ -2712,10 +2712,10 @@ public class PassportClient {
     return null;
   }
 
-  private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {
-    return new RESTClient<>(type, errorType).authorization(apiKey)
+  private <T> RESTClient<T, Errors> start(Class<T> type) {
+    return new RESTClient<>(type, Errors.class).authorization(apiKey)
                                             .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
-                                            .errorResponseHandler(errorType != Void.TYPE ? new JSONResponseHandler<>(errorType, objectMapper) : null)
+                                            .errorResponseHandler(new JSONResponseHandler<>(Errors.class, objectMapper))
                                             .url(baseURL)
                                             .connectTimeout(connectTimeout)
                                             .readTimeout(readTimeout);

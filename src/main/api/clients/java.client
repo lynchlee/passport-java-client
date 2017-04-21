@@ -85,7 +85,17 @@ import com.inversoft.rest.RESTClient;
  *
  * @author Brian Pontarelli
  */
+@SuppressWarnings("unused")
 public class PassportClient {
+  public static final ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL)
+                                                                    .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true)
+                                                                    .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+                                                                    .configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true)
+                                                                    .configure(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS, false)
+                                                                    .configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false)
+                                                                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                                                                    .registerModule(new JacksonModule());
+
   private final String apiKey;
 
   private final String baseURL;
@@ -98,8 +108,8 @@ public class PassportClient {
     this.apiKey = apiKey;
     this.baseURL = baseURL;
   }
-
-<% apis.each { api -> %>  /**
+<% apis.each { api -> %>
+  /**
 <% api['comments'].each { comment -> %>   * <%= comment %>
 <% } %>   *
 <% api['params'].each { param -> %>   * @param <%= param['name'] %> <%= param['comments'].join('\n   * ') %>
@@ -109,14 +119,13 @@ public class PassportClient {
    * IOException.
    */
   public ClientResponse<<%= api['successResponse'] %>, <%= api['errorResponse'] %>> <%= api['methodName'] %>(<%= api['params'].collect({ param -> "${param['javaType']} ${param['name']}" }).join(', ') %>) {
-    return start(<%= api['successResponse'] %>.class, <%= api['errorResponse'] %>.class).uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
+    return start(<%= api['successResponse'] %>.<%= api['successResponse'] == 'Void' ? 'TYPE' : 'class' %>, <%= api['errorResponse'] %>.<%= api['errorResponse'] == 'Void' ? 'TYPE' : 'class' %>).uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
                                             .urlSegment(<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
                                             .bodyHandler(new JSONBodyHandler(<%= param['name'] %>, objectMapper))<% } %><% } %>
                                             .<%= api['method'] %>()
                                             .go();
   }
 <% } %>
-
   private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {
     return new RESTClient<>(type, errorType).authorization(apiKey)
                                             .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
