@@ -1,0 +1,19 @@
+{
+  "uri": "/api/user/action",
+  "comment": "Takes an action on a user. The user being actioned is called the \"actionee\" and the user taking the action is called the \"actioner\". Both user ids are required. You pass the actionee's user id into the method and the actioner's is put into the request object.",
+  "method": "post",
+  "params": [
+    {
+      "name": "actioneeUserId",
+      "comment": "The actionee's user id.",
+      "type": "urlSegment",
+      "optional": false
+    },
+    {
+      "name": "actionRequest",
+      "comment": "The action request that includes all of the information about the action being taken including the id of the action, any options and the duration (if applicable).",
+      "type": "body",
+      "optional": false
+    }
+  ]
+}
