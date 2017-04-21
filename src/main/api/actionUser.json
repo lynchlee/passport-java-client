@@ -18,6 +18,7 @@
         "The actionee's user id."
       ],
       "type": "urlSegment",
+      "javaType": "UUID",
       "rubyType": "String",
       "phpType": "string"
     },
@@ -29,6 +30,7 @@
         "    the id of the action, any options and the duration (if applicable)."
       ],
       "type": "body",
+      "javaType": "ActionResponse",
       "rubyType": "OpenStruct, Hash",
       "phpType": "array"
     }

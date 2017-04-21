@@ -127,4 +127,9 @@ target(name: "update-client", description: "Updates the client libraries using t
       .createTemplate(new File("src/main/api/clients/php.client"))
       .make(apis)
       .toString()
+
+  println new groovy.text.SimpleTemplateEngine()
+      .createTemplate(new File("src/main/api/clients/node.client"))
+      .make(apis)
+      .toString()
 }

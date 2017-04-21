@@ -60,9 +60,20 @@ class PassportClient
   {
     return \$this->start()->uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
         ->urlSegment(\$<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
-        ->bodyHandler(new JSONBodyHandler(\$request))<% } %><% } %>
+        ->bodyHandler(new JSONBodyHandler(\$<%= param['name'] %>))<% } %><% } %>
         -><%= api['method'] %>()
         ->go();
   }
 <% } %>
+
+  private function start()
+  {
+    \$rest = new RESTClient();
+    return \$rest->authorization(\$this->apiKey)
+        ->url(\$this->baseURL)
+        ->connectTimeout(\$this->connectTimeout)
+        ->readTimeout(\$this->readTimeout)
+        ->successResponseHandler(new JSONResponseHandler())
+        ->errorResponseHandler(new JSONResponseHandler());
+  }
 }
