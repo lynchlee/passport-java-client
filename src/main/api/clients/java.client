@@ -46,9 +46,13 @@ public class PassportClient {
    */
   public ClientResponse<<%= api['successResponse'] %>, <%= api['errorResponse'] %>> <%= api['methodName'] %>>(UUID actioneeUserId, ActionRequest request) {
     return start(ActionResponse.class).uri("<%= api['uri'] %>")
-                                      .urlSegment(actioneeUserId)
+                                       <% api['params'].each do |param| %>
+                                         <% if param['type'] == 'urlSegment' %>
+                                      .urlSegment(<%= param['name'] %>)
+                                         <% end %>
+                                       <% end %>
                                       .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                                      .<%= api['method'] %>>()
+                                      .<%= api['method'] %>()
                                       .go();
   }
   <% end %>
