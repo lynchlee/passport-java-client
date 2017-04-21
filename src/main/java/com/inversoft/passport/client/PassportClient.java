@@ -529,8 +529,7 @@ public class PassportClient {
   }
 
   /**
-   * Creates a webhook. You can optionally specify an id for the webhook when calling this
-   * method, but it is not required.
+   * Creates a webhook. You can optionally specify an id for the webhook when calling this method, but it is not required.
    *
    * @param webhookId (Optional) The id for the webhook.
    * @param request   The webhook request that contains all of the information used to create the webhook.

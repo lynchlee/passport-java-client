@@ -112,7 +112,7 @@ public class PassportClient {
   /**
 <% api['comments'].each { comment -> %>   * <%= comment %>
 <% } %>   *
-<% api['params'].each { param -> %>   * @param <%= param['name'] %> <%= param['comments'].join('\n   * ') %>
+<% api['params'].findAll({ param -> !param['constant'] }).each { param -> %>   * @param <%= param['name'] %> <%= param['comments'].join('\n   * ') %>
 <% } %>   * @return When successful, the response will contain the log of the action. If there was a validation error or any
    * other type of error, this will return the Errors object in the response. Additionally, if Passport could not be
    * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
@@ -120,7 +120,8 @@ public class PassportClient {
    */
   public ClientResponse<<%= api['successResponse'] %>, <%= api['errorResponse'] %>> <%= api['methodName'] %>(<%= api['params'].collect({ param -> "${param['javaType']} ${param['name']}" }).join(', ') %>) {
     return start(<%= api['successResponse'] %>.<%= api['successResponse'] == 'Void' ? 'TYPE' : 'class' %>, <%= api['errorResponse'] %>.<%= api['errorResponse'] == 'Void' ? 'TYPE' : 'class' %>).uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-                                            .urlSegment(<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
+                                            .urlSegment(<%= param['constant'] ? param['value'] : param['name'] %>)<% } else if (param['type'] == 'urlParameter') { %>
+                                            .urlParameter(<%= "\"${param['parameterName']}\"" %>, <%= param['constant'] ? param['value'] : param['name'] %>)<% } else if (param['type'] == 'body') { %>
                                             .bodyHandler(new JSONBodyHandler(<%= param['name'] %>, objectMapper))<% } %><% } %>
                                             .<%= api['method'] %>()
                                             .go();

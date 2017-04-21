@@ -68,7 +68,8 @@ namespace Com.Inversoft.Passport.Client
      */
     public ClientResponse<<%= api['successResponse'] %>, <%= api['errorResponse'] %>> <%= api['methodName'].capitalize() %>(<%= api['params'].collect({ param -> "${param['csharpType']} ${param['name']}" }).join(', ') %>) {
         return Start<<%= api['successResponse'] %>, <%= api['errorResponse'] %>>().Uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-                                          .UrlSegment(<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
+                                          .UrlSegment(<%= param['name'] %>)<% } else if (param['type'] == 'urlParameter') { %>
+                                          .UrlParameter(<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
                                           .BodyHandler(new JSONBodyHandler(<%= param['name'] %>))<% } %><% } %>
                                           .<%= api['method'].capitalize() %>()
                                           .Go();

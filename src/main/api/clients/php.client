@@ -59,7 +59,8 @@ class PassportClient
   public function <%= api['methodName'] %>(<%= api['params'].collect({ param -> "\$${param['name']}" }).join(', ') %>)
   {
     return \$this->start()->uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-        ->urlSegment(\$<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
+        ->urlSegment(\$<%= param['name'] %>)<% } else if (param['type'] == 'urlParameter') { %>
+        ->urlParameter(\$<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
         ->bodyHandler(new JSONBodyHandler(\$<%= param['name'] %>))<% } %><% } %>
         -><%= api['method'] %>()
         ->go();
