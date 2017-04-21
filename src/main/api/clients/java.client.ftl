@@ -128,14 +128,29 @@ public class PassportClient {
   * IOException.
   */
   public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api)}) {
+    return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')},
+[#--<%= api['errorResponse'] %>.<%= api['errorResponse'] == 'Void' ? 'TYPE' : 'class' %>).uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>--]
+[#--.urlSegment(<%= param['constant'] ? param['value'] : param['name'] %>)<% } else if (param['type'] == 'urlParameter') { %>--]
+[#--.urlParameter(<%= "\"${param['parameterName']}\"" %>, <%= param['constant'] ? param['value'] : param['name'] %>)<% } else if (param['type'] == 'body') { %>--]
+[#--.bodyHandler(new JSONBodyHandler(<%= param['name'] %>, objectMapper))<% } %><% } %>--]
+[#--.<%= api['method'] %>()--]
+.go();
 
   }
 
 [/#list]
-  private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {
-    return new RESTClient<>(type, errorType).authorization(apiKey)
+  private <T> RESTClient<T, Errors> start(Class<T> type) {
+    return new RESTClient<>(type, Errors.class).authorization(apiKey)
+                                               .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
+                                               .errorResponseHandler(new JSONResponseHandler<>(Errors.class, objectMapper))
+                                               .url(baseURL)
+                                               .connectTimeout(connectTimeout)
+                                               .readTimeout(readTimeout);
+  }
+
+  private <T> RESTClient<T, Void> startVoid(Class<T> type) {
+    return new RESTClient<>(type, Void.TYPE).authorization(apiKey)
                                             .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
-                                            .errorResponseHandler(errorType != Void.TYPE ? new JSONResponseHandler<>(errorType, objectMapper) : null)
                                             .url(baseURL)
                                             .connectTimeout(connectTimeout)
                                             .readTimeout(readTimeout);
