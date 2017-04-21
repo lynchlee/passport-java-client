@@ -102,3 +102,19 @@ target(name: "bundle", description: "Builds the project release bundle", depends
     fileSet(dir: "build/jars")
   }
 }
+
+target(name: "update-client", description: "Updates the client libraries using the JSON files") {
+  def apis = [ 'apis' : [] ]
+  def jsonSlurper = new groovy.json.JsonSlurper()
+  new File("src/main/api").eachFile { f ->
+    if (f.isFile()) {
+      def name = f.getName()
+      apis['apis'] << jsonSlurper.parseText(f.getText())
+    }
+  }
+
+  println new groovy.text.SimpleTemplateEngine()
+      .createTemplate(new File("src/main/api/clients/java.client-groovy"))
+      .make(apis)
+      .toString()
+}
