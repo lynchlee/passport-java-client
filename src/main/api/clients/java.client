@@ -34,10 +34,10 @@ public class PassportClient {
 
   <% apis.each do |api| %>
   /**
-   * <%= api['comment'] %>
+   * <%= api['comment'].scan(/\w+.{1,120}/).join("\n   * ")  %>
    *
 <% api['params'].each do |param| -%>
-   * @param <%= param['name'] %> <%= param['comment'] %>
+   * @param <%= param['name'] %> <%= param['comment'].scan(/\w+.{1,110}/).join("\n   *                ") %>
 <% end -%>
    * @return When successful, the response will contain the log of the action. If there was a validation error or any
    * other type of error, this will return the Errors object in the response. Additionally, if Passport could not be
