@@ -114,7 +114,17 @@ target(name: "update-client", description: "Updates the client libraries using t
   }
 
   println new groovy.text.SimpleTemplateEngine()
-      .createTemplate(new File("src/main/api/clients/java.client-groovy"))
+      .createTemplate(new File("src/main/api/clients/java.client"))
+      .make(apis)
+      .toString()
+
+  println new groovy.text.SimpleTemplateEngine()
+      .createTemplate(new File("src/main/api/clients/ruby.client"))
+      .make(apis)
+      .toString()
+
+  println new groovy.text.SimpleTemplateEngine()
+      .createTemplate(new File("src/main/api/clients/php.client"))
       .make(apis)
       .toString()
 }
