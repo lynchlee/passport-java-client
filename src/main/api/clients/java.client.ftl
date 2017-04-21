@@ -1,3 +1,4 @@
+[#import "_macros.ftl" as global/]
 /*
 * Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
 *
@@ -114,13 +115,23 @@ public class PassportClient {
   [#list api.comments as comment]
   * ${comment}
   [/#list]
+  *
+  [#list api.params as param]
+    [#if !param.constant??]
+  * @param ${param.name} ${param.comments?join("\n  * ")}
+    [/#if]
+  [/#list]
+  *
   * @return When successful, the response will contain the log of the action. If there was a validation error or any
   * other type of error, this will return the Errors object in the response. Additionally, if Passport could not be
   * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
   * IOException.
   */
-[/#list]
+  public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api)}) {
 
+  }
+
+[/#list]
   private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {
     return new RESTClient<>(type, errorType).authorization(apiKey)
                                             .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
