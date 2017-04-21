@@ -1,6 +1,10 @@
 {
   "uri": "/api/user/action",
-  "comment": "Takes an action on a user. The user being actioned is called the \"actionee\" and the user taking the action is called the \"actioner\". Both user ids are required. You pass the actionee's user id into the method and the actioner's is put into the request object.",
+  "comments": [
+    "Takes an action on a user. The user being actioned is called the \"actionee\" and the user taking the action is called the",
+    "\"actioner\". Both user ids are required. You pass the actionee's user id into the method and the actioner's is put into the",
+    "request object."
+  ],
   "method": "post",
   "methodName": "actionUser",
   "successResponse": "ActionResponse",
