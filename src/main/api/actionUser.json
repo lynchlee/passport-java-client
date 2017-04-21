@@ -19,6 +19,7 @@
       ],
       "type": "urlSegment",
       "javaType": "UUID",
+      "csharpType": "Guid",
       "rubyType": "String",
       "phpType": "string"
     },
@@ -31,6 +32,7 @@
       ],
       "type": "body",
       "javaType": "ActionResponse",
+      "csharpType": "ActionResponse",
       "rubyType": "OpenStruct, Hash",
       "phpType": "array"
     }

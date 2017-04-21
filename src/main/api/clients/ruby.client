@@ -44,8 +44,8 @@ module Inversoft
     #
     def <%= api['underscoreMethodName'] %>(<%= api['params'].collect({ param -> param['underscoreName'] }).join(', ') %>)
       start.uri('<%= api['uri'] %>')<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-          .url_segment(<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
-          .body_handler(Inversoft::JSONBodyHandler.new(<%= param['name'] %>))<% } %><% } %>
+          .url_segment(<%= param['underscoreName'] %>)<% } else if (param['type'] == 'body') { %>
+          .body_handler(Inversoft::JSONBodyHandler.new(<%= param['underscoreName'] %>))<% } %><% } %>
           .<%= api['method'] %>()
           .go()
     end

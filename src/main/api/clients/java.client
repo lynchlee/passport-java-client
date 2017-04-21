@@ -109,11 +109,20 @@ public class PassportClient {
    * IOException.
    */
   public ClientResponse<<%= api['successResponse'] %>, <%= api['errorResponse'] %>> <%= api['methodName'] %>(<%= api['params'].collect({ param -> "${param['javaType']} ${param['name']}" }).join(', ') %>) {
-    return start(ActionResponse.class).uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-                                      .urlSegment(<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
-                                      .bodyHandler(new JSONBodyHandler(<%= param['name'] %>, objectMapper))<% } %><% } %>
-                                      .<%= api['method'] %>()
-                                      .go();
+    return start(<%= api['successResponse'] %>.class, <%= api['errorResponse'] %>.class).uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
+                                            .urlSegment(<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
+                                            .bodyHandler(new JSONBodyHandler(<%= param['name'] %>, objectMapper))<% } %><% } %>
+                                            .<%= api['method'] %>()
+                                            .go();
   }
 <% } %>
+
+  private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {
+    return new RESTClient<>(type, errorType).authorization(apiKey)
+                                            .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
+                                            .errorResponseHandler(errorType != Void.TYPE ? new JSONResponseHandler<>(errorType, objectMapper) : null)
+                                            .url(baseURL)
+                                            .connectTimeout(connectTimeout)
+                                            .readTimeout(readTimeout);
+  }
 }
