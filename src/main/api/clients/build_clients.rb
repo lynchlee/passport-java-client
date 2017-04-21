@@ -8,5 +8,5 @@ require 'json'
 @java_client = File.read('./java.client')
 
 namespace = OpenStruct.new(apis: @apis)
-result = ERB.new(@java_client).result(namespace.instance_eval { binding })
+result = ERB.new(@java_client, nil, '-').result(namespace.instance_eval { binding })
 puts result

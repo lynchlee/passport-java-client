@@ -36,9 +36,9 @@ public class PassportClient {
   /**
    * <%= api['comment'] %>
    *
-   <% api['params'].each do |param| %>
+<% api['params'].each do |param| -%>
    * @param <%= param['name'] %> <%= param['comment'] %>
-   <% end %>
+<% end -%>
    * @return When successful, the response will contain the log of the action. If there was a validation error or any
    * other type of error, this will return the Errors object in the response. Additionally, if Passport could not be
    * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
@@ -46,12 +46,12 @@ public class PassportClient {
    */
   public ClientResponse<<%= api['successResponse'] %>, <%= api['errorResponse'] %>> <%= api['methodName'] %>>(UUID actioneeUserId, ActionRequest request) {
     return start(ActionResponse.class).uri("<%= api['uri'] %>")
-                                       <% api['params'].each do |param| %>
+                                       <% api['params'].each do |param| -%>
                                          <% if param['type'] == 'urlSegment' %>
                                       .urlSegment(<%= param['name'] %>)
                                         <% elsif param['type'] == 'body' %>
                                       .bodyHandler(new JSONBodyHandler(<%= param['name'] %>, objectMapper))
-                                         <% end %>
+                                         <% end -%>
                                        <% end %>
                                       .<%= api['method'] %>()
                                       .go();
