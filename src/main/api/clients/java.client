@@ -49,9 +49,10 @@ public class PassportClient {
                                        <% api['params'].each do |param| %>
                                          <% if param['type'] == 'urlSegment' %>
                                       .urlSegment(<%= param['name'] %>)
+                                        <% elsif param['type'] == 'body' %>
+                                      .bodyHandler(new JSONBodyHandler(<%= param['name'] %>, objectMapper))
                                          <% end %>
                                        <% end %>
-                                      .bodyHandler(new JSONBodyHandler(request, objectMapper))
                                       .<%= api['method'] %>()
                                       .go();
   }
