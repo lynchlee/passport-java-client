@@ -53,6 +53,10 @@ class RestClientBuilder {
     try {
       template.process(apis, writer)
       println writer.toString()
+
+      Paths.get("../../..//src/main/java/com/inversoft/passport/client/PassportClient.java").toFile().text = writer.toString()
+
+//      new File("../../src/main/java/com/inversoft/passport/client/PassportClient.java").text = writer.toString()
     } catch (TemplateException e) {
       throw new RuntimeException(e)
     }

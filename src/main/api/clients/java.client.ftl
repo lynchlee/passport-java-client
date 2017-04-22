@@ -121,21 +121,24 @@ public class PassportClient {
   * @param ${param.name} ${param.comments?join("\n  * ")}
     [/#if]
   [/#list]
-  *
   * @return When successful, the response will contain the log of the action. If there was a validation error or any
   * other type of error, this will return the Errors object in the response. Additionally, if Passport could not be
   * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
   * IOException.
   */
   public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api)}) {
-    return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')},
-[#--<%= api['errorResponse'] %>.<%= api['errorResponse'] == 'Void' ? 'TYPE' : 'class' %>).uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>--]
-[#--.urlSegment(<%= param['constant'] ? param['value'] : param['name'] %>)<% } else if (param['type'] == 'urlParameter') { %>--]
-[#--.urlParameter(<%= "\"${param['parameterName']}\"" %>, <%= param['constant'] ? param['value'] : param['name'] %>)<% } else if (param['type'] == 'body') { %>--]
-[#--.bodyHandler(new JSONBodyHandler(<%= param['name'] %>, objectMapper))<% } %><% } %>--]
-[#--.<%= api['method'] %>()--]
-.go();
-
+    return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')}).uri("${api.uri}")
+                          [#list api.params as param]
+                            [#if param.type == "urlSegment"]
+                            .urlSegment(${(param.constant?? && param.constant)?then(param.value, param.name)})
+                            [#elseif param.type == "urlParameter"]
+                            .urlParameter("${param['parameterName']}", ${(param.constant?? && param.constant)?then(param.value, param.name)})
+                            [#elseif param.type == "body"]
+                            .bodyHandler(new JSONBodyHandler(${param.name}, objectMapper))
+                            [/#if]
+                          [/#list]
+                            .${api.method}()
+                            .go();
   }
 
 [/#list]
