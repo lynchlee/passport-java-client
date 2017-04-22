@@ -1,3 +1,4 @@
+[#import "_macros.ftl" as global/]
 #
 # Copyright (c) 2016, Inversoft Inc., All Rights Reserved
 #
@@ -29,20 +30,31 @@ class PassportClient:
         self.api_key = api_key
         self.base_url = base_url
 
-<% apis.each { api -> %>    def <%= api['underscoreMethodName'] %>(<%= ['self'].plus(api['params'].collect({ param -> param['underscoreName'] })).join(', ') %>):
-        """<%= api['comments'].join('\n        ') %>
+[#list apis as api]
+    def ${camel_to_underscores(api.methodName)}(${global.methodParameters(api, "python")}):
+        """
+        ${api.comments?join("\n        ")}
 
         Attributes:
-            <% api['params'].each { param -> %> <%= param['underscoreName'] %>: <%= param['comments'].join('\n                    ') %>
-            <% } %>
+        [#list api.params as param]
+          [#if !param.constant??]
+            ${camel_to_underscores(param.name)}: ${param.comments?join("\n                    ")}
+          [/#if]
+        [/#list]
         """
-        return self.start().uri('<%= api['uri'] %>') \\<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-                .url_segment(<%= param['underscoreName'] %>) \\<% } else if (param['type'] == 'urlParameter') { %>
-                .url_parameter(<%= param['underscoreName'] %>) \\<% } else if (param['type'] == 'body') { %>
-                .body_handler(JSONBodyHandler(<%= param['underscoreName'] %>)) \\<% } %><% } %>
-                .<%= api['method'] %>() \\
+        return self.start().uri('${api.uri}') \
+            [#list api.params as param]
+              [#if param.type == "urlSegment"]
+                .url_segment(${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name))}) \
+              [#elseif param.type == "urlParameter"]
+                .url_parameter('${param.parameterName}', ${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name))}) \
+              [#elseif param.type == "body"]
+                .body_handler(JSONBodyHandler(${camel_to_underscores(param.name)})) \
+              [/#if]
+            [/#list]
+                .${api.method}() \
                 .go()
-<% } %>
 
+[/#list]
     def start(self):
         return RESTClient().authorization(self.api_key).url(self.base_url)

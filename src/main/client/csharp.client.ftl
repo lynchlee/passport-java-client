@@ -88,8 +88,8 @@ namespace Com.Inversoft.Passport.Client
                                           .${api.method?capitalize}()
                                           .Go();
     }
-[/#list]
 
+[/#list]
     // Start initializes and returns RESTClient
     private RESTClient<T, U> Start<T, U>()
     {

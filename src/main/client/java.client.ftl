@@ -118,7 +118,7 @@ public class PassportClient {
   *
   [#list api.params as param]
     [#if !param.constant??]
-  * @param ${param.name} ${param.comments?join("\n  * ")}
+  * @param ${param.name} ${param.comments?join("\n  *     ")}
     [/#if]
   [/#list]
   * @return When successful, the response will contain the log of the action. If there was a validation error or any

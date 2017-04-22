@@ -1,3 +1,4 @@
+[#import "_macros.ftl" as global/]
 <?php
 namespace inversoft;
 
@@ -22,58 +23,71 @@ class PassportClient
   /**
    * @var string
    */
-  private \$apiKey;
+  private $apiKey;
 
   /**
    * @var string
    */
-  private \$baseURL;
+  private $baseURL;
 
   /**
    * @var int
    */
-  public \$connectTimeout = 2000;
+  public $connectTimeout = 2000;
 
   /**
    * @var int
    */
-  public \$readTimeout = 2000;
+  public $readTimeout = 2000;
 
-  public function __construct(\$apiKey, \$baseURL)
+  public function __construct($apiKey, $baseURL)
   {
     include_once 'RESTClient.php';
-    \$this->apiKey = \$apiKey;
-    \$this->baseURL = \$baseURL;
+    $this->apiKey = $apiKey;
+    $this->baseURL = $baseURL;
   }
 
-<% apis.each { api -> %>  /**
-<% api['comments'].each { comment -> %>   * <%= comment %>
-<% } %>   *
-<% api['params'].each { param -> %>   * @param <%= param['phpType'] %> \$<%= param['name'] %> <%= param['comments'].join('\n   * ') %>
-<% } %>   *
+[#list apis as api]
+  /**
+  [#list api.comments as comment]
+   * ${comment}
+  [/#list]
+   *
+  [#list api.params as param]
+    [#if !param.constant??]
+   * @param ${global.convertType(param.javaType, "php")} ${param.name} ${param.comments?join("\n  *     ")}
+    [/#if]
+  [/#list]
+   *
    * @return ClientResponse When successful, the response will contain the log of the action. If there was a
    *     validation error or any other type of error, this will return the Errors object in the response. Additionally,
    *     if Passport could not be contacted because it is down or experiencing a failure, the response will contain an
    *     Exception, which could be an IOException.
    */
-  public function <%= api['methodName'] %>(<%= api['params'].collect({ param -> "\$${param['name']}" }).join(', ') %>)
+  public function ${api.methodName}(${global.methodParameters(api, "php")})
   {
-    return \$this->start()->uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-        ->urlSegment(\$<%= param['name'] %>)<% } else if (param['type'] == 'urlParameter') { %>
-        ->urlParameter(\$<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
-        ->bodyHandler(new JSONBodyHandler(\$<%= param['name'] %>))<% } %><% } %>
-        -><%= api['method'] %>()
+    return $this->start()->uri("${api.uri}")
+    [#list api.params as param]
+      [#if param.type == "urlSegment"]
+        ->urlSegment(${(param.constant?? && param.constant)?then(param.value, "$" + param.name)})
+      [#elseif param.type == "urlParameter"]
+        ->urlParameter("${param.parameterName}", ${(param.constant?? && param.constant)?then(param.value, "$" + param.name)})
+      [#elseif param.type == "body"]
+        ->bodyHandler(new JSONBodyHandler($${param.name}))
+      [/#if]
+    [/#list]
+        ->${api.method}()
         ->go();
   }
-<% } %>
 
+[/#list]
   private function start()
   {
-    \$rest = new RESTClient();
-    return \$rest->authorization(\$this->apiKey)
-        ->url(\$this->baseURL)
-        ->connectTimeout(\$this->connectTimeout)
-        ->readTimeout(\$this->readTimeout)
+    $rest = new RESTClient();
+    return $rest->authorization($this->apiKey)
+        ->url($this->baseURL)
+        ->connectTimeout($this->connectTimeout)
+        ->readTimeout($this->readTimeout)
         ->successResponseHandler(new JSONResponseHandler())
         ->errorResponseHandler(new JSONResponseHandler());
   }

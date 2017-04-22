@@ -1,3 +1,4 @@
+[#import "_macros.ftl" as global/]
 #
 # Copyright (c) 2016-2017, Inversoft Inc., All Rights Reserved
 #
@@ -33,25 +34,38 @@ module Inversoft
       @read_timeout = 2000
     end
 
-<% apis.each { api -> %>    #
-<% api['comments'].each { comment -> %>    # <%= comment %>
-<% } %>    #
-<% api['params'].each { param -> %>    # @param <%= param['underscoreName'] %> [<%= param['rubyType'] %>] <%= param['comments'].join('\n    # ') %>
-<% } %>    # @return [Inversoft::ClientResponse] When successful, the response will contain the log of the action. If there was
+[#list apis as api]
+    #
+  [#list api.comments as comment]
+    # ${comment}
+  [/#list]
+    #
+  [#list api.params as param]
+    [#if !param.constant??]
+    # @param ${camel_to_underscores(param.name)} [${global.convertType(param.javaType, "ruby")}] ${param.comments?join("\n    #     ")}
+    [/#if]
+  [/#list]
+    # @return [Inversoft::ClientResponse] When successful, the response will contain the log of the action. If there was
     #   a validation error or any other type of error, this will return the Errors object in the response. Additionally,
     #   if Passport could not be contacted because it is down or experiencing a failure, the response will contain an
     #   Exception.
     #
-    def <%= api['underscoreMethodName'] %>(<%= api['params'].collect({ param -> param['underscoreName'] }).join(', ') %>)
-      start.uri('<%= api['uri'] %>')<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-          .url_segment(<%= param['underscoreName'] %>)<% } else if (param['type'] == 'urlParameter') { %>
-          .url_parameter(<%= param['underscoreName'] %>)<% } else if (param['type'] == 'body') { %>
-          .body_handler(Inversoft::JSONBodyHandler.new(<%= param['underscoreName'] %>))<% } %><% } %>
-          .<%= api['method'] %>()
-          .go()
+    def ${camel_to_underscores(api.methodName)}(${global.methodParameters(api, "ruby")})
+      start.uri('${api.uri}')
+      [#list api.params as param]
+        [#if param.type == "urlSegment"]
+           .url_segment(${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name))})
+        [#elseif param.type == "urlParameter"]
+           .url_parameter('${param.parameterName}', ${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name))})
+        [#elseif param.type == "body"]
+           .body_handler(Inversoft::JSONBodyHandler.new(${camel_to_underscores(param.name)}))
+        [/#if]
+      [/#list]
+           .${api.method}()
+           .go()
     end
-<% } %>
 
+[/#list]
     #
     # Starts the HTTP call
     #
