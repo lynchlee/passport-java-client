@@ -50,7 +50,7 @@ javaTestNG = loadPlugin(id: "org.savantbuild.plugin:java-testng:${savantVersion}
 file = loadPlugin(id: "org.savantbuild.plugin:file:${savantVersion}")
 idea = loadPlugin(id: "org.savantbuild.plugin:idea:${savantVersion}")
 release = loadPlugin(id: "org.savantbuild.plugin:release-git:${savantVersion}")
-clientLibrary = loadPlugin(id: "com.inversoft.savant.plugin:client-library:0.1.0-{integration}")
+clientLibrary = loadPlugin(id: "com.inversoft.savant.plugin:client-library:0.1.2")
 
 // Plugin settings
 java.settings.javaVersion = "1.8"
