@@ -126,7 +126,7 @@ public class PassportClient {
   * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
   * IOException.
   */
-  public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api)}) {
+  public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api, "java")}) {
     return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')}).uri("${api.uri}")
                         [#list api.params as param]
                           [#if param.type == "urlSegment"]

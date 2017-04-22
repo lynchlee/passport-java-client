@@ -1,3 +1,4 @@
+[#import "_macros.ftl" as global/]
 /*
  * Copyright (c) 2016-2017, Inversoft Inc., All Rights Reserved
  *
@@ -57,24 +58,37 @@ namespace Com.Inversoft.Passport.Client
       this.webProxy = webProxy;
     }
 
-<% apis.each { api -> %>    /**
-<% api['comments'].each { comment -> %>     * <%= comment %>
-<% } %>     *
-<% api['params'].each { param -> %>     * @param <%= param['name'] %> <%= param['comments'].join('\n     * ') %>
-<% } %>     * @return When successful, the response will contain the log of the action. If there was a validation error or any
+[#list apis as api]
+    /**
+  [#list api.comments as comment]
+     * ${comment}
+  [/#list]
+     *
+  [#list api.params as param]
+    [#if !param.constant??]
+     * @param ${param.name} ${param.comments?join("\n  * ")}
+    [/#if]
+  [/#list]
+     * @return When successful, the response will contain the log of the action. If there was a validation error or any
      * other type of error, this will return the Errors object in the response. Additionally, if Passport could not be
      * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
      * IOException.
      */
-    public ClientResponse<<%= api['successResponse'] %>, <%= api['errorResponse'] %>> <%= api['methodName'].capitalize() %>(<%= api['params'].collect({ param -> "${param['csharpType']} ${param['name']}" }).join(', ') %>) {
-        return Start<<%= api['successResponse'] %>, <%= api['errorResponse'] %>>().Uri("<%= api['uri'] %>")<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-                                          .UrlSegment(<%= param['name'] %>)<% } else if (param['type'] == 'urlParameter') { %>
-                                          .UrlParameter(<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
-                                          .BodyHandler(new JSONBodyHandler(<%= param['name'] %>))<% } %><% } %>
-                                          .<%= api['method'].capitalize() %>()
+    public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName?capitalize}(${global.methodParameters(api, "csharp")}) {
+        return Start<${api.successResponse}, ${api.errorResponse}>().Uri("${api.uri}")
+                                      [#list api.params as param]
+                                        [#if param.type == "urlSegment"]
+                                          .UrlSegment(${(param.constant?? && param.constant)?then(param.value, param.name)})
+                                        [#elseif param.type == "urlParameter"]
+                                          .UrlParameter("${param.parameterName}", ${(param.constant?? && param.constant)?then(param.value, param.name)})
+                                        [#elseif param.type == "body"]
+                                          .BodyHandler(new JSONBodyHandler(${param.name}))
+                                        [/#if]
+                                      [/#list]
+                                          .${api.method?capitalize}()
                                           .Go();
     }
-<% } %>
+[/#list]
 
     // Start initializes and returns RESTClient
     private RESTClient<T, U> Start<T, U>()
