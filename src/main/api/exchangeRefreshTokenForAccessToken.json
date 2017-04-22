@@ -1,0 +1,20 @@
+{
+  "uri": "/api/jwt/refresh",
+  "comments": [
+    "Exchange a refresh token for a new Access Token (JWT)."
+  ],
+  "method": "post",
+  "methodName": "exchangeRefreshTokenForAccessToken",
+  "successResponse": "RefreshResponse",
+  "errorResponse": "Errors",
+  "params": [
+    {
+      "name": "request",
+      "comments": [
+        "The refresh request."
+      ],
+      "type": "body",
+      "javaType": "RefreshRequest"
+    }
+  ]
+}

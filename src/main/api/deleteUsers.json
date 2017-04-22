@@ -1,21 +1,28 @@
 {
   "uri": "/api/user/bulk",
   "comments": [
-    "Deactivates the users with the given ids."
+    "Deletes the users with the given ids."
   ],
   "method": "delete",
-  "methodName": "deactivateUsers",
+  "methodName": "deleteUsers",
   "successResponse": "Void",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "userIds",
       "comments": [
-        "The ids of the users to deactivate."
+        "The ids of the users to delete."
       ],
       "type": "urlParameter",
       "parameterName": "userId",
       "javaType": "Collection<UUID>"
+    },
+    {
+      "constant": true,
+      "name": "hardDelete",
+      "type": "urlParameter",
+      "parameterName": "hardDelete",
+      "value": "true"
     }
   ]
 }

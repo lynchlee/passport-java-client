@@ -26,11 +26,5 @@
       "parameterName": "hardDelete",
       "value": "true"
     }
-  ],
-  "restParameters": [
-    {
-      "type": "urlSegment",
-      "value": "applicationId"
-    }
   ]
 }

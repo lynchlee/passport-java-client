@@ -82,10 +82,10 @@ import com.inversoft.rest.JSONResponseHandler;
 import com.inversoft.rest.RESTClient;
 
 /**
-* Client that connects to a Passport server and provides access to the full set of Passport APIs.
-*
-* @author Brian Pontarelli
-*/
+ * Client that connects to a Passport server and provides access to the full set of Passport APIs.
+ *
+ * @author Brian Pontarelli
+ */
 @SuppressWarnings("unused")
 public class PassportClient {
   public static final ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL)
@@ -113,19 +113,19 @@ public class PassportClient {
 [#list apis as api]
   /**
   [#list api.comments as comment]
-  * ${comment}
+   * ${comment}
   [/#list]
-  *
+   *
   [#list api.params as param]
     [#if !param.constant??]
-  * @param ${param.name} ${param.comments?join("\n  *     ")}
+   * @param ${param.name} ${param.comments?join("\n  *     ")}
     [/#if]
   [/#list]
-  * @return When successful, the response will contain the log of the action. If there was a validation error or any
-  * other type of error, this will return the Errors object in the response. Additionally, if Passport could not be
-  * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
-  * IOException.
-  */
+   * @return When successful, the response will contain the log of the action. If there was a validation error or any
+   * other type of error, this will return the Errors object in the response. Additionally, if Passport could not be
+   * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
+   * IOException.
+   */
   public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api, "java")}) {
     return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')}).uri("${api.uri}")
                         [#list api.params as param]
