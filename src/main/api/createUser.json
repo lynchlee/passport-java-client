@@ -5,33 +5,24 @@
   ],
   "method": "post",
   "methodName": "createUser",
-  "underscoreMethodName": "create_user",
   "successResponse": "UserResponse",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "userId",
-      "underscoreName": "user_id",
       "comments": [
         "(Optional) The id for the user."
       ],
       "type": "urlSegment",
-      "javaType": "UUID",
-      "csharpType": "Guid",
-      "rubyType": "String",
-      "phpType": "string"
+      "javaType": "UUID"
     },
     {
       "name": "request",
-      "underscoreName": "request",
       "comments": [
         "The user request that contains all of the information used to create the user."
       ],
       "type": "body",
-      "javaType": "UserRequest",
-      "csharpType": "UserRequest",
-      "rubyType": "OpenStruct, Hash",
-      "phpType": "array"
+      "javaType": "UserRequest"
     }
   ]
 }

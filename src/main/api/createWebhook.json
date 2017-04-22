@@ -5,33 +5,24 @@
   ],
   "method": "post",
   "methodName": "createWebhook",
-  "underscoreMethodName": "create_webhook",
   "successResponse": "WebhookResponse",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "webhookId",
-      "underscoreName": "webhook_id",
       "comments": [
         "(Optional) The id for the webhook."
       ],
       "type": "urlSegment",
-      "javaType": "UUID",
-      "csharpType": "Guid",
-      "rubyType": "String",
-      "phpType": "string"
+      "javaType": "UUID"
     },
     {
       "name": "request",
-      "underscoreName": "request",
       "comments": [
         "The webhook request that contains all of the information used to create the webhook."
       ],
       "type": "body",
-      "javaType": "WebhookRequest",
-      "csharpType": "WebhookRequest",
-      "rubyType": "OpenStruct, Hash",
-      "phpType": "array"
+      "javaType": "WebhookRequest"
     }
   ]
 }

@@ -6,34 +6,25 @@
   ],
   "method": "post",
   "methodName": "createEmailTemplate",
-  "underscoreMethodName": "create_email_template",
   "successResponse": "EmailTemplateResponse",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "emailTemplateId",
-      "underscoreName": "email_template_id",
       "comments": [
         "(Optional) The id for the template."
       ],
       "type": "urlSegment",
-      "javaType": "UUID",
-      "csharpType": "Guid",
-      "rubyType": "String",
-      "phpType": "string"
+      "javaType": "UUID"
     },
     {
       "name": "request",
-      "underscoreName": "request",
       "comments": [
         "The email template request that contains all of the information used to create the email",
         "template."
       ],
       "type": "body",
-      "javaType": "EmailTemplateRequest",
-      "csharpType": "EmailTemplateRequest",
-      "rubyType": "OpenStruct, Hash",
-      "phpType": "array"
+      "javaType": "EmailTemplateRequest"
     }
   ]
 }

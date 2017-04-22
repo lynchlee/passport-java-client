@@ -6,33 +6,24 @@
   ],
   "method": "post",
   "methodName": "createUserActionReason",
-  "underscoreMethodName": "create_user_action_reason",
   "successResponse": "UserActionReasonResponse",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "userActionReasonId",
-      "underscoreName": "user_action_reason_id",
       "comments": [
         "(Optional) The id for the user action reason."
       ],
       "type": "urlSegment",
-      "javaType": "UUID",
-      "csharpType": "Guid",
-      "rubyType": "String",
-      "phpType": "string"
+      "javaType": "UUID"
     },
     {
       "name": "request",
-      "underscoreName": "request",
       "comments": [
         "The user action reason request that contains all of the information used to create the user action reason."
       ],
       "type": "body",
-      "javaType": "UserActionReasonRequest",
-      "csharpType": "UserActionReasonRequest",
-      "rubyType": "OpenStruct, Hash",
-      "phpType": "array"
+      "javaType": "UserActionReasonRequest"
     }
   ]
 }

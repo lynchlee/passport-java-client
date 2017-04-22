@@ -7,34 +7,26 @@
   ],
   "method": "post",
   "methodName": "actionUser",
-  "underscoreMethodName": "action_user",
   "successResponse": "ActionResponse",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "actioneeUserId",
-      "underscoreName": "actionee_user_id",
       "comments": [
         "The actionee's user id."
       ],
       "type": "urlSegment",
-      "javaType": "UUID",
-      "csharpType": "Guid",
-      "rubyType": "String",
-      "phpType": "string"
+      "javaType": "UUID"
     },
     {
       "name": "request",
       "underscoreName": "request",
       "comments": [
         "The action request that includes all of the information about the action being taken including",
-        "    the id of the action, any options and the duration (if applicable)."
+        "the id of the action, any options and the duration (if applicable)."
       ],
       "type": "body",
-      "javaType": "ActionRequest",
-      "csharpType": "ActionRequest",
-      "rubyType": "OpenStruct, Hash",
-      "phpType": "array"
+      "javaType": "ActionRequest"
     }
   ]
 }

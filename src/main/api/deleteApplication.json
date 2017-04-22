@@ -8,21 +8,16 @@
   ],
   "method": "delete",
   "methodName": "deleteApplication",
-  "underscoreMethodName": "delete_application",
   "successResponse": "Void",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "applicationId",
-      "underscoreName": "application_id",
       "comments": [
         "The id of the application to deactivate."
       ],
       "type": "urlSegment",
-      "javaType": "UUID",
-      "csharpType": "Guid",
-      "rubyType": "String",
-      "phpType": "string"
+      "javaType": "UUID"
     },
     {
       "constant": true,
@@ -35,8 +30,7 @@
   "restParameters": [
     {
       "type": "urlSegment",
-      "value": "applicationId",
-      "underscoreValue": "application_id"
+      "value": "applicationId"
     }
   ]
 }

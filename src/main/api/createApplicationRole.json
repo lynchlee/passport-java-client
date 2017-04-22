@@ -6,21 +6,16 @@
   ],
   "method": "post",
   "methodName": "createApplicationRole",
-  "underscoreMethodName": "create_application_role",
   "successResponse": "ApplicationResponse",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "applicationId",
-      "underscoreName": "application_id",
       "comments": [
         "The id of the application to create the role on."
       ],
       "type": "urlSegment",
-      "javaType": "UUID",
-      "csharpType": "Guid",
-      "rubyType": "String",
-      "phpType": "string"
+      "javaType": "UUID"
     },
     {
       "constant": true,
@@ -30,15 +25,11 @@
     },
     {
       "name": "request",
-      "underscoreName": "request",
       "comments": [
         "The application request that contains all of the information used to create the role."
       ],
       "type": "body",
-      "javaType": "ApplicationRequest",
-      "csharpType": "ApplicationRequest",
-      "rubyType": "OpenStruct, Hash",
-      "phpType": "array"
+      "javaType": "ApplicationRequest"
     }
   ]
 }

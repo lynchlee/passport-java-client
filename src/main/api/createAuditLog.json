@@ -7,21 +7,16 @@
   ],
   "method": "post",
   "methodName": "createAuditLog",
-  "underscoreMethodName": "create_audit_log",
   "successResponse": "Void",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "request",
-      "underscoreName": "request",
       "comments": [
         "The audit log request that contains all of the information used to create the audit log entry."
       ],
       "type": "body",
-      "javaType": "AuditLogRequest",
-      "csharpType": "AuditLogRequest",
-      "rubyType": "OpenStruct, Hash",
-      "phpType": "array"
+      "javaType": "AuditLogRequest"
     }
   ]
 }

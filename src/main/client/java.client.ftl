@@ -1,19 +1,19 @@
 [#import "_macros.ftl" as global/]
 /*
-* Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing,
-* software distributed under the License is distributed on an
-* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-* either express or implied. See the License for the specific
-* language governing permissions and limitations under the License.
-*/
+ * Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
 package com.inversoft.passport.client;
 
 import java.util.Collection;
@@ -128,15 +128,15 @@ public class PassportClient {
   */
   public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api)}) {
     return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')}).uri("${api.uri}")
-                          [#list api.params as param]
-                            [#if param.type == "urlSegment"]
+                        [#list api.params as param]
+                          [#if param.type == "urlSegment"]
                             .urlSegment(${(param.constant?? && param.constant)?then(param.value, param.name)})
-                            [#elseif param.type == "urlParameter"]
-                            .urlParameter("${param['parameterName']}", ${(param.constant?? && param.constant)?then(param.value, param.name)})
-                            [#elseif param.type == "body"]
+                          [#elseif param.type == "urlParameter"]
+                            .urlParameter("${param.parameterName}", ${(param.constant?? && param.constant)?then(param.value, param.name)})
+                          [#elseif param.type == "body"]
                             .bodyHandler(new JSONBodyHandler(${param.name}, objectMapper))
-                            [/#if]
-                          [/#list]
+                          [/#if]
+                        [/#list]
                             .${api.method}()
                             .go();
   }

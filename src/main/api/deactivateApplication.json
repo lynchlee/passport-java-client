@@ -5,21 +5,16 @@
   ],
   "method": "delete",
   "methodName": "deactivateApplication",
-  "underscoreMethodName": "deactivate_application",
   "successResponse": "Void",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "applicationId",
-      "underscoreName": "application_id",
       "comments": [
         "The id of the application to deactivate."
       ],
       "type": "urlSegment",
-      "javaType": "UUID",
-      "csharpType": "Guid",
-      "rubyType": "String",
-      "phpType": "string"
+      "javaType": "UUID"
     }
   ]
 }

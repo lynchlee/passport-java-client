@@ -37,6 +37,9 @@ project(group: "com.inversoft.passport", name: "passport-java-client", version: 
 
   publications {
     standard()
+    main {
+      publication(name: "apis", type: "zip", file: "build/apis.zip")
+    }
   }
 }
 
@@ -47,9 +50,12 @@ javaTestNG = loadPlugin(id: "org.savantbuild.plugin:java-testng:${savantVersion}
 file = loadPlugin(id: "org.savantbuild.plugin:file:${savantVersion}")
 idea = loadPlugin(id: "org.savantbuild.plugin:idea:${savantVersion}")
 release = loadPlugin(id: "org.savantbuild.plugin:release-git:${savantVersion}")
+clientLibrary = loadPlugin(id: "com.inversoft.savant.plugin:client-library:0.1.0-{integration}")
 
+// Plugin settings
 java.settings.javaVersion = "1.8"
 javaTestNG.settings.javaVersion = "1.8"
+clientLibrary.settings.debug = true
 
 target(name: "clean", description: "Cleans the project") {
   java.clean()
@@ -61,6 +67,10 @@ target(name: "compile", description: "Compiles the project") {
 
 target(name: "jar", description: "JARs the project", dependsOn: ["compile"]) {
   java.jar()
+
+  file.zip(file: "build/apis.zip") {
+    fileSet(dir: "src/main/api")
+  }
 }
 
 target(name: "test", description: "Runs the project's tests", dependsOn: ["jar"]) {
@@ -104,17 +114,5 @@ target(name: "bundle", description: "Builds the project release bundle", depends
 }
 
 target(name: "update-client", description: "Updates the client libraries using the JSON files") {
-  def apis = [ 'apis' : [] ]
-  def jsonSlurper = new groovy.json.JsonSlurper()
-  new File("src/main/api").eachFile { f ->
-    if (f.isFile()) {
-      def name = f.getName()
-      apis['apis'] << jsonSlurper.parseText(f.getText())
-    }
-  }
-
-  new File("src/main/java/com/inversoft/passport/client/PassportClient.java").text = new groovy.text.SimpleTemplateEngine()
-      .createTemplate(new File("src/main/api/clients/java.client"))
-      .make(apis)
-      .toString()
+  clientLibrary.buildClient()
 }
