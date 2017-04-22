@@ -1,4 +1,5 @@
-/*
+[#import "_macros.ftl" as global/]
+/*/*
  * Copyright (c) 2016-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,23 +29,36 @@ PassportClient.constructor = PassportClient;
 //noinspection JSUnusedGlobalSymbols
 PassportClient.prototype = {
 
-<% apis.each { api -> %>  /**
-<% api['comments'].each { comment -> %>   * <%= comment %>
-<% } %>   *
-<% api['params'].each { param -> %>   * @param <%= param['name'] %> <%= param['comments'].join('\n   * ') %>
-<% } %>   * @return {Promise} A Promise for the Passport call.
+[#list apis as api]
+  /**
+  [#list api.comments as comment]
+   * ${comment}
+  [/#list]
+   *
+  [#list api.params as param]
+    [#if !param.constant??]
+   * @param {${global.convertType(param.javaType, "js")}} ${param.name} ${param.comments?join("\n   *    ")}
+    [/#if]
+  [/#list]
+   * @return {Promise} A Promise for the Passport call.
    */
-  <%= api['methodName'] %>: function(<%= api['params'].collect({ param -> param['name'] }).join(', ') %>) {
+  ${api.methodName}: function(${global.methodParameters(api, "js")}) {
     return new Promise((resolve, reject) => {
       this._start()
-          .uri('<%= api['uri'] %>')<% api['params'].each { param -> %><% if (param['type'] == 'urlSegment') { %>
-          .urlSegment(<%= param['name'] %>)<% } else if (param['type'] == 'urlParameter') { %>
-          .urlParameter(<%= param['name'] %>)<% } else if (param['type'] == 'body') { %>
-          .setJSONBody(<%= param['name'] %>)<% } %><% } %>
-          .<%= api['method'] %>()
+          .uri('${api.uri}')
+      [#list api.params as param]
+        [#if param.type == "urlSegment"]
+          .urlSegment(${(param.constant?? && param.constant)?then(param.value, param.name)})
+        [#elseif param.type == "urlParameter"]
+          .urlParameter('${param.parameterName}', ${(param.constant?? && param.constant)?then(param.value, param.name)})
+        [#elseif param.type == "body"]
+          .setJSONBody(${param.name})
+        [/#if]
+      [/#list]
+          .${api.method}()
           .go(this._responseHandler(resolve, reject));
-    },
-<% } %>
+  },
+[/#list]
 
   /* ===================================================================================================================
    * Private methods
