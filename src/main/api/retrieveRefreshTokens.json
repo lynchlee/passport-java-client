@@ -1,0 +1,21 @@
+{
+  "uri": "/api/jwt/refresh",
+  "comments": [
+    "Retrieves the refresh tokens that belong to the user with the given id."
+  ],
+  "method": "get",
+  "methodName": "retrieveRefreshTokens",
+  "successResponse": "RefreshResponse",
+  "errorResponse": "Errors",
+  "params": [
+    {
+      "name": "userId",
+      "comments": [
+        "The id of the user."
+      ],
+      "type": "urlParameter",
+      "parameterName": "userId",
+      "javaType": "UUID"
+    }
+  ]
+}

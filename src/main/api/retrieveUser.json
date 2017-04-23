@@ -1,0 +1,20 @@
+{
+  "uri": "/api/user",
+  "comments": [
+    "Retrieves the user for the given id."
+  ],
+  "method": "get",
+  "methodName": "retrieveUser",
+  "successResponse": "UserResponse",
+  "errorResponse": "Errors",
+  "params": [
+    {
+      "name": "userId",
+      "comments": [
+        "The id of the user."
+      ],
+      "type": "urlSegment",
+      "javaType": "UUID"
+    }
+  ]
+}

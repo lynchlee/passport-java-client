@@ -1,0 +1,20 @@
+{
+  "uri": "/api/user/comment",
+  "comments": [
+    "Retrieves all of the comments for the user with the given id."
+  ],
+  "method": "get",
+  "methodName": "retrieveUserComments",
+  "successResponse": "UserCommentResponse",
+  "errorResponse": "Errors",
+  "params": [
+    {
+      "name": "userId",
+      "comments": [
+        "The id of the user."
+      ],
+      "type": "urlSegment",
+      "javaType": "String"
+    }
+  ]
+}
