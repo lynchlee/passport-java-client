@@ -36,7 +36,7 @@ class PassportClient:
         ${api.comments?join("\n        ")}
 
         Attributes:
-        [#list api.params as param]
+        [#list api.params![] as param]
           [#if !param.constant??]
             ${camel_to_underscores(param.name)}: ${param.comments?join("\n                    ")}
           [/#if]
@@ -46,7 +46,7 @@ class PassportClient:
             [#if api.authorization??]
                 .authorization(${api.authorization})
             [/#if]
-            [#list api.params as param]
+            [#list api.params![] as param]
               [#if param.type == "urlSegment"]
                 .url_segment(${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name))}) \
               [#elseif param.type == "urlParameter"]

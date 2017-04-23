@@ -53,7 +53,7 @@ class PassportClient
    * ${comment}
   [/#list]
    *
-  [#list api.params as param]
+  [#list api.params![] as param]
     [#if !param.constant??]
    * @param ${global.convertType(param.javaType, "php")} ${param.name} ${param.comments?join("\n  *     ")}
     [/#if]
@@ -68,9 +68,9 @@ class PassportClient
   {
     return $this->start()->uri("${api.uri}")
     [#if api.authorization??]
-        ->authorization(${api.authorization})
+        ->authorization(${api.authorization?replace("+", ".")})
     [/#if]
-    [#list api.params as param]
+    [#list api.params![] as param]
       [#if param.type == "urlSegment"]
         ->urlSegment(${(param.constant?? && param.constant)?then(param.value, "$" + param.name)})
       [#elseif param.type == "urlParameter"]

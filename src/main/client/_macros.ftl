@@ -31,7 +31,7 @@
 
 [#function methodParameters api language]
   [#local result = []]
-  [#list api.params as param]
+  [#list api.params![] as param]
     [#if !param.constant??]
       [#if language == "php"]
         [#local result = result + ["$" + param.name]/]

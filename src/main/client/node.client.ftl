@@ -35,7 +35,7 @@ PassportClient.prototype = {
    * ${comment}
   [/#list]
    *
-  [#list api.params as param]
+  [#list api.params![] as param]
     [#if !param.constant??]
    * @param {${global.convertType(param.javaType, "js")}} ${param.name} ${param.comments?join("\n   *    ")}
     [/#if]
@@ -49,7 +49,7 @@ PassportClient.prototype = {
       [#if api.authorization??]
           .authorization(${api.authorization})
       [/#if]
-      [#list api.params as param]
+      [#list api.params![] as param]
         [#if param.type == "urlSegment"]
           .urlSegment(${(param.constant?? && param.constant)?then(param.value, param.name)})
         [#elseif param.type == "urlParameter"]

@@ -40,7 +40,7 @@ module Inversoft
     # ${comment}
   [/#list]
     #
-  [#list api.params as param]
+  [#list api.params![] as param]
     [#if !param.constant??]
     # @param ${camel_to_underscores(param.name)} [${global.convertType(param.javaType, "ruby")}] ${param.comments?join("\n    #     ")}
     [/#if]
@@ -55,7 +55,7 @@ module Inversoft
       [#if api.authorization??]
            .authorization(${api.authorization})
       [/#if]
-      [#list api.params as param]
+      [#list api.params![] as param]
         [#if param.type == "urlSegment"]
            .url_segment(${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name))})
         [#elseif param.type == "urlParameter"]

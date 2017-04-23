@@ -64,7 +64,7 @@ namespace Com.Inversoft.Passport.Client
      * ${comment}
   [/#list]
      *
-  [#list api.params as param]
+  [#list api.params![] as param]
     [#if !param.constant??]
      * @param ${param.name} ${param.comments?join("\n  * ")}
     [/#if]
@@ -79,7 +79,7 @@ namespace Com.Inversoft.Passport.Client
                                       [#if api.authorization??]
                                           .Authorization(${api.authorization})
                                       [/#if]
-                                      [#list api.params as param]
+                                      [#list api.params![] as param]
                                         [#if param.type == "urlSegment"]
                                           .UrlSegment(${(param.constant?? && param.constant)?then(param.value, param.name)})
                                         [#elseif param.type == "urlParameter"]
