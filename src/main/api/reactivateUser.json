@@ -1,0 +1,27 @@
+{
+  "uri": "/api/user",
+  "comments": [
+    "Reactivates the user with the given id."
+  ],
+  "method": "put",
+  "methodName": "reactivateUser",
+  "successResponse": "UserResponse",
+  "errorResponse": "Errors",
+  "params": [
+    {
+      "name": "userId",
+      "comments": [
+        "The id of the user to reactivate."
+      ],
+      "type": "urlSegment",
+      "javaType": "UUID"
+    },
+    {
+      "name": "reactivate",
+      "constant": true,
+      "type": "urlParameter",
+      "parameterName": "reactivate",
+      "value": "true"
+    }
+  ]
+}

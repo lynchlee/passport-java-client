@@ -1,0 +1,27 @@
+{
+  "uri": "/api/application",
+  "comments": [
+    "Reactivates the application with the given id."
+  ],
+  "method": "put",
+  "methodName": "reactivateApplication",
+  "successResponse": "ApplicationResponse",
+  "errorResponse": "Errors",
+  "params": [
+    {
+      "name": "applicationId",
+      "comments": [
+        "The id of the application to reactivate."
+      ],
+      "type": "urlSegment",
+      "javaType": "UUID"
+    },
+    {
+      "name": "reactivate",
+      "constant": true,
+      "type": "urlParameter",
+      "parameterName": "reactivate",
+      "value": "true"
+    }
+  ]
+}
