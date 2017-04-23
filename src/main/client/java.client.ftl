@@ -17,7 +17,6 @@
 package com.inversoft.passport.client;
 
 import java.util.Collection;
-import java.util.Objects;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -27,7 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.inversoft.error.Errors;
 import com.inversoft.json.JacksonModule;
-import com.inversoft.passport.domain.AuditLog;
 import com.inversoft.passport.domain.api.ApplicationRequest;
 import com.inversoft.passport.domain.api.ApplicationResponse;
 import com.inversoft.passport.domain.api.AuditLogRequest;
@@ -83,6 +81,12 @@ import com.inversoft.rest.RESTClient;
 
 /**
  * Client that connects to a Passport server and provides access to the full set of Passport APIs.
+ * <p/>
+ * When any method is called the return value is always a ClientResponse object. When an API call was successful, the
+ * response will contain the response from the server. This might be empty or contain an success object or an error
+ * object. If there was a validation error or any other type of error, this will return the Errors object in the
+ * response. Additionally, if Passport could not be contacted because it is down or experiencing a failure, the response
+ * will contain an Exception, which could be an IOException.
  *
  * @author Brian Pontarelli
  */
@@ -121,13 +125,10 @@ public class PassportClient {
    * @param ${param.name} ${param.comments?join("\n  *     ")}
     [/#if]
   [/#list]
-   * @return When successful, the response will contain the log of the action. If there was a validation error or any
-   * other type of error, this will return the Errors object in the response. Additionally, if Passport could not be
-   * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
-   * IOException.
+   * @return The ClientResponse object.
    */
   public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api, "java")}) {
-    return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')}).uri("${api.uri}")
+    return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')}, ${api.errorResponse}.${(api.errorResponse == 'Void')?then('TYPE', 'class')}).uri("${api.uri}")
                         [#if api.authorization??]
                             .authorization(${api.authorization})
                         [/#if]
@@ -145,20 +146,12 @@ public class PassportClient {
   }
 
 [/#list]
-  private <T> RESTClient<T, Errors> start(Class<T> type) {
-    return new RESTClient<>(type, Errors.class).authorization(apiKey)
+  private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {
+    return new RESTClient<>(type, errorType).authorization(apiKey)
                                                .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
-                                               .errorResponseHandler(new JSONResponseHandler<>(Errors.class, objectMapper))
+                                               .errorResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(errorType, objectMapper) : null)
                                                .url(baseURL)
                                                .connectTimeout(connectTimeout)
                                                .readTimeout(readTimeout);
-  }
-
-  private <T> RESTClient<T, Void> startVoid(Class<T> type) {
-    return new RESTClient<>(type, Void.TYPE).authorization(apiKey)
-                                            .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
-                                            .url(baseURL)
-                                            .connectTimeout(connectTimeout)
-                                            .readTimeout(readTimeout);
   }
 }

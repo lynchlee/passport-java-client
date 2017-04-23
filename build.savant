@@ -52,7 +52,7 @@ clientLibrary = loadPlugin(id: "com.inversoft.savant.plugin:client-library:0.2.1
 // Plugin settings
 java.settings.javaVersion = "1.8"
 javaTestNG.settings.javaVersion = "1.8"
-clientLibrary.settings.debug = true
+clientLibrary.settings.debug = false
 
 target(name: "clean", description: "Cleans the project") {
   java.clean()

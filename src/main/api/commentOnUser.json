@@ -4,7 +4,7 @@
     "Adds a comment to the user's account."
   ],
   "method": "post",
-  "methodName": "changePassword",
+  "methodName": "commentOnUser",
   "successResponse": "Void",
   "errorResponse": "Errors",
   "params": [

@@ -1,0 +1,20 @@
+{
+  "uri": "/api/two-factor",
+  "comments": [
+    "Confirms a two factor authentication code."
+  ],
+  "method": "post",
+  "methodName": "verifyTwoFactor",
+  "successResponse": "Void",
+  "errorResponse": "Errors",
+  "params": [
+    {
+      "name": "request",
+      "comments": [
+        "The two factor request information."
+      ],
+      "type": "body",
+      "javaType": "TwoFactorRequest"
+    }
+  ]
+}

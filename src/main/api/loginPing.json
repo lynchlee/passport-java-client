@@ -35,7 +35,7 @@
       ],
       "type": "urlParameter",
       "parameterName": "ipAddress",
-      "javaType": "UUID"
+      "javaType": "String"
     }
   ]
 }

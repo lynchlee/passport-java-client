@@ -11,7 +11,7 @@
   "methodName": "issueAccessToken",
   "successResponse": "IssueResponse",
   "errorResponse": "Errors",
-  "authorization": "\"JWT\" + encodedJWT",
+  "authorization": "\"JWT \" + encodedJWT",
   "params": [
     {
       "name": "applicationId",
