@@ -1,0 +1,69 @@
+{
+  "uri": "/api/system/audit-log",
+  "comments": [
+    "Searches the audit logs with the specified criteria and pagination."
+  ],
+  "method": "get",
+  "methodName": "searchAuditLogs",
+  "successResponse": "AuditLogResponse",
+  "errorResponse": "Void",
+  "params": [
+    {
+      "name": "search",
+      "comments": [
+        "The search criteria and pagination information."
+      ],
+      "type": "notUsed",
+      "javaType": "AuditLogSearchCriteria"
+    },
+    {
+      "name": "search.user",
+      "constant": true,
+      "type": "urlParameter",
+      "parameterName": "search.user",
+      "value": "search.user"
+    },
+    {
+      "name": "search.message",
+      "constant": true,
+      "type": "urlParameter",
+      "parameterName": "search.message",
+      "value": "search.message"
+    },
+    {
+      "name": "search.end",
+      "constant": true,
+      "type": "urlParameter",
+      "parameterName": "search.end",
+      "value": "search.end"
+    },
+    {
+      "name": "search.start",
+      "constant": true,
+      "type": "urlParameter",
+      "parameterName": "search.start",
+      "value": "search.start"
+    },
+    {
+      "name": "search.orderBy",
+      "constant": true,
+      "type": "urlParameter",
+      "parameterName": "search.orderBy",
+      "value": "search.orderBy"
+    },
+    {
+      "name": "search.startRow",
+      "constant": true,
+      "type": "urlParameter",
+      "parameterName": "search.startRow",
+      "value": "search.startRow"
+    },
+    {
+      "name": "search.numberOfResults",
+      "constant": true,
+      "type": "urlParameter",
+      "parameterName": "search.numberOfResults",
+      "value": "search.numberOfResults"
+    }
+  ]
+}
