@@ -128,6 +128,9 @@ public class PassportClient {
    */
   public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api, "java")}) {
     return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')}).uri("${api.uri}")
+                        [#if api.authorization??]
+                            .authorization(${api.authorization})
+                        [/#if]
                         [#list api.params as param]
                           [#if param.type == "urlSegment"]
                             .urlSegment(${(param.constant?? && param.constant)?then(param.value, param.name)})

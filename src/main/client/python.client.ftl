@@ -43,6 +43,9 @@ class PassportClient:
         [/#list]
         """
         return self.start().uri('${api.uri}') \
+            [#if api.authorization??]
+                .authorization(${api.authorization})
+            [/#if]
             [#list api.params as param]
               [#if param.type == "urlSegment"]
                 .url_segment(${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name))}) \

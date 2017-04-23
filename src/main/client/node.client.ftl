@@ -46,6 +46,9 @@ PassportClient.prototype = {
     return new Promise((resolve, reject) => {
       this._start()
           .uri('${api.uri}')
+      [#if api.authorization??]
+          .authorization(${api.authorization})
+      [/#if]
       [#list api.params as param]
         [#if param.type == "urlSegment"]
           .urlSegment(${(param.constant?? && param.constant)?then(param.value, param.name)})

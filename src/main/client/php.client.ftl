@@ -67,6 +67,9 @@ class PassportClient
   public function ${api.methodName}(${global.methodParameters(api, "php")})
   {
     return $this->start()->uri("${api.uri}")
+    [#if api.authorization??]
+        ->authorization(${api.authorization})
+    [/#if]
     [#list api.params as param]
       [#if param.type == "urlSegment"]
         ->urlSegment(${(param.constant?? && param.constant)?then(param.value, "$" + param.name)})

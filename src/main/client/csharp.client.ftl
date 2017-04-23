@@ -76,6 +76,9 @@ namespace Com.Inversoft.Passport.Client
      */
     public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName?capitalize}(${global.methodParameters(api, "csharp")}) {
         return Start<${api.successResponse}, ${api.errorResponse}>().Uri("${api.uri}")
+                                      [#if api.authorization??]
+                                          .Authorization(${api.authorization})
+                                      [/#if]
                                       [#list api.params as param]
                                         [#if param.type == "urlSegment"]
                                           .UrlSegment(${(param.constant?? && param.constant)?then(param.value, param.name)})
