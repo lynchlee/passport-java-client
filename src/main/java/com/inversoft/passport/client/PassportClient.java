@@ -29,6 +29,8 @@ import com.inversoft.passport.domain.api.ApplicationRequest;
 import com.inversoft.passport.domain.api.ApplicationResponse;
 import com.inversoft.passport.domain.api.AuditLogRequest;
 import com.inversoft.passport.domain.api.AuditLogResponse;
+import com.inversoft.passport.domain.api.AuditLogSearchRequest;
+import com.inversoft.passport.domain.api.AuditLogSearchResponse;
 import com.inversoft.passport.domain.api.EmailTemplateRequest;
 import com.inversoft.passport.domain.api.EmailTemplateResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
@@ -69,10 +71,8 @@ import com.inversoft.passport.domain.api.user.ForgotPasswordResponse;
 import com.inversoft.passport.domain.api.user.ImportRequest;
 import com.inversoft.passport.domain.api.user.RegistrationRequest;
 import com.inversoft.passport.domain.api.user.RegistrationResponse;
+import com.inversoft.passport.domain.api.user.SearchRequest;
 import com.inversoft.passport.domain.api.user.SearchResponse;
-import com.inversoft.passport.domain.search.AuditLogSearchCriteria;
-import com.inversoft.passport.domain.search.SortField;
-import com.inversoft.passport.domain.search.UserSearchCriteria;
 import com.inversoft.rest.ClientResponse;
 import com.inversoft.rest.JSONBodyHandler;
 import com.inversoft.rest.JSONResponseHandler;
@@ -230,8 +230,8 @@ public class PassportClient {
    * @param request The audit log request that contains all of the information used to create the audit log entry.
    * @return The ClientResponse object.
    */
-  public ClientResponse<Void, Errors> createAuditLog(AuditLogRequest request) {
-    return start(Void.TYPE, Errors.class).uri("/api/system/audit-log")
+  public ClientResponse<AuditLogResponse, Errors> createAuditLog(AuditLogRequest request) {
+    return start(AuditLogResponse.class, Errors.class).uri("/api/system/audit-log")
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
                             .go();
@@ -1102,6 +1102,19 @@ public class PassportClient {
   }
 
   /**
+   * Searches the audit logs with the specified criteria and pagination.
+   *
+   * @param request The search criteria and pagination information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<AuditLogSearchResponse, Void> searchAuditLogs(AuditLogSearchRequest request) {
+    return start(AuditLogSearchResponse.class, Void.TYPE).uri("/api/system/audit-log/search")
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
+                            .go();
+  }
+
+  /**
    * Retrieves the users for the given ids. If any id is invalid, it is ignored.
    *
    * @param ids The user ids to search for.
@@ -1111,6 +1124,20 @@ public class PassportClient {
     return start(SearchResponse.class, Errors.class).uri("/api/user/search")
                             .urlParameter("ids", ids)
                             .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves the users for the given search criteria and pagination.
+   *
+   * @param request The search criteria and pagination constraints. Fields used: queryString, numberOfResults, startRow,
+  *     and sort fields.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<SearchResponse, Errors> searchUsersByQueryString(SearchRequest request) {
+    return start(SearchResponse.class, Errors.class).uri("/api/user/search")
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
                             .go();
   }
 
@@ -1306,54 +1333,6 @@ public class PassportClient {
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
                             .go();
-  }
-
-  /**
-   * Searches the audit logs with the specified criteria and pagination.
-   *
-   * @param search The search criteria and pagination information.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<AuditLogResponse, Void> searchAuditLogs(AuditLogSearchCriteria search) {
-    return start(AuditLogResponse.class, Void.TYPE).uri("/api/system/audit-log")
-                            .urlParameter("search.user", search.user)
-                            .urlParameter("search.message", search.message)
-                            .urlParameter("search.end", search.end)
-                            .urlParameter("search.start", search.start)
-                            .urlParameter("search.orderBy", search.orderBy)
-                            .urlParameter("search.startRow", search.startRow)
-                            .urlParameter("search.numberOfResults", search.numberOfResults)
-                            .get()
-                            .go();
-  }
-
-  /**
-   * Retrieves the users for the given search criteria and pagination.
-   *
-   * @param search The search criteria and pagination constraints. Fields used: queryString, numberOfResults, startRow,
-   *               and sort fields.
-   * @return When successful, the response will contain the users that match the search criteria and pagination
-   * constraints. If there was a validation error or any other type of error, this will return the Errors object in the
-   * response. Additionally, if Passport could not be contacted because it is down or experiencing a failure, the
-   * response will contain an Exception, which could be an IOException.
-   */
-  public ClientResponse<UserResponse, Errors> searchUsersByQueryString(UserSearchCriteria search) {
-    RESTClient<UserResponse, Errors> client = start(UserResponse.class, Errors.class).uri("/api/user/search")
-                                                                                     .urlParameter("queryString", search.queryString)
-                                                                                     .urlParameter("numberOfResults", search.numberOfResults)
-                                                                                     .urlParameter("startRow", search.startRow)
-                                                                                     .get();
-
-    if (search.sortFields != null) {
-      for (int i = 0; i < search.sortFields.size(); i++) {
-        SortField field = search.sortFields.get(i);
-        client.urlParameter("sortFields[" + i + "].name", field.name)
-              .urlParameter("sortFields[" + i + "].missing", field.missing)
-              .urlParameter("sortFields[" + i + "].order", field.order);
-      }
-    }
-
-    return client.go();
   }
 
   private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {

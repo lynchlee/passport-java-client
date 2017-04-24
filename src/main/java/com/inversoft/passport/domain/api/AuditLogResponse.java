@@ -15,11 +15,8 @@
  */
 package com.inversoft.passport.domain.api;
 
-import java.util.List;
-
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.passport.domain.AuditLog;
-import com.inversoft.passport.domain.search.SearchResults;
 
 /**
  * Audit log response.
@@ -27,16 +24,13 @@ import com.inversoft.passport.domain.search.SearchResults;
  * @author Brian Pontarelli
  */
 public class AuditLogResponse {
-  public List<AuditLog> auditLogs;
-
-  public long total;
+  public AuditLog auditLog;
 
   @JacksonConstructor
   public AuditLogResponse() {
   }
 
-  public AuditLogResponse(SearchResults<AuditLog> searchResults) {
-    this.auditLogs = searchResults.results;
-    this.total = searchResults.total;
+  public AuditLogResponse(AuditLog auditLog) {
+    this.auditLog = auditLog;
   }
 }

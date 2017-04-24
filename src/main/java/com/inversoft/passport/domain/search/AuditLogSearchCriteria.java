@@ -17,6 +17,8 @@ package com.inversoft.passport.domain.search;
 
 import java.time.ZonedDateTime;
 
+import com.inversoft.json.JacksonConstructor;
+
 /**
  * @author Brian Pontarelli
  */
@@ -28,6 +30,20 @@ public class AuditLogSearchCriteria extends BaseSearchCriteria {
   public ZonedDateTime start;
 
   public String user;
+
+  @JacksonConstructor
+  public AuditLogSearchCriteria() {
+  }
+
+  public AuditLogSearchCriteria(String message, String user, ZonedDateTime start, ZonedDateTime end, int startRow, int numberOfResults, String orderBy) {
+    this.end = end;
+    this.message = message;
+    this.start = start;
+    this.user = user;
+    this.startRow = startRow;
+    this.numberOfResults = numberOfResults;
+    this.orderBy = orderBy;
+  }
 
   @Override
   public void prepare() {

@@ -17,6 +17,7 @@ package com.inversoft.passport.domain.api;
 
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.passport.domain.AuditLog;
+import com.inversoft.passport.domain.search.AuditLogSearchCriteria;
 
 /**
  * @author Brian Pontarelli

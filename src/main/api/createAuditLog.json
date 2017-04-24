@@ -7,7 +7,7 @@
   ],
   "method": "post",
   "methodName": "createAuditLog",
-  "successResponse": "Void",
+  "successResponse": "AuditLogResponse",
   "errorResponse": "Errors",
   "params": [
     {

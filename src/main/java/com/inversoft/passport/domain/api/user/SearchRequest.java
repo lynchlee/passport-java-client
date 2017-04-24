@@ -15,7 +15,6 @@
  */
 package com.inversoft.passport.domain.api.user;
 
-
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.passport.domain.search.UserSearchCriteria;
 
