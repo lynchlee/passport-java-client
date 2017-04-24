@@ -45,10 +45,7 @@ module Inversoft
     # @param ${camel_to_underscores(param.name)} [${global.convertType(param.javaType, "ruby")}] ${param.comments?join("\n    #     ")}
     [/#if]
   [/#list]
-    # @return [Inversoft::ClientResponse] When successful, the response will contain the log of the action. If there was
-    #   a validation error or any other type of error, this will return the Errors object in the response. Additionally,
-    #   if Passport could not be contacted because it is down or experiencing a failure, the response will contain an
-    #   Exception.
+    # @return [Inversoft::ClientResponse] The ClientResponse object.
     #
     def ${camel_to_underscores(api.methodName)}(${global.methodParameters(api, "ruby")})
       start.uri('${api.uri}')
@@ -69,6 +66,32 @@ module Inversoft
     end
 
 [/#list]
+    #
+    # Retrieves the users for the given search criteria and pagination.
+    #
+    # @param search [OpenStruct, Hash] The search criteria and pagination constraints. Fields used: queryString, numberOfResults, and startRow
+    #
+    # @return [Inversoft::ClientResponse] The ClientResponse object.
+    #
+    def function search_users_by_query_string(search)
+      client = start.uri("/api/user/search")
+          .url_parameter("queryString", search["queryString"])
+          .url_parameter("numberOfResults", search["numberOfResults"])
+          .url_parameter("startRow", search["startRow"])
+
+      if search["sortFields"]
+        index = 0
+        search["sortFields"].each_with_index |value, index|
+          client.url_parameter("sortFields[" + index + "].name", value["name"])
+              .url_parameter("sortFields[" + index + "].missing", value["missing"])
+              .url_parameter("sortFields[" + index . "].order", value["order"])
+          index++
+        end
+      end
+
+      return client.get.go
+    end
+
     #
     # Starts the HTTP call
     #

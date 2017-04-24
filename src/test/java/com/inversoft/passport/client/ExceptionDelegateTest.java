@@ -9,12 +9,12 @@ import org.testng.annotations.Test;
 /**
  * @author Brian Pontarelli
  */
-public class MoneyDelegateTest {
+public class ExceptionDelegateTest {
   @Test
   public void all() {
     PassportClient client = new PassportClient(null, null);
-    MoneyDelegate delegate = new MoneyDelegate(null, null);
+    ExceptionDelegate delegate = new ExceptionDelegate();
 
-    User user = delegate.delegate(() -> client.retrieveUser(null)).user;
+    User user = delegate.execute(() -> client.retrieveUser(null)).user;
   }
 }
