@@ -1,4 +1,15 @@
 [#import "_macros.ftl" as global/]
+[#function parameter_value param]
+  [#if param.constant?? && param.constant]
+    [#if param.value?starts_with("search")]
+      [#return "$" + param.value/] [#-- Hack for the search functions --]
+    [#else]
+      [#return param.value/]
+    [/#if]
+  [#else]
+    [#return "$" + param.name/]
+  [/#if]
+[/#function]
 <?php
 namespace inversoft;
 
@@ -18,6 +29,17 @@ namespace inversoft;
  * language governing permissions and limitations under the License.
  */
 
+/**
+ * Client that connects to a Passport server and provides access to the full set of Passport APIs.
+ * <p/>
+ * When any method is called the return value is always a ClientResponse object. When an API call was successful, the
+ * response will contain the response from the server. This might be empty or contain an success object or an error
+ * object. If there was a validation error or any other type of error, this will return the Errors object in the
+ * response. Additionally, if Passport could not be contacted because it is down or experiencing a failure, the response
+ * will contain an Exception, which could be an IOException.
+ *
+ * @author Brian Pontarelli
+ */
 class PassportClient
 {
   /**
@@ -55,7 +77,7 @@ class PassportClient
    *
   [#list api.params![] as param]
     [#if !param.constant??]
-   * @param ${global.convertType(param.javaType, "php")} ${param.name} ${param.comments?join("\n  *     ")}
+   * @param ${global.convertType(param.javaType, "php")} $${param.name} ${param.comments?join("\n  *     ")}
     [/#if]
   [/#list]
    *
@@ -65,13 +87,13 @@ class PassportClient
   {
     return $this->start()->uri("${api.uri}")
     [#if api.authorization??]
-        ->authorization(${api.authorization?replace("+", ".")})
+        ->authorization(${api.authorization?replace("+ ", ". $")})
     [/#if]
     [#list api.params![] as param]
       [#if param.type == "urlSegment"]
         ->urlSegment(${(param.constant?? && param.constant)?then(param.value, "$" + param.name)})
       [#elseif param.type == "urlParameter"]
-        ->urlParameter("${param.parameterName}", ${(param.constant?? && param.constant)?then(param.value, "$" + param.name)})
+        ->urlParameter("${param.parameterName}", ${parameter_value(param)})
       [#elseif param.type == "body"]
         ->bodyHandler(new JSONBodyHandler($${param.name}))
       [/#if]
@@ -81,6 +103,27 @@ class PassportClient
   }
 
 [/#list]
+  /**
+   * Searches the audit logs with the specified criteria and pagination.
+   *
+   * @param array $search The search criteria and pagination information.
+   *
+   * @return ClientResponse The ClientResponse.
+   */
+  public function searchAuditLogs($search)
+  {
+    return $this->start()->uri("/api/system/audit-log")
+        ->urlParameter("search.user", $search["user"])
+        ->urlParameter("search.message", $search["message"])
+        ->urlParameter("search.end", $search["end"])
+        ->urlParameter("search.start", $search["start"])
+        ->urlParameter("search.orderBy", $search["orderBy"])
+        ->urlParameter("search.startRow", $search["startRow"])
+        ->urlParameter("search.numberOfResults", $search["numberOfResults"])
+        ->get()
+        ->go();
+  }
+
   /**
    * Retrieves the users for the given search criteria and pagination.
    *
@@ -99,14 +142,14 @@ class PassportClient
     if (isset($search["sortFields"])) {
       $index = 0;
       foreach($search["sortFields"] as $value) {
-        client->urlParameter("sortFields[" . $index . "].name", $value["name"])
-            ->urlParameter("sortFields[" . $index . "].missing", $value["missing"])
-            ->urlParameter("sortFields[" . $index . "].order", $value["order"]);
+        $client->urlParameter("sortFields[" . $index . "].name", $value["name"])
+               ->urlParameter("sortFields[" . $index . "].missing", $value["missing"])
+               ->urlParameter("sortFields[" . $index . "].order", $value["order"]);
         $index++;
       }
     }
 
-    return client->get()->go();
+    return $client->get()->go();
   }
 
   private function start()

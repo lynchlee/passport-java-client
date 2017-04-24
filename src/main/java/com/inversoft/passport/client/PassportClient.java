@@ -163,14 +163,14 @@ public class PassportClient {
   }
 
   /**
-   * Changes a user's password using a loginId. Using a loginId instead of the verificationId bypasses the email
-   * verification and allows a password to be changed directly without first calling {@link
-   * #forgotPassword(ForgotPasswordRequest)}.
+   * Changes a user's password using their identity (login id and password). Using a loginId instead of the verificationId
+   * bypasses the email verification and allows a password to be changed directly without first calling the #forgotPassword
+   * method.
    *
    * @param request The change password request that contains all of the information used to change the password.
    * @return The ClientResponse object.
    */
-  public ClientResponse<Void, Errors> changePassword(ChangePasswordRequest request) {
+  public ClientResponse<Void, Errors> changePasswordByIdentity(ChangePasswordRequest request) {
     return start(Void.TYPE, Errors.class).uri("/api/user/change-password")
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
@@ -1102,25 +1102,6 @@ public class PassportClient {
   }
 
   /**
-   * Searches the audit logs with the specified criteria and pagination.
-   *
-   * @param search The search criteria and pagination information.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<AuditLogResponse, Void> searchAuditLogs(AuditLogSearchCriteria search) {
-    return start(AuditLogResponse.class, Void.TYPE).uri("/api/system/audit-log")
-                            .urlParameter("search.user", search.user)
-                            .urlParameter("search.message", search.message)
-                            .urlParameter("search.end", search.end)
-                            .urlParameter("search.start", search.start)
-                            .urlParameter("search.orderBy", search.orderBy)
-                            .urlParameter("search.startRow", search.startRow)
-                            .urlParameter("search.numberOfResults", search.numberOfResults)
-                            .get()
-                            .go();
-  }
-
-  /**
    * Retrieves the users for the given ids. If any id is invalid, it is ignored.
    *
    * @param ids The user ids to search for.
@@ -1324,6 +1305,25 @@ public class PassportClient {
     return start(Void.TYPE, Errors.class).uri("/api/two-factor")
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
+                            .go();
+  }
+
+  /**
+   * Searches the audit logs with the specified criteria and pagination.
+   *
+   * @param search The search criteria and pagination information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<AuditLogResponse, Void> searchAuditLogs(AuditLogSearchCriteria search) {
+    return start(AuditLogResponse.class, Void.TYPE).uri("/api/system/audit-log")
+                            .urlParameter("search.user", search.user)
+                            .urlParameter("search.message", search.message)
+                            .urlParameter("search.end", search.end)
+                            .urlParameter("search.start", search.start)
+                            .urlParameter("search.orderBy", search.orderBy)
+                            .urlParameter("search.startRow", search.startRow)
+                            .urlParameter("search.numberOfResults", search.numberOfResults)
+                            .get()
                             .go();
   }
 

@@ -147,6 +147,25 @@ public class PassportClient {
 
 [/#list]
   /**
+   * Searches the audit logs with the specified criteria and pagination.
+   *
+   * @param search The search criteria and pagination information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<AuditLogResponse, Void> searchAuditLogs(AuditLogSearchCriteria search) {
+    return start(AuditLogResponse.class, Void.TYPE).uri("/api/system/audit-log")
+                            .urlParameter("search.user", search.user)
+                            .urlParameter("search.message", search.message)
+                            .urlParameter("search.end", search.end)
+                            .urlParameter("search.start", search.start)
+                            .urlParameter("search.orderBy", search.orderBy)
+                            .urlParameter("search.startRow", search.startRow)
+                            .urlParameter("search.numberOfResults", search.numberOfResults)
+                            .get()
+                            .go();
+  }
+
+  /**
    * Retrieves the users for the given search criteria and pagination.
    *
    * @param search The search criteria and pagination constraints. Fields used: queryString, numberOfResults, startRow,

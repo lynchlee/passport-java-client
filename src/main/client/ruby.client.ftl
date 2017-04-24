@@ -67,13 +67,33 @@ module Inversoft
 
 [/#list]
     #
+    # Searches the audit logs with the specified criteria and pagination.
+    #
+    # @param search [OpenStruct, Hash] The search criteria and pagination information.
+    #
+    # @return [Inversoft::ClientResponse] The ClientResponse object.
+    #
+    def search_users_by_query_string(search)
+      return start.uri("/api/system/audit-log")
+          .urlParameter("search.user", search["user"])
+          .urlParameter("search.message", search["message"])
+          .urlParameter("search.end", search["end"])
+          .urlParameter("search.start", search["start"])
+          .urlParameter("search.orderBy", search["orderBy"])
+          .urlParameter("search.startRow", search["startRow"])
+          .urlParameter("search.numberOfResults", search["numberOfResults"])
+          .get
+          .go
+    end
+
+    #
     # Retrieves the users for the given search criteria and pagination.
     #
     # @param search [OpenStruct, Hash] The search criteria and pagination constraints. Fields used: queryString, numberOfResults, and startRow
     #
     # @return [Inversoft::ClientResponse] The ClientResponse object.
     #
-    def function search_users_by_query_string(search)
+    def search_users_by_query_string(search)
       client = start.uri("/api/user/search")
           .url_parameter("queryString", search["queryString"])
           .url_parameter("numberOfResults", search["numberOfResults"])

@@ -94,6 +94,25 @@ namespace Com.Inversoft.Passport.Client
 
 [/#list]
     /**
+     * Searches the audit logs with the specified criteria and pagination.
+     *
+     * @param search The search criteria and pagination information.
+     * @return The ClientResponse object.
+     */
+    public ClientResponse<AuditLogResponse, RESTVoid> SearchAuditLogs(AuditLogSearchCriteria search) {
+      return Start<AuditLogResponse, Void>().Uri("/api/system/audit-log")
+                              .UrlParameter("search.user", search.user)
+                              .UrlParameter("search.message", search.message)
+                              .UrlParameter("search.end", search.end)
+                              .UrlParameter("search.start", search.start)
+                              .UrlParameter("search.orderBy", search.orderBy)
+                              .UrlParameter("search.startRow", search.startRow)
+                              .UrlParameter("search.numberOfResults", search.numberOfResults)
+                              .Get()
+                              .Go();
+    }
+
+    /**
      * Retrieves the users for the given search criteria and pagination.
      *
      * @param search The search criteria and pagination constraints. Fields used: queryString, numberOfResults,
