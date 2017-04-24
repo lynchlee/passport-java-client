@@ -39,6 +39,8 @@ public class UserSearchCriteria extends BaseSearchCriteria {
 
   public UUID id;
 
+  public List<UUID> ids = new ArrayList<>();
+
   public String queryString;
 
   public List<SortField> sortFields = new ArrayList<>(Arrays.asList(new SortField("user.email"), new SortField("user.username")));
