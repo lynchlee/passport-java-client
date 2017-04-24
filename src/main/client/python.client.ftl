@@ -59,31 +59,5 @@ class PassportClient:
                 .go()
 
 [/#list]
-    def search_audit_logs(self, search):
-        return self.start().uri('/api/system/audit-log') \
-                .urlParameter('search.user', search.user) \
-                .urlParameter('search.message', search.message) \
-                .urlParameter('search.end', search.end) \
-                .urlParameter('search.start', search.start) \
-                .urlParameter('search.orderBy', search.orderBy) \
-                .urlParameter('search.startRow', search.startRow) \
-                .urlParameter('search.numberOfResults', search.numberOfResults) \
-                .get() \
-                .go()
-
-    def search_for_users_by_search_criteria(self, search):
-        client = self.start().uri('/api/user/search') \
-                .url_parameter('queryString', search.queryString) \
-                .url_parameter('numberOfResults', search.numberOfResults) \
-                .url_parameter('startRow', search.startRow)
-
-        if search.sortFields:
-            for i, value in enumerate(search.sortFields:
-                client.urlParameter("sortFields[" + i + "].name", value.name)
-                    .urlParameter("sortFields[" + i + "].missing", value.missing)
-                    .urlParameter("sortFields[" + i + "].order", value.order)
-
-        return client.get().go()
-
     def start(self):
         return RESTClient().authorization(self.api_key).url(self.base_url)

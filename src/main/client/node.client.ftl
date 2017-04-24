@@ -63,61 +63,6 @@ PassportClient.prototype = {
   },
 
 [/#list]
-  /**
-   * Searches the audit logs with the specified criteria and pagination.
-   *
-   * @param {Object} search The search criteria and pagination information.
-   * @returns {Promise} A Promise for the Passport call.
-   */
-  searchAuditLogs: function(search) {
-    const client = this._start()
-        .uri('/api/system/audit-log')
-        .urlParameter("search.user", search.user)
-        .urlParameter("search.message", search.message)
-        .urlParameter("search.end", search.end)
-        .urlParameter("search.start", search.start)
-        .urlParameter("search.orderBy", search.orderBy)
-        .urlParameter("search.startRow", search.startRow)
-        .urlParameter("search.numberOfResults", search.numberOfResults)
-        .get();
-
-    return new Promise((resolve, reject) => {
-      client.go(this._responseHandler(resolve, reject));
-    });
-  },
-
-  /**
-   * Retrieves the users for the given search criteria and pagination.
-   *
-   * @param {Object} search The search criteria and pagination constraints. Fields used: queryString, numberOfResults, startRow,
-   *               and sort fields.
-   * @returns {Promise} A Promise for the Passport call.
-   */
-  searchUsersByQueryString: function(search) {
-    //noinspection JSUnresolvedVariable
-    const client = this._start()
-        .uri('/api/user/search')
-        .urlParameter('queryString', search.queryString)
-        .urlParameter("numberOfResults", search.numberOfResults)
-        .urlParameter("startRow", search.startRow)
-        .get();
-
-    //noinspection JSUnresolvedVariable
-    if (search.sortFields !== null && typeof search.sortFields !== 'undefined') {
-      //noinspection JSUnresolvedVariable
-      for (let i = 0; i < search.sortFields.length; i++) {
-        //noinspection JSUnresolvedVariable
-        client.urlParameter("sortFields[" + i + "].name", search.sortFields[i].name)
-            .urlParameter("sortFields[" + i + "].missing", search.sortFields[i].missing)
-            .urlParameter("sortFields[" + i + "].order", search.sortFields[i].order);
-      }
-    }
-
-    return new Promise((resolve, reject) => {
-      client.go(this._responseHandler(resolve, reject));
-    });
-  },
-
   /* ===================================================================================================================
    * Private methods
    * ===================================================================================================================*/
