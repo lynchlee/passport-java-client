@@ -59,5 +59,19 @@ class PassportClient:
                 .go()
 
 [/#list]
+    def search_for_users_by_search_criteria(self, search):
+        client = self.start().uri('/api/user/search') \
+                .url_parameter('queryString', search.queryString) \
+                .url_parameter('numberOfResults', search.numberOfResults) \
+                .url_parameter('startRow', search.startRow)
+
+        if search.sortFields:
+            for i, value in enumerate(search.sortFields:
+                client.urlParameter("sortFields[" + i + "].name", value.name)
+                    .urlParameter("sortFields[" + i + "].missing", value.missing)
+                    .urlParameter("sortFields[" + i + "].order", value.order)
+
+        return client.get().go()
+
     def start(self):
         return RESTClient().authorization(self.api_key).url(self.base_url)

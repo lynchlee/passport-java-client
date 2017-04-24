@@ -59,10 +59,7 @@ class PassportClient
     [/#if]
   [/#list]
    *
-   * @return ClientResponse When successful, the response will contain the log of the action. If there was a
-   *     validation error or any other type of error, this will return the Errors object in the response. Additionally,
-   *     if Passport could not be contacted because it is down or experiencing a failure, the response will contain an
-   *     Exception, which could be an IOException.
+   * @return ClientResponse The ClientResponse.
    */
   public function ${api.methodName}(${global.methodParameters(api, "php")})
   {
@@ -84,6 +81,34 @@ class PassportClient
   }
 
 [/#list]
+  /**
+   * Retrieves the users for the given search criteria and pagination.
+   *
+   * @param string $search The search criteria and pagination constraints. Fields used: queryString, numberOfResults,
+   *                       and startRow
+   *
+   * @return ClientResponse The ClientResponse.
+   */
+  public function searchUsersByQueryString($search)
+  {
+    $client = $this->start()->uri("/api/user/search")
+        ->urlParameter("queryString", $search["queryString"])
+        ->urlParameter("numberOfResults", $search["numberOfResults"])
+        ->urlParameter("startRow", $search["startRow"]);
+
+    if (isset($search["sortFields"])) {
+      $index = 0;
+      foreach($search["sortFields"] as $value) {
+        client->urlParameter("sortFields[" . $index . "].name", $value["name"])
+            ->urlParameter("sortFields[" . $index . "].missing", $value["missing"])
+            ->urlParameter("sortFields[" . $index . "].order", $value["order"]);
+        $index++;
+      }
+    }
+
+    return client->get()->go();
+  }
+
   private function start()
   {
     $rest = new RESTClient();

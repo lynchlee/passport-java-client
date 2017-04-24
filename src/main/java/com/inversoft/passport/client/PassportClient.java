@@ -684,6 +684,19 @@ public class PassportClient {
   }
 
   /**
+   * Retrieves a single action log (the log of a user action that was taken on a user previously) for the given id.
+   *
+   * @param actionId The id of the action to retrieve.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<ActionResponse, Errors> retrieveAction(UUID actionId) {
+    return start(ActionResponse.class, Errors.class).uri("/api/user/action")
+                            .urlSegment(actionId)
+                            .get()
+                            .go();
+  }
+
+  /**
    * Retrieves all of the actions for the user with the given id.
    *
    * @param userId The id of the user to fetch the actions for.
@@ -1040,7 +1053,7 @@ public class PassportClient {
    * @param userId The id of the user.
    * @return The ClientResponse object.
    */
-  public ClientResponse<UserCommentResponse, Errors> retrieveUserComments(String userId) {
+  public ClientResponse<UserCommentResponse, Errors> retrieveUserComments(UUID userId) {
     return start(UserCommentResponse.class, Errors.class).uri("/api/user/comment")
                             .urlSegment(userId)
                             .get()
@@ -1312,6 +1325,35 @@ public class PassportClient {
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
                             .go();
+  }
+
+  /**
+   * Retrieves the users for the given search criteria and pagination.
+   *
+   * @param search The search criteria and pagination constraints. Fields used: queryString, numberOfResults, startRow,
+   *               and sort fields.
+   * @return When successful, the response will contain the users that match the search criteria and pagination
+   * constraints. If there was a validation error or any other type of error, this will return the Errors object in the
+   * response. Additionally, if Passport could not be contacted because it is down or experiencing a failure, the
+   * response will contain an Exception, which could be an IOException.
+   */
+  public ClientResponse<UserResponse, Errors> searchUsersByQueryString(UserSearchCriteria search) {
+    RESTClient<UserResponse, Errors> client = start(UserResponse.class, Errors.class).uri("/api/user/search")
+                                                                                     .urlParameter("queryString", search.queryString)
+                                                                                     .urlParameter("numberOfResults", search.numberOfResults)
+                                                                                     .urlParameter("startRow", search.startRow)
+                                                                                     .get();
+
+    if (search.sortFields != null) {
+      for (int i = 0; i < search.sortFields.size(); i++) {
+        SortField field = search.sortFields.get(i);
+        client.urlParameter("sortFields[" + i + "].name", field.name)
+              .urlParameter("sortFields[" + i + "].missing", field.missing)
+              .urlParameter("sortFields[" + i + "].order", field.order);
+      }
+    }
+
+    return client.go();
   }
 
   private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {

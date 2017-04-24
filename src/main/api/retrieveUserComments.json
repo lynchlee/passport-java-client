@@ -14,7 +14,7 @@
         "The id of the user."
       ],
       "type": "urlSegment",
-      "javaType": "String"
+      "javaType": "UUID"
     }
   ]
 }

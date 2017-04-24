@@ -93,6 +93,37 @@ namespace Com.Inversoft.Passport.Client
     }
 
 [/#list]
+    /**
+     * Retrieves the users for the given search criteria and pagination.
+     *
+     * @param search The search criteria and pagination constraints. Fields used: queryString, numberOfResults,
+     *               startRow, sort fields.
+     * @return When successful, the response will contain the users that match the search criteria and pagination
+     * constraints. If there was a validation error or any other type of error, this will return the Errors object in the
+     * response. Additionally, if Passport could not be contacted because it is down or experiencing a failure, the
+     * response will contain an Exception, which could be an IOException.
+     */
+    public ClientResponse<UserResponse, Errors> SearchUsersByQueryString(UserSearchCriteria search)
+    {
+      var client = Start<UserResponse>().Uri("/api/user/search")
+                                        .UrlParameter("queryString", search.queryString)
+                                        .UrlParameter("numberOfResults", search.numberOfResults)
+                                        .UrlParameter("startRow", search.startRow)
+                                        .Get();
+
+      if (search.sortFields != null)
+      {
+        for (var i = 0; i < search.sortFields.Count; i++)
+        {
+          var field = search.sortFields[i];
+          client.UrlParameter("sortFields[" + i + "].name", field.name)
+                .UrlParameter("sortFields[" + i + "].missing", field.missing)
+                .UrlParameter("sortFields[" + i + "].order", field.order);
+        }
+      }
+      return client.Go();
+    }
+
     // Start initializes and returns RESTClient
     private RESTClient<T, U> Start<T, U>()
     {

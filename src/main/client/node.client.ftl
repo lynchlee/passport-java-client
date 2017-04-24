@@ -63,6 +63,38 @@ PassportClient.prototype = {
   },
 
 [/#list]
+  /**
+   * Retrieves the users for the given search criteria and pagination.
+   *
+   * @param {Object} search The search criteria and pagination constraints. Fields used: queryString, numberOfResults, startRow,
+   *               and sort fields.
+   * @returns {Promise} A Promise for the Passport call.
+   */
+  searchUsersByQueryString: function(search) {
+    //noinspection JSUnresolvedVariable
+    const client = this._start()
+        .uri('/api/user/search')
+        .urlParameter('queryString', search.queryString)
+        .urlParameter("numberOfResults", search.numberOfResults)
+        .urlParameter("startRow", search.startRow)
+        .get();
+
+    //noinspection JSUnresolvedVariable
+    if (search.sortFields !== null && typeof search.sortFields !== 'undefined') {
+      //noinspection JSUnresolvedVariable
+      for (let i = 0; i < search.sortFields.length; i++) {
+        //noinspection JSUnresolvedVariable
+        client.urlParameter("sortFields[" + i + "].name", search.sortFields[i].name)
+            .urlParameter("sortFields[" + i + "].missing", search.sortFields[i].missing)
+            .urlParameter("sortFields[" + i + "].order", search.sortFields[i].order);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      client.go(this._responseHandler(resolve, reject));
+    });
+  },
+
   /* ===================================================================================================================
    * Private methods
    * ===================================================================================================================*/

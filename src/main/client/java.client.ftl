@@ -146,6 +146,35 @@ public class PassportClient {
   }
 
 [/#list]
+  /**
+   * Retrieves the users for the given search criteria and pagination.
+   *
+   * @param search The search criteria and pagination constraints. Fields used: queryString, numberOfResults, startRow,
+   *               and sort fields.
+   * @return When successful, the response will contain the users that match the search criteria and pagination
+   * constraints. If there was a validation error or any other type of error, this will return the Errors object in the
+   * response. Additionally, if Passport could not be contacted because it is down or experiencing a failure, the
+   * response will contain an Exception, which could be an IOException.
+   */
+  public ClientResponse<UserResponse, Errors> searchUsersByQueryString(UserSearchCriteria search) {
+    RESTClient<UserResponse, Errors> client = start(UserResponse.class, Errors.class).uri("/api/user/search")
+                                                                                     .urlParameter("queryString", search.queryString)
+                                                                                     .urlParameter("numberOfResults", search.numberOfResults)
+                                                                                     .urlParameter("startRow", search.startRow)
+                                                                                     .get();
+
+    if (search.sortFields != null) {
+      for (int i = 0; i < search.sortFields.size(); i++) {
+        SortField field = search.sortFields.get(i);
+        client.urlParameter("sortFields[" + i + "].name", field.name)
+              .urlParameter("sortFields[" + i + "].missing", field.missing)
+              .urlParameter("sortFields[" + i + "].order", field.order);
+      }
+    }
+
+    return client.go();
+  }
+
   private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {
     return new RESTClient<>(type, errorType).authorization(apiKey)
                                                .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
