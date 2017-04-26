@@ -19,7 +19,7 @@ import com.inversoft.json.JacksonConstructor;
 import com.inversoft.passport.domain.search.UserSearchCriteria;
 
 /**
- * Search API response.
+ * Search API request.
  *
  * @author Brian Pontarelli
  */
