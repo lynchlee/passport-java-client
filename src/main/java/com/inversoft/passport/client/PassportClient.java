@@ -210,13 +210,15 @@ public class PassportClient {
    * You can optionally specify an id for the role inside the ApplicationRole object itself, but this is not required.
    *
    * @param applicationId The id of the application to create the role on.
+   * @param roleId (Optional) The id of the role. Defaults to a secure UUID.
    * @param request The application request that contains all of the information used to create the role.
    * @return The ClientResponse object.
    */
-  public ClientResponse<ApplicationResponse, Errors> createApplicationRole(UUID applicationId, ApplicationRequest request) {
+  public ClientResponse<ApplicationResponse, Errors> createApplicationRole(UUID applicationId, UUID roleId, ApplicationRequest request) {
     return start(ApplicationResponse.class, Errors.class).uri("/api/application")
                             .urlSegment(applicationId)
                             .urlSegment("role")
+                            .urlSegment(roleId)
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
                             .go();

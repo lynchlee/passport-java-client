@@ -24,6 +24,14 @@
       "value": "\"role\""
     },
     {
+      "name": "roleId",
+      "comments": [
+        "(Optional) The id of the role. Defaults to a secure UUID."
+      ],
+      "type": "urlSegment",
+      "javaType": "UUID"
+    },
+    {
       "name": "request",
       "comments": [
         "The application request that contains all of the information used to create the role."
