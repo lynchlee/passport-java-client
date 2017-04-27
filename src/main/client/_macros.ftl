@@ -29,6 +29,14 @@
   [#return type/]
 [/#function]
 
+[#function optional param language]
+  [#if language == "js"]
+    [#return param.comments[0]?starts_with("(Optional)")?then("?", "")/]
+  [#else]
+    [#return ""/]
+  [/#if]
+[/#function]
+
 [#function methodParameters api language]
   [#local result = []]
   [#list api.params![] as param]

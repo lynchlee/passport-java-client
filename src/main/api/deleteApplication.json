@@ -14,7 +14,7 @@
     {
       "name": "applicationId",
       "comments": [
-        "The id of the application to deactivate."
+        "The id of the application to delete."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

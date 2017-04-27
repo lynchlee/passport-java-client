@@ -375,7 +375,7 @@ public class PassportClient {
    * roles for the application, and any other data associated with the application. This operation could take a very
    * long time, depending on the amount of data in your database.
    *
-   * @param applicationId The id of the application to deactivate.
+   * @param applicationId The id of the application to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteApplication(UUID applicationId) {
@@ -592,6 +592,25 @@ public class PassportClient {
                             .urlSegment(applicationId)
                             .urlParameter("ipAddress", callerIPAddress)
                             .put()
+                            .go();
+  }
+
+  /**
+   * The Logout API is intended to be used to remove the refresh token and access token cookies if they exist on the
+   * client and revoke the refresh token stored. This API does nothing if the request does not contain an access
+   * token or refresh token cookies.
+   *
+   * @param global (Optional) When this value is set to true all of the refresh tokens issued to the owner of the
+  *     provided token will be revoked.
+   * @param refreshToken (Optional) The refresh_token as a request parameter instead of coming in via a cookie.
+  *     If provided this takes precedence over the cookie.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Void> logout(boolean global, String refreshToken) {
+    return start(Void.TYPE, Void.TYPE).uri("/api/logout")
+                            .urlParameter("global", global)
+                            .urlParameter("refreshToken", refreshToken)
+                            .post()
                             .go();
   }
 

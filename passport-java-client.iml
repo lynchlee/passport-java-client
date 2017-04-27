@@ -132,16 +132,5 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="PHP" type="php">
-        <CLASSES>
-          <root url="file:///usr/local/Cellar/phpunit/6.1.1/libexec" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file:///usr/local/Cellar/phpunit/6.1.1/libexec" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>

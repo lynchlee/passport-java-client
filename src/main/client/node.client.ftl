@@ -1,5 +1,5 @@
 [#import "_macros.ftl" as global/]
-/*/*
+/*
  * Copyright (c) 2016-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +37,7 @@ PassportClient.prototype = {
    *
   [#list api.params![] as param]
     [#if !param.constant??]
-   * @param {${global.convertType(param.javaType, "js")}} ${param.name} ${param.comments?join("\n   *    ")}
+   * @param {${global.optional(param, "js")}${global.convertType(param.javaType, "js")}} ${param.name} ${param.comments?join("\n   *    ")}
     [/#if]
   [/#list]
    * @return {Promise} A Promise for the Passport call.
@@ -60,6 +60,7 @@ PassportClient.prototype = {
       [/#list]
           .${api.method}()
           .go(this._responseHandler(resolve, reject));
+    });
   },
 
 [/#list]
