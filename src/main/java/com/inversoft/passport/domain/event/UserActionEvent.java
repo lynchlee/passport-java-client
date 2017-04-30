@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, Inversoft Inc., All Rights Reserved
+ * Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,8 +34,10 @@ import com.inversoft.passport.domain.email.Email;
  *
  * @author Brian Pontarelli
  */
-public class UserActionEvent extends BaseEvent implements Buildable<UserActionEvent> {
+public class UserActionEvent extends BaseEvent implements Buildable<UserActionEvent>, ApplicationEvent {
   public static ZonedDateTime Infinite = ZonedDateTime.ofInstant(Instant.ofEpochMilli(Long.MAX_VALUE), ZoneOffset.UTC);
+
+  public final List<UUID> applicationIds = new ArrayList<>();
 
   public String action;
 
@@ -44,8 +46,6 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
   public UUID actioneeUserId;
 
   public UUID actionerUserId;
-
-  public final List<UUID> applicationIds = new ArrayList<>();
 
   public String comment;
 
@@ -83,11 +83,6 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
   public String reasonCode;
 
   public UserActionEvent() {
-  }
-
-  @Override
-  public EventType type() {
-    return EventType.UserAction;
   }
 
   /**
@@ -174,6 +169,11 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
   }
 
   @Override
+  public List<UUID> applicationIds() {
+    return applicationIds;
+  }
+
+  @Override
   public int hashCode() {
     return Objects.hash(actionId, applicationIds, action, actioneeUserId, actionerUserId, comment, createInstant, email, expiry,
                         localizedAction, localizedDuration, localizedOption, localizedReason, notifyUser, option, passportEmailedUser,
@@ -182,5 +182,10 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
 
   public String toString() {
     return ToString.toString(this);
+  }
+
+  @Override
+  public EventType type() {
+    return EventType.UserAction;
   }
 }
