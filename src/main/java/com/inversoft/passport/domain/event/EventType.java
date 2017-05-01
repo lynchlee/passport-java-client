@@ -29,7 +29,9 @@ public enum EventType {
 
   UserAction("user.action"),
 
-  JWTRefreshTokenRevoke("jwt.refresh-token.revoke");
+  JWTRefreshTokenRevoke("jwt.refresh-token.revoke"),
+
+  JWTPublicKeyUpdate("jwt.public-key.update");
 
   private static Map<String, EventType> nameMap = new HashMap<>(EventType.values().length);
 

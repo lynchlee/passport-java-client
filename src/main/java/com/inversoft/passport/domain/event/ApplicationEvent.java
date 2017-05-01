@@ -3,7 +3,7 @@
  */
 package com.inversoft.passport.domain.event;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -15,5 +15,5 @@ public interface ApplicationEvent {
   /**
    * @return The application ids for the event.
    */
-  List<UUID> applicationIds();
+  Collection<UUID> applicationIds();
 }

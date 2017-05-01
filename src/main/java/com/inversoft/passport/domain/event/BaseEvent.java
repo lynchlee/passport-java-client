@@ -21,7 +21,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @Type(value = UserDeactivateEvent.class, name = "user.deactivate"),
     @Type(value = UserReactivateEvent.class, name = "user.reactivate"),
     @Type(value = UserBulkCreateEvent.class, name = "user.bulk.create"),
-    @Type(value = JWTRefreshTokenRevokeEvent.class, name = "jwt.refresh-token.revoke")
+    @Type(value = JWTRefreshTokenRevokeEvent.class, name = "jwt.refresh-token.revoke"),
+    @Type(value = JWTPublicKeyUpdateEvent.class, name = "jwt.public-key.update")
 })
 public abstract class BaseEvent {
   /**
