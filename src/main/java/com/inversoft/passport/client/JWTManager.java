@@ -15,7 +15,7 @@ import org.primeframework.jwt.domain.JWT;
 
 /**
  * A singleton cache of JWTs that have been revoked. This should be connected via a Webhook that listens for the
- * <code>user.jwt.refresh-token.revoke</code> event from Passport.
+ * <code>jwt.refresh-token.revoke</code> event from Passport.
  *
  * @author Brian Pontarelli
  */

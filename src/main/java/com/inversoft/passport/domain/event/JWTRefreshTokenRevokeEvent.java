@@ -15,27 +15,36 @@ import com.inversoft.json.ToString;
 import com.inversoft.passport.domain.Buildable;
 
 /**
- * Models the Refresh Token Revoke Event (and can be converted to JSON).
+ * Models the Refresh Token Revoke Event (and can be converted to JSON). This event might be for a single token, a user
+ * or an entire application.
  *
  * @author Brian Pontarelli
  */
-public class UserRefreshTokenRevokeEvent extends BaseEvent implements Buildable<UserRefreshTokenRevokeEvent>, ApplicationEvent {
+public class JWTRefreshTokenRevokeEvent extends BaseEvent implements Buildable<JWTRefreshTokenRevokeEvent>, ApplicationEvent {
+  public UUID applicationId;
+
   public Map<UUID, Integer> applicationTimeToLiveInSeconds = new TreeMap<>();
 
   public UUID userId;
 
   @JacksonConstructor
-  public UserRefreshTokenRevokeEvent() {
+  public JWTRefreshTokenRevokeEvent() {
   }
 
-  public UserRefreshTokenRevokeEvent(UUID userId, UUID applicationId, int timeToLiveInSeconds) {
+  public JWTRefreshTokenRevokeEvent(UUID userId, UUID applicationId, int timeToLiveInSeconds) {
+    this.applicationId = applicationId;
     this.applicationTimeToLiveInSeconds.put(applicationId, timeToLiveInSeconds);
     this.userId = userId;
   }
 
-  public UserRefreshTokenRevokeEvent(UUID userId, Map<UUID, Integer> applicationTimeToLiveInSeconds) {
+  public JWTRefreshTokenRevokeEvent(UUID userId, Map<UUID, Integer> applicationTimeToLiveInSeconds) {
     this.applicationTimeToLiveInSeconds.putAll(applicationTimeToLiveInSeconds);
     this.userId = userId;
+  }
+
+  @Override
+  public List<UUID> applicationIds() {
+    return new ArrayList<>(applicationTimeToLiveInSeconds.keySet());
   }
 
   @Override
@@ -46,13 +55,8 @@ public class UserRefreshTokenRevokeEvent extends BaseEvent implements Buildable<
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserRefreshTokenRevokeEvent that = (UserRefreshTokenRevokeEvent) o;
+    JWTRefreshTokenRevokeEvent that = (JWTRefreshTokenRevokeEvent) o;
     return Objects.equals(applicationTimeToLiveInSeconds, that.applicationTimeToLiveInSeconds) && Objects.equals(userId, that.userId);
-  }
-
-  @Override
-  public List<UUID> applicationIds() {
-    return new ArrayList<>(applicationTimeToLiveInSeconds.keySet());
   }
 
   @Override
@@ -66,6 +70,6 @@ public class UserRefreshTokenRevokeEvent extends BaseEvent implements Buildable<
 
   @Override
   public EventType type() {
-    return EventType.UserRefreshTokenRevoke;
+    return EventType.JWTRefreshTokenRevoke;
   }
 }

@@ -29,7 +29,7 @@ public enum EventType {
 
   UserAction("user.action"),
 
-  UserRefreshTokenRevoke("user.jwt.refresh-token.revoke");
+  JWTRefreshTokenRevoke("jwt.refresh-token.revoke");
 
   private static Map<String, EventType> nameMap = new HashMap<>(EventType.values().length);
 
