@@ -8,7 +8,7 @@ javaErrorVersion = "2.2.0"
 primeJWTVersion = "0.2.0"
 restifyVersion = "3.1.4"
 
-project(group: "com.inversoft.passport", name: "passport-java-client", version: "1.9.5", licenses: ["ApacheV2_0"]) {
+project(group: "com.inversoft.passport", name: "passport-java-client", version: "1.10.0", licenses: ["ApacheV2_0"]) {
   workflow {
     standard()
   }
