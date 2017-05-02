@@ -212,6 +212,8 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
 
     public PasswordEncryptionConfiguration passwordEncryptionConfiguration = new PasswordEncryptionConfiguration();
 
+    public UIConfiguration uiConfiguration = new UIConfiguration();
+
     @Override
     public boolean equals(Object o) {
       if (this == o) {
@@ -227,12 +229,14 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
           Objects.equals(eventConfiguration, that.eventConfiguration) &&
           Objects.equals(failedAuthenticationConfiguration, that.failedAuthenticationConfiguration) &&
           Objects.equals(jwtConfiguration, that.jwtConfiguration) &&
-          Objects.equals(passwordEncryptionConfiguration, that.passwordEncryptionConfiguration);
+          Objects.equals(passwordEncryptionConfiguration, that.passwordEncryptionConfiguration) &&
+          Objects.equals(uiConfiguration, that.uiConfiguration);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(backendServers, cookieEncryptionIV, cookieEncryptionKey, eventConfiguration, failedAuthenticationConfiguration, jwtConfiguration, passwordEncryptionConfiguration);
+      return Objects.hash(backendServers, cookieEncryptionIV, cookieEncryptionKey, eventConfiguration, failedAuthenticationConfiguration,
+                          jwtConfiguration, passwordEncryptionConfiguration, uiConfiguration);
     }
 
     @Override
@@ -302,6 +306,34 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
           return ToString.toString(this);
         }
       }
+    }
+
+    public static class UIConfiguration {
+      public String logoURL;
+
+      public String headerColor;
+
+      @Override
+      public boolean equals(Object o) {
+        if (this == o) {
+          return true;
+        }
+        if (!(o instanceof UIConfiguration)) {
+          return false;
+        }
+        UIConfiguration that = (UIConfiguration) o;
+        return Objects.equals(logoURL, that.logoURL) &&
+            Objects.equals(headerColor, that.headerColor) &&
+            Objects.equals(menuFontColor, that.menuFontColor);
+      }
+
+      @Override
+      public int hashCode() {
+        return Objects.hash(logoURL, headerColor, menuFontColor);
+      }
+
+      public String menuFontColor;
+
     }
   }
 }
