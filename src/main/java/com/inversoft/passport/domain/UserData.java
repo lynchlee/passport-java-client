@@ -30,7 +30,7 @@ import com.inversoft.passport.domain.util.Normalizer;
  *
  * @author Brian Pontarelli
  */
-public class UserData {
+public class UserData implements Buildable<UserData> {
   public final Map<String, Object> attributes = new LinkedHashMap<>();
 
   public final List<Locale> preferredLanguages = new ArrayList<>();
