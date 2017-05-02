@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, Inversoft Inc., All Rights Reserved
+ * Copyright (c) 2016-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,8 @@ import org.primeframework.jwt.domain.JWT;
 public class ValidateResponse {
   public JWT jwt;
 
-  public String token;
-
-  public ValidateResponse(JWT jwt, String token) {
+  public ValidateResponse(JWT jwt) {
     this.jwt = jwt;
-    this.token = token;
   }
 
   @JacksonConstructor
