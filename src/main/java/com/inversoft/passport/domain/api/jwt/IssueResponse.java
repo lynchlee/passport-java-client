@@ -9,6 +9,8 @@ import com.inversoft.json.JacksonConstructor;
  * @author Daniel DeGroff
  */
 public class IssueResponse {
+  public String refreshToken;
+
   public String token;
 
   @JacksonConstructor

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, Inversoft Inc., All Rights Reserved
+ * Copyright (c) 2016-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.inversoft.passport.domain.Application;
 import com.inversoft.passport.domain.Buildable;
 
 /**
- * Internal representation of our refresh token.
+ * Models a JWT Refresh Token.
  *
  * @author Daniel DeGroff
  */
@@ -38,9 +38,19 @@ public class RefreshToken implements Buildable<RefreshToken> {
 
   public String device;
 
+  /**
+   * The time this token was created. The start time of this token may be prior to the insert instant when generating
+   * refresh tokens for another application in a SSO scenario.
+   */
   public ZonedDateTime insertInstant;
 
   public MetaData metaData = new MetaData();
+
+  /**
+   * The time at which the life started of this token. The start + ttl = expiration. The expiration should be calculated
+   * using the start instant.
+   */
+  public ZonedDateTime startInstant;
 
   public String token;
 
@@ -59,13 +69,14 @@ public class RefreshToken implements Buildable<RefreshToken> {
         Objects.equals(device, that.device) &&
         Objects.equals(insertInstant, that.insertInstant) &&
         Objects.equals(metaData, that.metaData) &&
+        Objects.equals(startInstant, that.startInstant) &&
         Objects.equals(token, that.token) &&
         Objects.equals(userId, that.userId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(applicationId, device, insertInstant, metaData, token, userId);
+    return Objects.hash(applicationId, device, insertInstant, metaData, startInstant, token, userId);
   }
 
   @Override
