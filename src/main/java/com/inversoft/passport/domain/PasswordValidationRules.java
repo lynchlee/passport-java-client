@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2016, Inversoft Inc., All Rights Reserved
+ * Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,8 @@ public class PasswordValidationRules implements Buildable<PasswordValidationRule
   public int maxLength = 256;
 
   public int minLength = 8;
+
+  public int rememberPreviousPasswords = 1;
 
   public boolean requireMixedCase;
 
@@ -51,12 +53,13 @@ public class PasswordValidationRules implements Buildable<PasswordValidationRule
     PasswordValidationRules that = (PasswordValidationRules) o;
     return Objects.equals(maxLength, that.maxLength) &&
         Objects.equals(minLength, that.minLength) &&
+        Objects.equals(rememberPreviousPasswords, that.rememberPreviousPasswords) &&
         Objects.equals(requireMixedCase, that.requireMixedCase) &&
         Objects.equals(requireNonAlpha, that.requireNonAlpha);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(maxLength, minLength, requireMixedCase, requireNonAlpha);
+    return Objects.hash(maxLength, minLength, rememberPreviousPasswords, requireMixedCase, requireNonAlpha);
   }
 }
