@@ -755,6 +755,19 @@ public class PassportClient {
   }
 
   /**
+   * Retrieves a single audit log for the given id.
+   *
+   * @param auditLogId The id of the audit log to retrieve.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<AuditLogResponse, Errors> retrieveAuditLog(Integer auditLogId) {
+    return start(AuditLogResponse.class, Errors.class).uri("/api/system/audit-log")
+                            .urlSegment(auditLogId)
+                            .get()
+                            .go();
+  }
+
+  /**
    * Retrieves the daily active user report between the two instants. If you specify an application id, it will only
    * return the daily active counts for that application.
    *
