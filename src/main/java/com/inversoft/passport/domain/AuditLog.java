@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2016, Inversoft Inc., All Rights Reserved
+ * Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,8 @@ import com.inversoft.passport.domain.util.Normalizer;
  * @author Brian Pontarelli
  */
 public class AuditLog implements Buildable<AuditLog> {
+  public AuditLogData data;
+
   public ZonedDateTime insertInstant;
 
   public String insertUser;
@@ -36,6 +38,11 @@ public class AuditLog implements Buildable<AuditLog> {
   }
 
   public AuditLog(String insertUser, String message) {
+    this(insertUser, message, null);
+  }
+
+  public AuditLog(String insertUser, String message, AuditLogData data) {
+    this.data = data;
     this.insertUser = insertUser;
     this.message = message;
   }
@@ -49,14 +56,15 @@ public class AuditLog implements Buildable<AuditLog> {
       return false;
     }
     AuditLog auditLog = (AuditLog) o;
-    return Objects.equals(insertInstant, auditLog.insertInstant) &&
+    return Objects.equals(data, auditLog.data) &&
+        Objects.equals(insertInstant, auditLog.insertInstant) &&
         Objects.equals(insertUser, auditLog.insertUser) &&
         Objects.equals(message, auditLog.message);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(insertInstant, insertUser, message);
+    return Objects.hash(data, insertInstant, insertUser, message);
   }
 
   public void normalize() {

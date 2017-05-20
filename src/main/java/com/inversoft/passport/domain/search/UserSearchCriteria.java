@@ -36,7 +36,7 @@ public class UserSearchCriteria extends BaseSearchCriteria {
 
   public String queryString;
 
-  public List<SortField> sortFields = new ArrayList<>(Arrays.asList(new SortField("user.email"), new SortField("user.username")));
+  public List<SortField> sortFields = new ArrayList<>(Arrays.asList(new SortField("email"), new SortField("username")));
 
   public String username;
 

@@ -212,6 +212,8 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
 
     public PasswordEncryptionConfiguration passwordEncryptionConfiguration = new PasswordEncryptionConfiguration();
 
+    public Integer passwordMinimumAgeInSeconds;
+
     public UIConfiguration uiConfiguration = new UIConfiguration();
 
     @Override
@@ -230,13 +232,14 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
           Objects.equals(failedAuthenticationConfiguration, that.failedAuthenticationConfiguration) &&
           Objects.equals(jwtConfiguration, that.jwtConfiguration) &&
           Objects.equals(passwordEncryptionConfiguration, that.passwordEncryptionConfiguration) &&
+          Objects.equals(passwordMinimumAgeInSeconds, that.passwordMinimumAgeInSeconds) &&
           Objects.equals(uiConfiguration, that.uiConfiguration);
     }
 
     @Override
     public int hashCode() {
       return Objects.hash(backendServers, cookieEncryptionIV, cookieEncryptionKey, eventConfiguration, failedAuthenticationConfiguration,
-                          jwtConfiguration, passwordEncryptionConfiguration, uiConfiguration);
+                          jwtConfiguration, passwordEncryptionConfiguration, passwordMinimumAgeInSeconds, uiConfiguration);
     }
 
     @Override
@@ -309,9 +312,11 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
     }
 
     public static class UIConfiguration {
+      public String headerColor;
+
       public String logoURL;
 
-      public String headerColor;
+      public String menuFontColor;
 
       @Override
       public boolean equals(Object o) {
@@ -331,8 +336,6 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
       public int hashCode() {
         return Objects.hash(logoURL, headerColor, menuFontColor);
       }
-
-      public String menuFontColor;
 
     }
   }
