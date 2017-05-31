@@ -103,6 +103,12 @@ public class JWTConfiguration implements Buildable<JWTConfiguration> {
     }
   }
 
+  public JWTConfiguration secure() {
+    privateKey = null;
+    secret = null;
+    return this;
+  }
+
   @Override
   public String toString() {
     return ToString.toString(this);

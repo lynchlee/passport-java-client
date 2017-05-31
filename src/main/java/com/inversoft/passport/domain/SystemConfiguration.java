@@ -127,6 +127,17 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
     }
   }
 
+  public SystemConfiguration secure() {
+    if (data.jwtConfiguration != null) {
+      data.jwtConfiguration.secure();
+    }
+
+    data.cookieEncryptionIV = null;
+    data.cookieEncryptionKey = null;
+
+    return this;
+  }
+
   @Override
   public String toString() {
     return ToString.toString(this);
