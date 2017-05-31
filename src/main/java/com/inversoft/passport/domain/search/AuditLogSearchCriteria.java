@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, Inversoft Inc., All Rights Reserved
+ * Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,11 @@ public class AuditLogSearchCriteria extends BaseSearchCriteria {
 
   @JacksonConstructor
   public AuditLogSearchCriteria() {
+    orderBy = defaultOrderBy();
   }
 
-  public AuditLogSearchCriteria(String message, String user, ZonedDateTime start, ZonedDateTime end, int startRow, int numberOfResults, String orderBy) {
+  public AuditLogSearchCriteria(String message, String user, ZonedDateTime start, ZonedDateTime end, int startRow,
+                                int numberOfResults, String orderBy) {
     this.end = end;
     this.message = message;
     this.start = start;
