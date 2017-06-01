@@ -74,8 +74,8 @@ namespace Com.Inversoft.Passport.Client
      * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
      * IOException.
      */
-    public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName?capitalize}(${global.methodParameters(api, "csharp")}) {
-        return Start<${api.successResponse}, ${api.errorResponse}>().Uri("${api.uri}")
+    public ClientResponse<${global.convertType(api.successResponse, "csharp")}, ${global.convertType(api.errorResponse, "csharp")}> ${api.methodName?cap_first}(${global.methodParameters(api, "csharp")}) {
+        return ${global.start(api, "csharp")}<${global.convertType(api.successResponse, "csharp")}>().Uri("${api.uri}")
                                       [#if api.authorization??]
                                           .Authorization(${api.authorization})
                                       [/#if]
@@ -88,7 +88,7 @@ namespace Com.Inversoft.Passport.Client
                                           .BodyHandler(new JSONBodyHandler(${param.name}))
                                         [/#if]
                                       [/#list]
-                                          .${api.method?capitalize}()
+                                          .${api.method?cap_first}()
                                           .Go();
     }
 
