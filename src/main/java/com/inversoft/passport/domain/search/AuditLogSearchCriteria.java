@@ -50,6 +50,9 @@ public class AuditLogSearchCriteria extends BaseSearchCriteria {
   @Override
   public void prepare() {
     secure();
+    if (orderBy == null) {
+      orderBy = defaultOrderBy();
+    }
     user = toSearchString(user);
     message = toSearchString(message);
   }
