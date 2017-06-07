@@ -25,7 +25,7 @@ public class PasswordValidationRules implements Buildable<PasswordValidationRule
 
   public int minLength = 8;
 
-  public int rememberPreviousPasswords = 1;
+  public RememberPreviousPasswords rememberPreviousPasswords = new RememberPreviousPasswords();
 
   public boolean requireMixedCase;
 

@@ -63,6 +63,10 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
 
   public URI passportFrontendURL;
 
+  /**
+   * Prefer maximumPasswordAge.days
+   */
+  @Deprecated
   public Integer passwordExpirationDays;
 
   public PasswordValidationRules passwordValidationRules = new PasswordValidationRules();
@@ -100,7 +104,6 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
         Objects.equals(logoutURL, that.logoutURL) &&
         Objects.equals(reportTimezone, that.reportTimezone) &&
         Objects.equals(passportFrontendURL, that.passportFrontendURL) &&
-        Objects.equals(passwordExpirationDays, that.passwordExpirationDays) &&
         Objects.equals(passwordValidationRules, that.passwordValidationRules) &&
         Objects.equals(setPasswordEmailTemplateId, that.setPasswordEmailTemplateId) &&
         Objects.equals(useOauthForBackend, that.useOauthForBackend) &&
@@ -109,10 +112,25 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
         Objects.equals(verificationEmailTemplateId, that.verificationEmailTemplateId);
   }
 
+  /**
+   * Compatibility with deprecated field <code>passwordExpirationDays</code>. Delete this code once we remove the
+   * deprecated field.
+   *
+   * @return The maximum password age.
+   */
+  public MaximumPasswordAge getMaximumPasswordAge() {
+    if (passwordExpirationDays != null) {
+      data.maximumPasswordAge.enabled = true;
+      data.maximumPasswordAge.days = passwordExpirationDays;
+    }
+
+    return data.maximumPasswordAge;
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(cleanSpeakConfiguration, data, failedAuthenticationUserActionId, forgotEmailTemplateId, httpSessionMaxInactiveInterval,
-                        logoutURL, reportTimezone, passportFrontendURL, passwordExpirationDays, passwordValidationRules,
+                        logoutURL, reportTimezone, passportFrontendURL, passwordValidationRules,
                         setPasswordEmailTemplateId, useOauthForBackend, verificationEmailTemplateId, verifyEmail, verifyEmailWhenChanged);
   }
 
@@ -221,9 +239,11 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
      */
     public JWTConfiguration jwtConfiguration = new JWTConfiguration();
 
-    public PasswordEncryptionConfiguration passwordEncryptionConfiguration = new PasswordEncryptionConfiguration();
+    public MaximumPasswordAge maximumPasswordAge = new MaximumPasswordAge();
 
-    public Integer passwordMinimumAgeInSeconds;
+    public MinimumPasswordAge minimumPasswordAge = new MinimumPasswordAge();
+
+    public PasswordEncryptionConfiguration passwordEncryptionConfiguration = new PasswordEncryptionConfiguration();
 
     public UIConfiguration uiConfiguration = new UIConfiguration();
 
@@ -243,14 +263,15 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
           Objects.equals(failedAuthenticationConfiguration, that.failedAuthenticationConfiguration) &&
           Objects.equals(jwtConfiguration, that.jwtConfiguration) &&
           Objects.equals(passwordEncryptionConfiguration, that.passwordEncryptionConfiguration) &&
-          Objects.equals(passwordMinimumAgeInSeconds, that.passwordMinimumAgeInSeconds) &&
+          Objects.equals(maximumPasswordAge, that.maximumPasswordAge) &&
+          Objects.equals(minimumPasswordAge, that.minimumPasswordAge) &&
           Objects.equals(uiConfiguration, that.uiConfiguration);
     }
 
     @Override
     public int hashCode() {
       return Objects.hash(backendServers, cookieEncryptionIV, cookieEncryptionKey, eventConfiguration, failedAuthenticationConfiguration,
-                          jwtConfiguration, passwordEncryptionConfiguration, passwordMinimumAgeInSeconds, uiConfiguration);
+                          jwtConfiguration, passwordEncryptionConfiguration, maximumPasswordAge, minimumPasswordAge, uiConfiguration);
     }
 
     @Override
@@ -283,9 +304,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
         return ToString.toString(this);
       }
 
-      public static class EventConfigurationData {
-        public boolean enabled;
-
+      public static class EventConfigurationData extends Enableable {
         public TransactionType transactionType;
 
         @JacksonConstructor
@@ -306,13 +325,12 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
             return false;
           }
           EventConfigurationData that = (EventConfigurationData) o;
-          return enabled == that.enabled &&
-              transactionType == that.transactionType;
+          return transactionType == that.transactionType;
         }
 
         @Override
         public int hashCode() {
-          return Objects.hash(enabled, transactionType);
+          return Objects.hash(transactionType);
         }
 
         @Override

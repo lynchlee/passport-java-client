@@ -21,19 +21,14 @@ import com.inversoft.json.ToString;
 import org.primeframework.jwt.domain.Algorithm;
 
 /**
- * JWT Configuration.
+ * JWT Configuration. A JWT Configuration for an Application may not be active if it is using the global configuration,
+ * the configuration may be <code>enabled = false</code>.
  *
  * @author Daniel DeGroff
  */
-public class JWTConfiguration implements Buildable<JWTConfiguration> {
+public class JWTConfiguration extends Enableable implements Buildable<JWTConfiguration> {
 
   public Algorithm algorithm;
-
-  /**
-   * True if this configuration is active. A JWT Configuration for an application may not be active if it is using the
-   * global configuration provided int he System Configuration.
-   */
-  public boolean enabled;
 
   /**
    * The Issuer of the JWT.
@@ -79,7 +74,6 @@ public class JWTConfiguration implements Buildable<JWTConfiguration> {
     }
     JWTConfiguration that = (JWTConfiguration) o;
     return Objects.equals(algorithm, that.algorithm) &&
-        Objects.equals(enabled, that.enabled) &&
         Objects.equals(issuer, that.issuer) &&
         Objects.equals(privateKey, that.privateKey) &&
         Objects.equals(publicKey, that.publicKey) &&
@@ -90,7 +84,7 @@ public class JWTConfiguration implements Buildable<JWTConfiguration> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(algorithm, enabled, issuer, privateKey, publicKey, refreshTokenTimeToLiveInMinutes, secret, timeToLiveInSeconds);
+    return Objects.hash(algorithm, issuer, privateKey, publicKey, refreshTokenTimeToLiveInMinutes, secret, timeToLiveInSeconds);
   }
 
   public void normalize() {

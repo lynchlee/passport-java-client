@@ -26,9 +26,9 @@ project(group: "com.inversoft.passport", name: "passport-java-client", version: 
       dependency(id: "com.inversoft:java-error:${javaErrorVersion}")
       dependency(id: "org.primeframework:prime-jwt:${primeJWTVersion}")
       dependency(id: "com.inversoft:jackson5:${jackson5Version}")
-      dependency(id: "com.fasterxml.jackson.core:jackson-annotations:2.8.1")
-      dependency(id: "com.fasterxml.jackson.core:jackson-core:2.8.1")
-      dependency(id: "com.fasterxml.jackson.core:jackson-databind:2.8.1")
+      dependency(id: "com.fasterxml.jackson.core:jackson-annotations:2.8.8")
+      dependency(id: "com.fasterxml.jackson.core:jackson-core:2.8.8")
+      dependency(id: "com.fasterxml.jackson.core:jackson-databind:2.8.8")
     }
     group(name: "test-compile") {
       dependency(id: "org.testng:testng:6.8.7")
