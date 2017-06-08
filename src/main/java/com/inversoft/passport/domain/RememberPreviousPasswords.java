@@ -31,7 +31,6 @@ public class RememberPreviousPasswords extends Enableable {
     return Objects.hash(count, enabled);
   }
 
-
   @Override
   public String toString() {
     return ToString.toString(this);

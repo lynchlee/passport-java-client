@@ -103,7 +103,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
         Objects.equals(httpSessionMaxInactiveInterval, that.httpSessionMaxInactiveInterval) &&
         Objects.equals(logoutURL, that.logoutURL) &&
         Objects.equals(reportTimezone, that.reportTimezone) &&
-        Objects.equals(passwordExpirationDays, that.passwordExpirationDays) &&
+        Objects.equals(getPasswordExpirationDays(), that.getPasswordExpirationDays()) &&
         Objects.equals(passportFrontendURL, that.passportFrontendURL) &&
         Objects.equals(passwordValidationRules, that.passwordValidationRules) &&
         Objects.equals(setPasswordEmailTemplateId, that.setPasswordEmailTemplateId) &&
@@ -113,25 +113,25 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
         Objects.equals(verificationEmailTemplateId, that.verificationEmailTemplateId);
   }
 
-  /**
-   * Compatibility with deprecated field <code>passwordExpirationDays</code>. Delete this code once we remove the
-   * deprecated field.
-   *
-   * @return The maximum password age.
-   */
-  public MaximumPasswordAge getMaximumPasswordAge() {
-    if (passwordExpirationDays != null) {
-      data.maximumPasswordAge.enabled = true;
-      data.maximumPasswordAge.days = passwordExpirationDays;
+  public Integer getPasswordExpirationDays() {
+    if (data.maximumPasswordAge.enabled) {
+      return data.maximumPasswordAge.days;
     }
+    return passwordExpirationDays;
+  }
 
-    return data.maximumPasswordAge;
+  public void setPasswordExpirationDays(Integer days) {
+    passwordExpirationDays = days;
+    if (days != null) {
+      data.maximumPasswordAge.enabled = true;
+      data.maximumPasswordAge.days = days;
+    }
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(cleanSpeakConfiguration, data, failedAuthenticationUserActionId, forgotEmailTemplateId, httpSessionMaxInactiveInterval,
-                        logoutURL, reportTimezone, passwordExpirationDays, passportFrontendURL, passwordValidationRules,
+                        logoutURL, reportTimezone, getPasswordExpirationDays(), passportFrontendURL, passwordValidationRules,
                         setPasswordEmailTemplateId, useOauthForBackend, verificationEmailTemplateId, verifyEmail, verifyEmailWhenChanged);
   }
 

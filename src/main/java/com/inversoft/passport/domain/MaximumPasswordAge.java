@@ -11,7 +11,7 @@ import com.inversoft.json.ToString;
  * @author Daniel DeGroff
  */
 public class MaximumPasswordAge extends Enableable {
-  public int days;
+  public int days = 180;
 
   @Override
   public boolean equals(Object o) {

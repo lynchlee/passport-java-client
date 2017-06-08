@@ -11,7 +11,7 @@ import com.inversoft.json.ToString;
  * @author Daniel DeGroff
  */
 public class MinimumPasswordAge extends Enableable {
-  public int seconds;
+  public int seconds = 30;
 
   @Override
   public boolean equals(Object o) {
