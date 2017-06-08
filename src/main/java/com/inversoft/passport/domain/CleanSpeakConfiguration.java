@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2016, Inversoft Inc., All Rights Reserved
+ * Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import static com.inversoft.passport.domain.util.Normalizer.trim;
  *
  * @author Brian Pontarelli
  */
-public class CleanSpeakConfiguration implements Buildable<CleanSpeakConfiguration> {
+public class CleanSpeakConfiguration extends Enableable implements Buildable<CleanSpeakConfiguration> {
   /**
    * API Key used to connect to the CleanSpeak API. This may be null some versions of CleanSpeak do not require an API
    * key.
@@ -48,8 +48,6 @@ public class CleanSpeakConfiguration implements Buildable<CleanSpeakConfiguratio
    * expected to be equal.
    */
   public List<UUID> applicationIds = new ArrayList<>();
-
-  public boolean enabled;
 
   /**
    * The CleanSpeak API URL.
@@ -101,10 +99,8 @@ public class CleanSpeakConfiguration implements Buildable<CleanSpeakConfiguratio
     return ToString.toString(this);
   }
 
-  public static class UsernameModeration implements Buildable<UsernameModeration> {
+  public static class UsernameModeration extends Enableable implements Buildable<UsernameModeration> {
     public UUID applicationId;
-
-    public boolean enabled;
 
     public UsernameModeration() {
     }
@@ -123,13 +119,13 @@ public class CleanSpeakConfiguration implements Buildable<CleanSpeakConfiguratio
         return false;
       }
       UsernameModeration that = (UsernameModeration) o;
-      return enabled == that.enabled &&
-          Objects.equals(applicationId, that.applicationId);
+      return Objects.equals(applicationId, that.applicationId) &&
+          Objects.equals(enabled, that.enabled);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(enabled, applicationId);
+      return Objects.hash(applicationId, enabled);
     }
 
     @Override

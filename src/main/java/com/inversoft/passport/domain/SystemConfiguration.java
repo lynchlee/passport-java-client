@@ -325,12 +325,13 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
             return false;
           }
           EventConfigurationData that = (EventConfigurationData) o;
-          return transactionType == that.transactionType;
+          return Objects.equals(enabled, that.enabled) &&
+              Objects.equals(transactionType, that.transactionType);
         }
 
         @Override
         public int hashCode() {
-          return Objects.hash(transactionType);
+          return Objects.hash(enabled, transactionType);
         }
 
         @Override

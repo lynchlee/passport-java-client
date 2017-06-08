@@ -21,17 +21,16 @@ public class RememberPreviousPasswords extends Enableable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    if (!super.equals(o)) {
-      return false;
-    }
     RememberPreviousPasswords that = (RememberPreviousPasswords) o;
-    return count == that.count;
+    return Objects.equals(count, that.count) &&
+        Objects.equals(enabled, that.enabled);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), count);
+    return Objects.hash(count, enabled);
   }
+
 
   @Override
   public String toString() {

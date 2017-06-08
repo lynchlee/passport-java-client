@@ -3,8 +3,6 @@
  */
 package com.inversoft.passport.domain;
 
-import java.util.Objects;
-
 import com.inversoft.json.ToString;
 
 /**
@@ -14,23 +12,6 @@ import com.inversoft.json.ToString;
  */
 public abstract class Enableable {
   public boolean enabled;
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Enableable that = (Enableable) o;
-    return enabled == that.enabled;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(enabled);
-  }
 
   @Override
   public String toString() {

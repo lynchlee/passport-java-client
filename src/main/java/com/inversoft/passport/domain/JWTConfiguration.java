@@ -74,6 +74,7 @@ public class JWTConfiguration extends Enableable implements Buildable<JWTConfigu
     }
     JWTConfiguration that = (JWTConfiguration) o;
     return Objects.equals(algorithm, that.algorithm) &&
+        Objects.equals(enabled, that.enabled) &&
         Objects.equals(issuer, that.issuer) &&
         Objects.equals(privateKey, that.privateKey) &&
         Objects.equals(publicKey, that.publicKey) &&
@@ -84,7 +85,7 @@ public class JWTConfiguration extends Enableable implements Buildable<JWTConfigu
 
   @Override
   public int hashCode() {
-    return Objects.hash(algorithm, issuer, privateKey, publicKey, refreshTokenTimeToLiveInMinutes, secret, timeToLiveInSeconds);
+    return Objects.hash(algorithm, enabled, issuer, privateKey, publicKey, refreshTokenTimeToLiveInMinutes, secret, timeToLiveInSeconds);
   }
 
   public void normalize() {
