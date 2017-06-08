@@ -103,6 +103,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
         Objects.equals(httpSessionMaxInactiveInterval, that.httpSessionMaxInactiveInterval) &&
         Objects.equals(logoutURL, that.logoutURL) &&
         Objects.equals(reportTimezone, that.reportTimezone) &&
+        Objects.equals(passwordExpirationDays, that.passwordExpirationDays) &&
         Objects.equals(passportFrontendURL, that.passportFrontendURL) &&
         Objects.equals(passwordValidationRules, that.passwordValidationRules) &&
         Objects.equals(setPasswordEmailTemplateId, that.setPasswordEmailTemplateId) &&
@@ -130,7 +131,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
   @Override
   public int hashCode() {
     return Objects.hash(cleanSpeakConfiguration, data, failedAuthenticationUserActionId, forgotEmailTemplateId, httpSessionMaxInactiveInterval,
-                        logoutURL, reportTimezone, passportFrontendURL, passwordValidationRules,
+                        logoutURL, reportTimezone, passwordExpirationDays, passportFrontendURL, passwordValidationRules,
                         setPasswordEmailTemplateId, useOauthForBackend, verificationEmailTemplateId, verifyEmail, verifyEmailWhenChanged);
   }
 
