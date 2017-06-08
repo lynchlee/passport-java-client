@@ -21,9 +21,6 @@ public class MinimumPasswordAge extends Enableable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    if (!super.equals(o)) {
-      return false;
-    }
     MinimumPasswordAge that = (MinimumPasswordAge) o;
     return Objects.equals(enabled, that.enabled) &&
         Objects.equals(seconds, that.seconds);
