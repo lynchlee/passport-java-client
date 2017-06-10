@@ -28,7 +28,7 @@ import com.inversoft.passport.domain.util.Normalizer;
 public class AuditLog implements Buildable<AuditLog> {
   public AuditLogData data;
 
-  public Integer id;
+  public Long id;
 
   public ZonedDateTime insertInstant;
 
