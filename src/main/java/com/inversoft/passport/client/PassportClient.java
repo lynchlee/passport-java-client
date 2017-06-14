@@ -1136,6 +1136,24 @@ public class PassportClient {
   }
 
   /**
+   * Revokes a single refresh token, all tokens for a user or all tokens for an application. If you provide a user id
+   * and an application id, this will delete all the refresh tokens for that user for that application.
+   *
+   * @param token (Optional) The refresh token to delete.
+   * @param userId (Optional) The user id whose tokens to delete.
+   * @param applicationId (Optional) The application id of the tokens to delete.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> revokeRefreshToken(String token, UUID userId, UUID applicationId) {
+    return start(Void.TYPE, Errors.class).uri("/api/jwt/refresh")
+                            .urlParameter("token", token)
+                            .urlParameter("userId", userId)
+                            .urlParameter("applicationId", applicationId)
+                            .delete()
+                            .go();
+  }
+
+  /**
    * Searches the audit logs with the specified criteria and pagination.
    *
    * @param request The search criteria and pagination information.
