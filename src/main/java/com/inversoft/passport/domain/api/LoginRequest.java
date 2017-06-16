@@ -18,6 +18,7 @@ package com.inversoft.passport.domain.api;
 import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
+import com.inversoft.passport.domain.Buildable;
 import com.inversoft.passport.domain.jwt.RefreshToken.MetaData;
 
 /**
@@ -25,7 +26,7 @@ import com.inversoft.passport.domain.jwt.RefreshToken.MetaData;
  *
  * @author Seth Musselman
  */
-public class LoginRequest {
+public class LoginRequest implements Buildable<LoginRequest> {
   public UUID applicationId;
 
   /**
