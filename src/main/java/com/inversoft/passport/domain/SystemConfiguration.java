@@ -33,8 +33,6 @@ import com.inversoft.passport.domain.event.EventType;
  * @author Brian Pontarelli
  */
 public class SystemConfiguration implements Buildable<SystemConfiguration> {
-  public CleanSpeakConfiguration cleanSpeakConfiguration = new CleanSpeakConfiguration();
-
   @JsonUnwrapped
   public SystemConfigurationData data = new SystemConfigurationData();
 
@@ -95,8 +93,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
       return false;
     }
     SystemConfiguration that = (SystemConfiguration) o;
-    return Objects.equals(cleanSpeakConfiguration, that.cleanSpeakConfiguration) &&
-        Objects.equals(emailConfiguration, that.emailConfiguration) &&
+    return Objects.equals(emailConfiguration, that.emailConfiguration) &&
         Objects.equals(data, that.data) &&
         Objects.equals(failedAuthenticationUserActionId, that.failedAuthenticationUserActionId) &&
         Objects.equals(forgotEmailTemplateId, that.forgotEmailTemplateId) &&
@@ -130,16 +127,12 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(cleanSpeakConfiguration, data, failedAuthenticationUserActionId, forgotEmailTemplateId, httpSessionMaxInactiveInterval,
+    return Objects.hash(data, failedAuthenticationUserActionId, forgotEmailTemplateId, httpSessionMaxInactiveInterval,
                         logoutURL, reportTimezone, getPasswordExpirationDays(), passportFrontendURL, passwordValidationRules,
                         setPasswordEmailTemplateId, useOauthForBackend, verificationEmailTemplateId, verifyEmail, verifyEmailWhenChanged);
   }
 
   public void normalize() {
-    if (cleanSpeakConfiguration != null) {
-      cleanSpeakConfiguration.normalize();
-    }
-
     // Normalize Line returns in the public / private keys
     if (data.jwtConfiguration != null) {
       data.jwtConfiguration.normalize();

@@ -33,6 +33,7 @@ import com.inversoft.passport.domain.api.AuditLogSearchRequest;
 import com.inversoft.passport.domain.api.AuditLogSearchResponse;
 import com.inversoft.passport.domain.api.EmailTemplateRequest;
 import com.inversoft.passport.domain.api.EmailTemplateResponse;
+import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
 import com.inversoft.passport.domain.api.LoginResponse;
 import com.inversoft.passport.domain.api.PreviewRequest;
@@ -844,6 +845,17 @@ public class PassportClient {
   public ClientResponse<UserActionResponse, Void> retrieveInactiveUserActions() {
     return start(UserActionResponse.class, Void.TYPE).uri("/api/user-action")
                             .urlParameter("inactive", true)
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves the available integrations.
+   *
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IntegrationResponse, Void> retrieveIntegration() {
+    return start(IntegrationResponse.class, Void.TYPE).uri("/api/integration")
                             .get()
                             .go();
   }
