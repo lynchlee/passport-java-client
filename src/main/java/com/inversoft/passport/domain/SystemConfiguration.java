@@ -246,6 +246,8 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
 
     public PasswordEncryptionConfiguration passwordEncryptionConfiguration = new PasswordEncryptionConfiguration();
 
+    public TwillioConfiguration twillioConfiguration = new TwillioConfiguration();
+
     public UIConfiguration uiConfiguration = new UIConfiguration();
 
     @Override
@@ -263,16 +265,17 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
           Objects.equals(eventConfiguration, that.eventConfiguration) &&
           Objects.equals(failedAuthenticationConfiguration, that.failedAuthenticationConfiguration) &&
           Objects.equals(jwtConfiguration, that.jwtConfiguration) &&
-          Objects.equals(passwordEncryptionConfiguration, that.passwordEncryptionConfiguration) &&
           Objects.equals(maximumPasswordAge, that.maximumPasswordAge) &&
           Objects.equals(minimumPasswordAge, that.minimumPasswordAge) &&
+          Objects.equals(passwordEncryptionConfiguration, that.passwordEncryptionConfiguration) &&
+          Objects.equals(twillioConfiguration, that.twillioConfiguration) &&
           Objects.equals(uiConfiguration, that.uiConfiguration);
     }
 
     @Override
     public int hashCode() {
       return Objects.hash(backendServers, cookieEncryptionIV, cookieEncryptionKey, eventConfiguration, failedAuthenticationConfiguration,
-                          jwtConfiguration, passwordEncryptionConfiguration, maximumPasswordAge, minimumPasswordAge, uiConfiguration);
+                          jwtConfiguration, maximumPasswordAge, minimumPasswordAge, passwordEncryptionConfiguration, twillioConfiguration, uiConfiguration);
     }
 
     @Override
@@ -367,7 +370,6 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
       public int hashCode() {
         return Objects.hash(logoURL, headerColor, menuFontColor);
       }
-
     }
   }
 }
