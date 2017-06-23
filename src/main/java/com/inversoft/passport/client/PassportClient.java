@@ -33,6 +33,7 @@ import com.inversoft.passport.domain.api.AuditLogSearchRequest;
 import com.inversoft.passport.domain.api.AuditLogSearchResponse;
 import com.inversoft.passport.domain.api.EmailTemplateRequest;
 import com.inversoft.passport.domain.api.EmailTemplateResponse;
+import com.inversoft.passport.domain.api.IntegrationRequest;
 import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
 import com.inversoft.passport.domain.api.LoginResponse;
@@ -120,31 +121,31 @@ public class PassportClient {
    * request object.
    *
    * @param actioneeUserId The actionee's user id.
-   * @param request The action request that includes all of the information about the action being taken including
-  *     the id of the action, any options and the duration (if applicable).
+   * @param request        The action request that includes all of the information about the action being taken including the id of the
+   *                       action, any options and the duration (if applicable).
    * @return The ClientResponse object.
    */
   public ClientResponse<ActionResponse, Errors> actionUser(UUID actioneeUserId, ActionRequest request) {
     return start(ActionResponse.class, Errors.class).uri("/api/user/action")
-                            .urlSegment(actioneeUserId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                    .urlSegment(actioneeUserId)
+                                                    .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                    .post()
+                                                    .go();
   }
 
   /**
    * Cancels the user action.
    *
    * @param actionId The action id of the action to cancel.
-   * @param request The action request that contains the information about the cancellation.
+   * @param request  The action request that contains the information about the cancellation.
    * @return The ClientResponse object.
    */
   public ClientResponse<ActionResponse, Errors> cancelAction(UUID actionId, ActionRequest request) {
     return start(ActionResponse.class, Errors.class).uri("/api/user/action")
-                            .urlSegment(actionId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .delete()
-                            .go();
+                                                    .urlSegment(actionId)
+                                                    .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                    .delete()
+                                                    .go();
   }
 
   /**
@@ -152,15 +153,15 @@ public class PassportClient {
    * and they clicked on a link to reset their password.
    *
    * @param verificationId The verification id used to find the user.
-   * @param request The change password request that contains all of the information used to change the password.
+   * @param request        The change password request that contains all of the information used to change the password.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> changePassword(String verificationId, ChangePasswordRequest request) {
     return start(Void.TYPE, Errors.class).uri("/api/user/change-password")
-                            .urlSegment(verificationId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                         .urlSegment(verificationId)
+                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                         .post()
+                                         .go();
   }
 
   /**
@@ -173,9 +174,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> changePasswordByIdentity(ChangePasswordRequest request) {
     return start(Void.TYPE, Errors.class).uri("/api/user/change-password")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                         .post()
+                                         .go();
   }
 
   /**
@@ -186,24 +187,24 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> commentOnUser(UserCommentRequest request) {
     return start(Void.TYPE, Errors.class).uri("/api/user/comment")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                         .post()
+                                         .go();
   }
 
   /**
    * Creates an application. You can optionally specify an id for the application, but this is not required.
    *
    * @param applicationId (Optional) The id to use for the application.
-   * @param request The application request that contains all of the information used to create the application.
+   * @param request       The application request that contains all of the information used to create the application.
    * @return The ClientResponse object.
    */
   public ClientResponse<ApplicationResponse, Errors> createApplication(UUID applicationId, ApplicationRequest request) {
     return start(ApplicationResponse.class, Errors.class).uri("/api/application")
-                            .urlSegment(applicationId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                         .urlSegment(applicationId)
+                                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                         .post()
+                                                         .go();
   }
 
   /**
@@ -211,18 +212,18 @@ public class PassportClient {
    * You can optionally specify an id for the role inside the ApplicationRole object itself, but this is not required.
    *
    * @param applicationId The id of the application to create the role on.
-   * @param roleId (Optional) The id of the role. Defaults to a secure UUID.
-   * @param request The application request that contains all of the information used to create the role.
+   * @param roleId        (Optional) The id of the role. Defaults to a secure UUID.
+   * @param request       The application request that contains all of the information used to create the role.
    * @return The ClientResponse object.
    */
   public ClientResponse<ApplicationResponse, Errors> createApplicationRole(UUID applicationId, UUID roleId, ApplicationRequest request) {
     return start(ApplicationResponse.class, Errors.class).uri("/api/application")
-                            .urlSegment(applicationId)
-                            .urlSegment("role")
-                            .urlSegment(roleId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                         .urlSegment(applicationId)
+                                                         .urlSegment("role")
+                                                         .urlSegment(roleId)
+                                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                         .post()
+                                                         .go();
   }
 
   /**
@@ -235,9 +236,9 @@ public class PassportClient {
    */
   public ClientResponse<AuditLogResponse, Errors> createAuditLog(AuditLogRequest request) {
     return start(AuditLogResponse.class, Errors.class).uri("/api/system/audit-log")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                      .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                      .post()
+                                                      .go();
   }
 
   /**
@@ -245,30 +246,30 @@ public class PassportClient {
    * is not required.
    *
    * @param emailTemplateId (Optional) The id for the template.
-   * @param request The email template request that contains all of the information used to create the email template.
+   * @param request         The email template request that contains all of the information used to create the email template.
    * @return The ClientResponse object.
    */
   public ClientResponse<EmailTemplateResponse, Errors> createEmailTemplate(UUID emailTemplateId, EmailTemplateRequest request) {
     return start(EmailTemplateResponse.class, Errors.class).uri("/api/email/template")
-                            .urlSegment(emailTemplateId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                           .urlSegment(emailTemplateId)
+                                                           .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                           .post()
+                                                           .go();
   }
 
   /**
    * Creates a user with an optional id.
    *
-   * @param userId (Optional) The id for the user.
+   * @param userId  (Optional) The id for the user.
    * @param request The user request that contains all of the information used to create the user.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserResponse, Errors> createUser(UUID userId, UserRequest request) {
     return start(UserResponse.class, Errors.class).uri("/api/user")
-                            .urlSegment(userId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                  .urlSegment(userId)
+                                                  .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                  .post()
+                                                  .go();
   }
 
   /**
@@ -276,15 +277,15 @@ public class PassportClient {
    * that the user action can be applied to any user.
    *
    * @param userActionId (Optional) The id for the user action.
-   * @param request The user action request that contains all of the information used to create the user action.
+   * @param request      The user action request that contains all of the information used to create the user action.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserActionResponse, Errors> createUserAction(UUID userActionId, UserActionRequest request) {
     return start(UserActionResponse.class, Errors.class).uri("/api/user-action")
-                            .urlSegment(userActionId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                        .urlSegment(userActionId)
+                                                        .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                        .post()
+                                                        .go();
   }
 
   /**
@@ -292,30 +293,30 @@ public class PassportClient {
    * successfully. Anytime after that the user action reason can be used.
    *
    * @param userActionReasonId (Optional) The id for the user action reason.
-   * @param request The user action reason request that contains all of the information used to create the user action reason.
+   * @param request            The user action reason request that contains all of the information used to create the user action reason.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserActionReasonResponse, Errors> createUserActionReason(UUID userActionReasonId, UserActionReasonRequest request) {
     return start(UserActionReasonResponse.class, Errors.class).uri("/api/user-action-reason")
-                            .urlSegment(userActionReasonId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                              .urlSegment(userActionReasonId)
+                                                              .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                              .post()
+                                                              .go();
   }
 
   /**
    * Creates a webhook. You can optionally specify an id for the webhook when calling this method, but it is not required.
    *
    * @param webhookId (Optional) The id for the webhook.
-   * @param request The webhook request that contains all of the information used to create the webhook.
+   * @param request   The webhook request that contains all of the information used to create the webhook.
    * @return The ClientResponse object.
    */
   public ClientResponse<WebhookResponse, Errors> createWebhook(UUID webhookId, WebhookRequest request) {
     return start(WebhookResponse.class, Errors.class).uri("/api/webhook")
-                            .urlSegment(webhookId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                     .urlSegment(webhookId)
+                                                     .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                     .post()
+                                                     .go();
   }
 
   /**
@@ -326,9 +327,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deactivateApplication(UUID applicationId) {
     return start(Void.TYPE, Errors.class).uri("/api/application")
-                            .urlSegment(applicationId)
-                            .delete()
-                            .go();
+                                         .urlSegment(applicationId)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -339,9 +340,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deactivateUser(UUID userId) {
     return start(Void.TYPE, Errors.class).uri("/api/user")
-                            .urlSegment(userId)
-                            .delete()
-                            .go();
+                                         .urlSegment(userId)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -352,9 +353,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deactivateUserAction(UUID userActionId) {
     return start(Void.TYPE, Errors.class).uri("/api/user-action")
-                            .urlSegment(userActionId)
-                            .delete()
-                            .go();
+                                         .urlSegment(userActionId)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -365,9 +366,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deactivateUsers(Collection<UUID> userIds) {
     return start(Void.TYPE, Errors.class).uri("/api/user/bulk")
-                            .urlParameter("userId", userIds)
-                            .delete()
-                            .go();
+                                         .urlParameter("userId", userIds)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -381,10 +382,10 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deleteApplication(UUID applicationId) {
     return start(Void.TYPE, Errors.class).uri("/api/application")
-                            .urlSegment(applicationId)
-                            .urlParameter("hardDelete", true)
-                            .delete()
-                            .go();
+                                         .urlSegment(applicationId)
+                                         .urlParameter("hardDelete", true)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -392,16 +393,16 @@ public class PassportClient {
    * permanently removes the given role from all users that had it.
    *
    * @param applicationId The id of the application to deactivate.
-   * @param roleId The id of the role to delete.
+   * @param roleId        The id of the role to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteApplicationRole(UUID applicationId, UUID roleId) {
     return start(Void.TYPE, Errors.class).uri("/api/application")
-                            .urlSegment(applicationId)
-                            .urlSegment("role")
-                            .urlSegment(roleId)
-                            .delete()
-                            .go();
+                                         .urlSegment(applicationId)
+                                         .urlSegment("role")
+                                         .urlSegment(roleId)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -412,24 +413,24 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deleteEmailTemplate(UUID emailTemplateId) {
     return start(Void.TYPE, Errors.class).uri("/api/email/template")
-                            .urlSegment(emailTemplateId)
-                            .delete()
-                            .go();
+                                         .urlSegment(emailTemplateId)
+                                         .delete()
+                                         .go();
   }
 
   /**
    * Deletes the user registration for the given user and application.
    *
-   * @param userId The id of the user whose registration is being deleted.
+   * @param userId        The id of the user whose registration is being deleted.
    * @param applicationId The id of the application to remove the registration for.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteRegistration(UUID userId, UUID applicationId) {
     return start(Void.TYPE, Errors.class).uri("/api/user/registration")
-                            .urlSegment(userId)
-                            .urlSegment(applicationId)
-                            .delete()
-                            .go();
+                                         .urlSegment(userId)
+                                         .urlSegment(applicationId)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -441,10 +442,10 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deleteUser(UUID userId) {
     return start(Void.TYPE, Errors.class).uri("/api/user")
-                            .urlSegment(userId)
-                            .urlParameter("hardDelete", true)
-                            .delete()
-                            .go();
+                                         .urlSegment(userId)
+                                         .urlParameter("hardDelete", true)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -456,10 +457,10 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deleteUserAction(UUID userActionId) {
     return start(Void.TYPE, Errors.class).uri("/api/user-action")
-                            .urlSegment(userActionId)
-                            .urlParameter("hardDelete", true)
-                            .delete()
-                            .go();
+                                         .urlSegment(userActionId)
+                                         .urlParameter("hardDelete", true)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -470,9 +471,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deleteUserActionReason(UUID userActionReasonId) {
     return start(Void.TYPE, Errors.class).uri("/api/user-action-reason")
-                            .urlSegment(userActionReasonId)
-                            .delete()
-                            .go();
+                                         .urlSegment(userActionReasonId)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -483,10 +484,10 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deleteUsers(Collection<UUID> userIds) {
     return start(Void.TYPE, Errors.class).uri("/api/user/bulk")
-                            .urlParameter("userId", userIds)
-                            .urlParameter("hardDelete", true)
-                            .delete()
-                            .go();
+                                         .urlParameter("userId", userIds)
+                                         .urlParameter("hardDelete", true)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -497,9 +498,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> deleteWebhook(UUID webhookId) {
     return start(Void.TYPE, Errors.class).uri("/api/webhook")
-                            .urlSegment(webhookId)
-                            .delete()
-                            .go();
+                                         .urlSegment(webhookId)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -510,9 +511,9 @@ public class PassportClient {
    */
   public ClientResponse<RefreshResponse, Errors> exchangeRefreshTokenForAccessToken(RefreshRequest request) {
     return start(RefreshResponse.class, Errors.class).uri("/api/jwt/refresh")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                     .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                     .post()
+                                                     .go();
   }
 
   /**
@@ -523,9 +524,9 @@ public class PassportClient {
    */
   public ClientResponse<ForgotPasswordResponse, Errors> forgotPassword(ForgotPasswordRequest request) {
     return start(ForgotPasswordResponse.class, Errors.class).uri("/api/user/forgot-password")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                            .post()
+                                                            .go();
   }
 
   /**
@@ -538,9 +539,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> importUsers(ImportRequest request) {
     return start(Void.TYPE, Errors.class).uri("/api/user/import")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                         .post()
+                                         .go();
   }
 
   /**
@@ -551,15 +552,15 @@ public class PassportClient {
    * obtained a valid token from authentication.
    *
    * @param applicationId The Application Id for which you are requesting a new access token be issued.
-   * @param encodedJWT The encoded JWT (access token).
+   * @param encodedJWT    The encoded JWT (access token).
    * @return The ClientResponse object.
    */
   public ClientResponse<IssueResponse, Errors> issueAccessToken(UUID applicationId, String encodedJWT) {
     return start(IssueResponse.class, Errors.class).uri("/api/jwt/issue")
-                            .authorization("JWT " + encodedJWT)
-                            .urlParameter("applicationId", applicationId)
-                            .get()
-                            .go();
+                                                   .authorization("JWT " + encodedJWT)
+                                                   .urlParameter("applicationId", applicationId)
+                                                   .get()
+                                                   .go();
   }
 
   /**
@@ -570,9 +571,9 @@ public class PassportClient {
    */
   public ClientResponse<LoginResponse, Errors> login(LoginRequest request) {
     return start(LoginResponse.class, Errors.class).uri("/api/login")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                   .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                   .post()
+                                                   .go();
   }
 
   /**
@@ -581,19 +582,19 @@ public class PassportClient {
    * application where they no longer have a session. This helps correctly track login counts, times and helps with
    * reporting.
    *
-   * @param userId The id of the user that was logged in.
-   * @param applicationId The id of the application that they logged into.
-   * @param callerIPAddress (Optional) The IP address of the end-user that is logging in. If a null value is provided
-  *     the IP address will be that of the client or last proxy that sent the request.
+   * @param userId          The id of the user that was logged in.
+   * @param applicationId   The id of the application that they logged into.
+   * @param callerIPAddress (Optional) The IP address of the end-user that is logging in. If a null value is provided the IP address will be
+   *                        that of the client or last proxy that sent the request.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> loginPing(UUID userId, UUID applicationId, String callerIPAddress) {
     return start(Void.TYPE, Errors.class).uri("/api/login")
-                            .urlSegment(userId)
-                            .urlSegment(applicationId)
-                            .urlParameter("ipAddress", callerIPAddress)
-                            .put()
-                            .go();
+                                         .urlSegment(userId)
+                                         .urlSegment(applicationId)
+                                         .urlParameter("ipAddress", callerIPAddress)
+                                         .put()
+                                         .go();
   }
 
   /**
@@ -601,18 +602,18 @@ public class PassportClient {
    * client and revoke the refresh token stored. This API does nothing if the request does not contain an access
    * token or refresh token cookies.
    *
-   * @param global (Optional) When this value is set to true all of the refresh tokens issued to the owner of the
-  *     provided token will be revoked.
-   * @param refreshToken (Optional) The refresh_token as a request parameter instead of coming in via a cookie.
-  *     If provided this takes precedence over the cookie.
+   * @param global       (Optional) When this value is set to true all of the refresh tokens issued to the owner of the provided token will
+   *                     be revoked.
+   * @param refreshToken (Optional) The refresh_token as a request parameter instead of coming in via a cookie. If provided this takes
+   *                     precedence over the cookie.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Void> logout(boolean global, String refreshToken) {
     return start(Void.TYPE, Void.TYPE).uri("/api/logout")
-                            .urlParameter("global", global)
-                            .urlParameter("refreshToken", refreshToken)
-                            .post()
-                            .go();
+                                      .urlParameter("global", global)
+                                      .urlParameter("refreshToken", refreshToken)
+                                      .post()
+                                      .go();
   }
 
   /**
@@ -620,15 +621,15 @@ public class PassportClient {
    * action.
    *
    * @param actionId The id of the action to modify. This is technically the user action log id.
-   * @param request The request that contains all of the information about the modification.
+   * @param request  The request that contains all of the information about the modification.
    * @return The ClientResponse object.
    */
   public ClientResponse<ActionResponse, Errors> modifyAction(UUID actionId, ActionRequest request) {
     return start(ActionResponse.class, Errors.class).uri("/api/user/action")
-                            .urlSegment(actionId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                    .urlSegment(actionId)
+                                                    .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                    .put()
+                                                    .go();
   }
 
   /**
@@ -639,10 +640,10 @@ public class PassportClient {
    */
   public ClientResponse<ApplicationResponse, Errors> reactivateApplication(UUID applicationId) {
     return start(ApplicationResponse.class, Errors.class).uri("/api/application")
-                            .urlSegment(applicationId)
-                            .urlParameter("reactivate", true)
-                            .put()
-                            .go();
+                                                         .urlSegment(applicationId)
+                                                         .urlParameter("reactivate", true)
+                                                         .put()
+                                                         .go();
   }
 
   /**
@@ -653,10 +654,10 @@ public class PassportClient {
    */
   public ClientResponse<UserResponse, Errors> reactivateUser(UUID userId) {
     return start(UserResponse.class, Errors.class).uri("/api/user")
-                            .urlSegment(userId)
-                            .urlParameter("reactivate", true)
-                            .put()
-                            .go();
+                                                  .urlSegment(userId)
+                                                  .urlParameter("reactivate", true)
+                                                  .put()
+                                                  .go();
   }
 
   /**
@@ -667,10 +668,10 @@ public class PassportClient {
    */
   public ClientResponse<UserActionResponse, Errors> reactivateUserAction(UUID userActionId) {
     return start(UserActionResponse.class, Errors.class).uri("/api/user-action")
-                            .urlSegment(userActionId)
-                            .urlParameter("reactivate", true)
-                            .put()
-                            .go();
+                                                        .urlSegment(userActionId)
+                                                        .urlParameter("reactivate", true)
+                                                        .put()
+                                                        .go();
   }
 
   /**
@@ -680,16 +681,16 @@ public class PassportClient {
    * application. The user id can also be provided and it will either be used to look up an existing user or it will be
    * used for the newly created User.
    *
-   * @param userId (Optional) The id of the user being registered for the application and optionally created.
+   * @param userId  (Optional) The id of the user being registered for the application and optionally created.
    * @param request The request that optionally contains the User and must contain the UserRegistration.
    * @return The ClientResponse object.
    */
   public ClientResponse<RegistrationResponse, Errors> register(UUID userId, RegistrationRequest request) {
     return start(RegistrationResponse.class, Errors.class).uri("/api/user/registration")
-                            .urlSegment(userId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                          .urlSegment(userId)
+                                                          .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                          .post()
+                                                          .go();
   }
 
   /**
@@ -700,9 +701,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Void> resendEmailVerification(String email) {
     return start(Void.TYPE, Void.TYPE).uri("/api/user/verify-email")
-                            .urlParameter("email", email)
-                            .put()
-                            .go();
+                                      .urlParameter("email", email)
+                                      .put()
+                                      .go();
   }
 
   /**
@@ -713,9 +714,9 @@ public class PassportClient {
    */
   public ClientResponse<ActionResponse, Errors> retrieveAction(UUID actionId) {
     return start(ActionResponse.class, Errors.class).uri("/api/user/action")
-                            .urlSegment(actionId)
-                            .get()
-                            .go();
+                                                    .urlSegment(actionId)
+                                                    .get()
+                                                    .go();
   }
 
   /**
@@ -726,9 +727,9 @@ public class PassportClient {
    */
   public ClientResponse<ActionResponse, Errors> retrieveActions(UUID userId) {
     return start(ActionResponse.class, Errors.class).uri("/api/user/action")
-                            .urlParameter("userId", userId)
-                            .get()
-                            .go();
+                                                    .urlParameter("userId", userId)
+                                                    .get()
+                                                    .go();
   }
 
   /**
@@ -739,9 +740,9 @@ public class PassportClient {
    */
   public ClientResponse<ApplicationResponse, Void> retrieveApplication(UUID applicationId) {
     return start(ApplicationResponse.class, Void.TYPE).uri("/api/application")
-                            .urlSegment(applicationId)
-                            .get()
-                            .go();
+                                                      .urlSegment(applicationId)
+                                                      .get()
+                                                      .go();
   }
 
   /**
@@ -751,8 +752,8 @@ public class PassportClient {
    */
   public ClientResponse<ApplicationResponse, Void> retrieveApplications() {
     return start(ApplicationResponse.class, Void.TYPE).uri("/api/application")
-                            .get()
-                            .go();
+                                                      .get()
+                                                      .go();
   }
 
   /**
@@ -763,9 +764,9 @@ public class PassportClient {
    */
   public ClientResponse<AuditLogResponse, Errors> retrieveAuditLog(Integer auditLogId) {
     return start(AuditLogResponse.class, Errors.class).uri("/api/system/audit-log")
-                            .urlSegment(auditLogId)
-                            .get()
-                            .go();
+                                                      .urlSegment(auditLogId)
+                                                      .get()
+                                                      .go();
   }
 
   /**
@@ -773,17 +774,17 @@ public class PassportClient {
    * return the daily active counts for that application.
    *
    * @param applicationId (Optional) The application id.
-   * @param start The start instant as UTC milliseconds since Epoch.
-   * @param end The end instant as UTC milliseconds since Epoch.
+   * @param start         The start instant as UTC milliseconds since Epoch.
+   * @param end           The end instant as UTC milliseconds since Epoch.
    * @return The ClientResponse object.
    */
   public ClientResponse<DailyActiveUserReportResponse, Errors> retrieveDailyActiveReport(UUID applicationId, long start, long end) {
     return start(DailyActiveUserReportResponse.class, Errors.class).uri("/api/report/daily-active-user")
-                            .urlParameter("applicationId", applicationId)
-                            .urlParameter("start", start)
-                            .urlParameter("end", end)
-                            .get()
-                            .go();
+                                                                   .urlParameter("applicationId", applicationId)
+                                                                   .urlParameter("start", start)
+                                                                   .urlParameter("end", end)
+                                                                   .get()
+                                                                   .go();
   }
 
   /**
@@ -794,9 +795,9 @@ public class PassportClient {
    */
   public ClientResponse<EmailTemplateResponse, Void> retrieveEmailTemplate(UUID emailTemplateId) {
     return start(EmailTemplateResponse.class, Void.TYPE).uri("/api/email/template")
-                            .urlSegment(emailTemplateId)
-                            .get()
-                            .go();
+                                                        .urlSegment(emailTemplateId)
+                                                        .get()
+                                                        .go();
   }
 
   /**
@@ -809,9 +810,9 @@ public class PassportClient {
    */
   public ClientResponse<PreviewResponse, Errors> retrieveEmailTemplatePreview(PreviewRequest request) {
     return start(PreviewResponse.class, Errors.class).uri("/api/email/template/preview")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                     .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                     .post()
+                                                     .go();
   }
 
   /**
@@ -821,8 +822,8 @@ public class PassportClient {
    */
   public ClientResponse<EmailTemplateResponse, Void> retrieveEmailTemplates() {
     return start(EmailTemplateResponse.class, Void.TYPE).uri("/api/email/template")
-                            .get()
-                            .go();
+                                                        .get()
+                                                        .go();
   }
 
   /**
@@ -832,9 +833,9 @@ public class PassportClient {
    */
   public ClientResponse<ApplicationResponse, Void> retrieveInactiveApplications() {
     return start(ApplicationResponse.class, Void.TYPE).uri("/api/application")
-                            .urlParameter("inactive", true)
-                            .get()
-                            .go();
+                                                      .urlParameter("inactive", true)
+                                                      .get()
+                                                      .go();
   }
 
   /**
@@ -844,9 +845,9 @@ public class PassportClient {
    */
   public ClientResponse<UserActionResponse, Void> retrieveInactiveUserActions() {
     return start(UserActionResponse.class, Void.TYPE).uri("/api/user-action")
-                            .urlParameter("inactive", true)
-                            .get()
-                            .go();
+                                                     .urlParameter("inactive", true)
+                                                     .get()
+                                                     .go();
   }
 
   /**
@@ -856,8 +857,8 @@ public class PassportClient {
    */
   public ClientResponse<IntegrationResponse, Void> retrieveIntegration() {
     return start(IntegrationResponse.class, Void.TYPE).uri("/api/integration")
-                            .get()
-                            .go();
+                                                      .get()
+                                                      .go();
   }
 
   /**
@@ -870,9 +871,9 @@ public class PassportClient {
    */
   public ClientResponse<PublicKeyResponse, Void> retrieveJWTPublicKey(String keyId) {
     return start(PublicKeyResponse.class, Void.TYPE).uri("/api/jwt/public-key")
-                            .urlSegment(keyId)
-                            .get()
-                            .go();
+                                                    .urlSegment(keyId)
+                                                    .get()
+                                                    .go();
   }
 
   /**
@@ -882,8 +883,8 @@ public class PassportClient {
    */
   public ClientResponse<PublicKeyResponse, Void> retrieveJWTPublicKeys() {
     return start(PublicKeyResponse.class, Void.TYPE).uri("/api/jwt/public-key")
-                            .get()
-                            .go();
+                                                    .get()
+                                                    .go();
   }
 
   /**
@@ -891,17 +892,17 @@ public class PassportClient {
    * login counts for that application.
    *
    * @param applicationId (Optional) The application id.
-   * @param start The start instant as UTC milliseconds since Epoch.
-   * @param end The end instant as UTC milliseconds since Epoch.
+   * @param start         The start instant as UTC milliseconds since Epoch.
+   * @param end           The end instant as UTC milliseconds since Epoch.
    * @return The ClientResponse object.
    */
   public ClientResponse<LoginReportResponse, Errors> retrieveLoginReport(UUID applicationId, long start, long end) {
     return start(LoginReportResponse.class, Errors.class).uri("/api/report/login")
-                            .urlParameter("applicationId", applicationId)
-                            .urlParameter("start", start)
-                            .urlParameter("end", end)
-                            .get()
-                            .go();
+                                                         .urlParameter("applicationId", applicationId)
+                                                         .urlParameter("start", start)
+                                                         .urlParameter("end", end)
+                                                         .get()
+                                                         .go();
   }
 
   /**
@@ -909,17 +910,17 @@ public class PassportClient {
    * return the monthly active counts for that application.
    *
    * @param applicationId (Optional) The application id.
-   * @param start The start instant as UTC milliseconds since Epoch.
-   * @param end The end instant as UTC milliseconds since Epoch.
+   * @param start         The start instant as UTC milliseconds since Epoch.
+   * @param end           The end instant as UTC milliseconds since Epoch.
    * @return The ClientResponse object.
    */
   public ClientResponse<MonthlyActiveUserReportResponse, Errors> retrieveMonthlyActiveReport(UUID applicationId, long start, long end) {
     return start(MonthlyActiveUserReportResponse.class, Errors.class).uri("/api/report/monthly-active-user")
-                            .urlParameter("applicationId", applicationId)
-                            .urlParameter("start", start)
-                            .urlParameter("end", end)
-                            .get()
-                            .go();
+                                                                     .urlParameter("applicationId", applicationId)
+                                                                     .urlParameter("start", start)
+                                                                     .urlParameter("end", end)
+                                                                     .get()
+                                                                     .go();
   }
 
   /**
@@ -930,24 +931,24 @@ public class PassportClient {
    */
   public ClientResponse<RefreshResponse, Errors> retrieveRefreshTokens(UUID userId) {
     return start(RefreshResponse.class, Errors.class).uri("/api/jwt/refresh")
-                            .urlParameter("userId", userId)
-                            .get()
-                            .go();
+                                                     .urlParameter("userId", userId)
+                                                     .get()
+                                                     .go();
   }
 
   /**
    * Retrieves the user registration for the user with the given id and the given application id.
    *
-   * @param userId The id of the user.
+   * @param userId        The id of the user.
    * @param applicationId The id of the application.
    * @return The ClientResponse object.
    */
   public ClientResponse<RegistrationResponse, Errors> retrieveRegistration(UUID userId, UUID applicationId) {
     return start(RegistrationResponse.class, Errors.class).uri("/api/user/registration")
-                            .urlSegment(userId)
-                            .urlSegment(applicationId)
-                            .get()
-                            .go();
+                                                          .urlSegment(userId)
+                                                          .urlSegment(applicationId)
+                                                          .get()
+                                                          .go();
   }
 
   /**
@@ -955,17 +956,17 @@ public class PassportClient {
    * the registration counts for that application.
    *
    * @param applicationId (Optional) The application id.
-   * @param start The start instant as UTC milliseconds since Epoch.
-   * @param end The end instant as UTC milliseconds since Epoch.
+   * @param start         The start instant as UTC milliseconds since Epoch.
+   * @param end           The end instant as UTC milliseconds since Epoch.
    * @return The ClientResponse object.
    */
   public ClientResponse<RegistrationReportResponse, Errors> retrieveRegistrationReport(UUID applicationId, long start, long end) {
     return start(RegistrationReportResponse.class, Errors.class).uri("/api/report/registration")
-                            .urlParameter("applicationId", applicationId)
-                            .urlParameter("start", start)
-                            .urlParameter("end", end)
-                            .get()
-                            .go();
+                                                                .urlParameter("applicationId", applicationId)
+                                                                .urlParameter("start", start)
+                                                                .urlParameter("end", end)
+                                                                .get()
+                                                                .go();
   }
 
   /**
@@ -975,8 +976,8 @@ public class PassportClient {
    */
   public ClientResponse<SystemConfigurationResponse, Void> retrieveSystemConfiguration() {
     return start(SystemConfigurationResponse.class, Void.TYPE).uri("/api/system-configuration")
-                            .get()
-                            .go();
+                                                              .get()
+                                                              .go();
   }
 
   /**
@@ -987,8 +988,8 @@ public class PassportClient {
    */
   public ClientResponse<TotalsReportResponse, Void> retrieveTotalReport() {
     return start(TotalsReportResponse.class, Void.TYPE).uri("/api/report/totals")
-                            .get()
-                            .go();
+                                                       .get()
+                                                       .go();
   }
 
   /**
@@ -999,9 +1000,9 @@ public class PassportClient {
    */
   public ClientResponse<UserResponse, Errors> retrieveUser(UUID userId) {
     return start(UserResponse.class, Errors.class).uri("/api/user")
-                            .urlSegment(userId)
-                            .get()
-                            .go();
+                                                  .urlSegment(userId)
+                                                  .get()
+                                                  .go();
   }
 
   /**
@@ -1013,9 +1014,9 @@ public class PassportClient {
    */
   public ClientResponse<UserActionResponse, Void> retrieveUserAction(UUID userActionId) {
     return start(UserActionResponse.class, Void.TYPE).uri("/api/user-action")
-                            .urlSegment(userActionId)
-                            .get()
-                            .go();
+                                                     .urlSegment(userActionId)
+                                                     .get()
+                                                     .go();
   }
 
   /**
@@ -1027,9 +1028,9 @@ public class PassportClient {
    */
   public ClientResponse<UserActionReasonResponse, Void> retrieveUserActionReason(UUID userActionReasonId) {
     return start(UserActionReasonResponse.class, Void.TYPE).uri("/api/user-action-reason")
-                            .urlSegment(userActionReasonId)
-                            .get()
-                            .go();
+                                                           .urlSegment(userActionReasonId)
+                                                           .get()
+                                                           .go();
   }
 
   /**
@@ -1039,8 +1040,8 @@ public class PassportClient {
    */
   public ClientResponse<UserActionReasonResponse, Void> retrieveUserActionReasons() {
     return start(UserActionReasonResponse.class, Void.TYPE).uri("/api/user-action-reason")
-                            .get()
-                            .go();
+                                                           .get()
+                                                           .go();
   }
 
   /**
@@ -1050,8 +1051,8 @@ public class PassportClient {
    */
   public ClientResponse<UserActionResponse, Void> retrieveUserActions() {
     return start(UserActionResponse.class, Void.TYPE).uri("/api/user-action")
-                            .get()
-                            .go();
+                                                     .get()
+                                                     .go();
   }
 
   /**
@@ -1062,9 +1063,9 @@ public class PassportClient {
    */
   public ClientResponse<UserResponse, Errors> retrieveUserByEmail(String email) {
     return start(UserResponse.class, Errors.class).uri("/api/user")
-                            .urlParameter("email", email)
-                            .get()
-                            .go();
+                                                  .urlParameter("email", email)
+                                                  .get()
+                                                  .go();
   }
 
   /**
@@ -1075,9 +1076,9 @@ public class PassportClient {
    */
   public ClientResponse<UserResponse, Errors> retrieveUserByLoginId(String loginId) {
     return start(UserResponse.class, Errors.class).uri("/api/user")
-                            .urlParameter("loginId", loginId)
-                            .get()
-                            .go();
+                                                  .urlParameter("loginId", loginId)
+                                                  .get()
+                                                  .go();
   }
 
   /**
@@ -1088,9 +1089,9 @@ public class PassportClient {
    */
   public ClientResponse<UserResponse, Errors> retrieveUserByUsername(String username) {
     return start(UserResponse.class, Errors.class).uri("/api/user")
-                            .urlParameter("username", username)
-                            .get()
-                            .go();
+                                                  .urlParameter("username", username)
+                                                  .get()
+                                                  .go();
   }
 
   /**
@@ -1101,9 +1102,9 @@ public class PassportClient {
    */
   public ClientResponse<UserCommentResponse, Errors> retrieveUserComments(UUID userId) {
     return start(UserCommentResponse.class, Errors.class).uri("/api/user/comment")
-                            .urlSegment(userId)
-                            .get()
-                            .go();
+                                                         .urlSegment(userId)
+                                                         .get()
+                                                         .go();
   }
 
   /**
@@ -1111,16 +1112,16 @@ public class PassportClient {
    *
    * @param userId The id of the user.
    * @param offset The initial record. e.g. 0 is the last login, 100 will be the 100th most recent login.
-   * @param limit (Optional, defaults to 10) The number of records to retrieve.
+   * @param limit  (Optional, defaults to 10) The number of records to retrieve.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserLoginReportResponse, Errors> retrieveUserLoginReport(UUID userId, int offset, Integer limit) {
     return start(UserLoginReportResponse.class, Errors.class).uri("/api/report/user-login")
-                            .urlParameter("userId", userId)
-                            .urlParameter("offset", offset)
-                            .urlParameter("limit", limit)
-                            .get()
-                            .go();
+                                                             .urlParameter("userId", userId)
+                                                             .urlParameter("offset", offset)
+                                                             .urlParameter("limit", limit)
+                                                             .get()
+                                                             .go();
   }
 
   /**
@@ -1131,9 +1132,9 @@ public class PassportClient {
    */
   public ClientResponse<WebhookResponse, Void> retrieveWebhook(UUID webhookId) {
     return start(WebhookResponse.class, Void.TYPE).uri("/api/webhook")
-                            .urlSegment(webhookId)
-                            .get()
-                            .go();
+                                                  .urlSegment(webhookId)
+                                                  .get()
+                                                  .go();
   }
 
   /**
@@ -1143,26 +1144,26 @@ public class PassportClient {
    */
   public ClientResponse<WebhookResponse, Void> retrieveWebhooks() {
     return start(WebhookResponse.class, Void.TYPE).uri("/api/webhook")
-                            .get()
-                            .go();
+                                                  .get()
+                                                  .go();
   }
 
   /**
    * Revokes a single refresh token, all tokens for a user or all tokens for an application. If you provide a user id
    * and an application id, this will delete all the refresh tokens for that user for that application.
    *
-   * @param token (Optional) The refresh token to delete.
-   * @param userId (Optional) The user id whose tokens to delete.
+   * @param token         (Optional) The refresh token to delete.
+   * @param userId        (Optional) The user id whose tokens to delete.
    * @param applicationId (Optional) The application id of the tokens to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> revokeRefreshToken(String token, UUID userId, UUID applicationId) {
     return start(Void.TYPE, Errors.class).uri("/api/jwt/refresh")
-                            .urlParameter("token", token)
-                            .urlParameter("userId", userId)
-                            .urlParameter("applicationId", applicationId)
-                            .delete()
-                            .go();
+                                         .urlParameter("token", token)
+                                         .urlParameter("userId", userId)
+                                         .urlParameter("applicationId", applicationId)
+                                         .delete()
+                                         .go();
   }
 
   /**
@@ -1173,9 +1174,9 @@ public class PassportClient {
    */
   public ClientResponse<AuditLogSearchResponse, Void> searchAuditLogs(AuditLogSearchRequest request) {
     return start(AuditLogSearchResponse.class, Void.TYPE).uri("/api/system/audit-log/search")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                         .post()
+                                                         .go();
   }
 
   /**
@@ -1186,23 +1187,22 @@ public class PassportClient {
    */
   public ClientResponse<SearchResponse, Errors> searchUsers(Collection<UUID> ids) {
     return start(SearchResponse.class, Errors.class).uri("/api/user/search")
-                            .urlParameter("ids", ids)
-                            .get()
-                            .go();
+                                                    .urlParameter("ids", ids)
+                                                    .get()
+                                                    .go();
   }
 
   /**
    * Retrieves the users for the given search criteria and pagination.
    *
-   * @param request The search criteria and pagination constraints. Fields used: queryString, numberOfResults, startRow,
-  *     and sort fields.
+   * @param request The search criteria and pagination constraints. Fields used: queryString, numberOfResults, startRow, and sort fields.
    * @return The ClientResponse object.
    */
   public ClientResponse<SearchResponse, Errors> searchUsersByQueryString(SearchRequest request) {
     return start(SearchResponse.class, Errors.class).uri("/api/user/search")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                    .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                    .post()
+                                                    .go();
   }
 
   /**
@@ -1210,78 +1210,91 @@ public class PassportClient {
    * pairs in the email template.
    *
    * @param emailTemplateId The id for the template.
-   * @param request The send email request that contains all of the information used to send the email.
+   * @param request         The send email request that contains all of the information used to send the email.
    * @return The ClientResponse object.
    */
   public ClientResponse<SendResponse, Errors> sendEmail(UUID emailTemplateId, SendRequest request) {
     return start(SendResponse.class, Errors.class).uri("/api/email/send")
-                            .urlSegment(emailTemplateId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                                  .urlSegment(emailTemplateId)
+                                                  .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                  .post()
+                                                  .go();
   }
 
   /**
    * Updates the application with the given id.
    *
    * @param applicationId The id of the application to update.
-   * @param request The request that contains all of the new application information.
+   * @param request       The request that contains all of the new application information.
    * @return The ClientResponse object.
    */
   public ClientResponse<ApplicationResponse, Errors> updateApplication(UUID applicationId, ApplicationRequest request) {
     return start(ApplicationResponse.class, Errors.class).uri("/api/application")
-                            .urlSegment(applicationId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                         .urlSegment(applicationId)
+                                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                         .put()
+                                                         .go();
   }
 
   /**
    * Updates the application role with the given id for the application.
    *
    * @param applicationId The id of the application that the role belongs to.
-   * @param roleId The id of the role to update.
-   * @param request The request that contains all of the new role information.
+   * @param roleId        The id of the role to update.
+   * @param request       The request that contains all of the new role information.
    * @return The ClientResponse object.
    */
   public ClientResponse<ApplicationResponse, Errors> updateApplicationRole(UUID applicationId, UUID roleId, ApplicationRequest request) {
     return start(ApplicationResponse.class, Errors.class).uri("/api/application")
-                            .urlSegment(applicationId)
-                            .urlSegment("role")
-                            .urlSegment(roleId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                         .urlSegment(applicationId)
+                                                         .urlSegment("role")
+                                                         .urlSegment(roleId)
+                                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                         .put()
+                                                         .go();
   }
 
   /**
    * Updates the email template with the given id.
    *
    * @param emailTemplateId The id of the email template to update.
-   * @param request The request that contains all of the new email template information.
+   * @param request         The request that contains all of the new email template information.
    * @return The ClientResponse object.
    */
   public ClientResponse<EmailTemplateResponse, Errors> updateEmailTemplate(UUID emailTemplateId, EmailTemplateRequest request) {
     return start(EmailTemplateResponse.class, Errors.class).uri("/api/email/template")
-                            .urlSegment(emailTemplateId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                           .urlSegment(emailTemplateId)
+                                                           .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                           .put()
+                                                           .go();
+  }
+
+  /**
+   * Updates the available integrations.
+   *
+   * @param request The request that contains all of the new integration information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IntegrationResponse, Errors> updateIntegrations(IntegrationRequest request) {
+    return start(IntegrationResponse.class, Errors.class).uri("/api/integration")
+                                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                         .put()
+                                                         .go();
   }
 
   /**
    * Updates the registration for the user with the given id and the application defined in the request.
    *
-   * @param userId The id of the user whose registration is going to be updated.
+   * @param userId  The id of the user whose registration is going to be updated.
    * @param request The request that contains all of the new registration information.
    * @return The ClientResponse object.
    */
   public ClientResponse<RegistrationResponse, Errors> updateRegistration(UUID userId, RegistrationRequest request) {
     return start(RegistrationResponse.class, Errors.class).uri("/api/user/registration")
-                            .urlSegment(userId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                          .urlSegment(userId)
+                                                          .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                          .put()
+                                                          .go();
   }
 
   /**
@@ -1292,69 +1305,69 @@ public class PassportClient {
    */
   public ClientResponse<SystemConfigurationResponse, Errors> updateSystemConfiguration(SystemConfigurationRequest request) {
     return start(SystemConfigurationResponse.class, Errors.class).uri("/api/system-configuration")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                                 .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                                 .put()
+                                                                 .go();
   }
 
   /**
    * Updates the user with the given id.
    *
-   * @param userId The id of the user to update.
+   * @param userId  The id of the user to update.
    * @param request The request that contains all of the new user information.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserResponse, Errors> updateUser(UUID userId, UserRequest request) {
     return start(UserResponse.class, Errors.class).uri("/api/user")
-                            .urlSegment(userId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                  .urlSegment(userId)
+                                                  .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                  .put()
+                                                  .go();
   }
 
   /**
    * Updates the user action with the given id.
    *
    * @param userActionId The id of the user action to update.
-   * @param request The request that contains all of the new user action information.
+   * @param request      The request that contains all of the new user action information.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserActionResponse, Errors> updateUserAction(UUID userActionId, UserActionRequest request) {
     return start(UserActionResponse.class, Errors.class).uri("/api/user-action")
-                            .urlSegment(userActionId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                        .urlSegment(userActionId)
+                                                        .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                        .put()
+                                                        .go();
   }
 
   /**
    * Updates the user action reason with the given id.
    *
    * @param userActionReasonId The id of the user action reason to update.
-   * @param request The request that contains all of the new user action reason information.
+   * @param request            The request that contains all of the new user action reason information.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserActionReasonResponse, Errors> updateUserActionReason(UUID userActionReasonId, UserActionReasonRequest request) {
     return start(UserActionReasonResponse.class, Errors.class).uri("/api/user-action-reason")
-                            .urlSegment(userActionReasonId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                              .urlSegment(userActionReasonId)
+                                                              .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                              .put()
+                                                              .go();
   }
 
   /**
    * Updates the webhook with the given id.
    *
    * @param webhookId The id of the webhook to update.
-   * @param request The request that contains all of the new webhook information.
+   * @param request   The request that contains all of the new webhook information.
    * @return The ClientResponse object.
    */
   public ClientResponse<WebhookResponse, Errors> updateWebhook(UUID webhookId, WebhookRequest request) {
     return start(WebhookResponse.class, Errors.class).uri("/api/webhook")
-                            .urlSegment(webhookId)
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .put()
-                            .go();
+                                                     .urlSegment(webhookId)
+                                                     .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                                     .put()
+                                                     .go();
   }
 
   /**
@@ -1368,9 +1381,9 @@ public class PassportClient {
    */
   public ClientResponse<ValidateResponse, Void> validateAccessToken(String encodedJWT) {
     return start(ValidateResponse.class, Void.TYPE).uri("/api/jwt/validate")
-                            .authorization("JWT" + encodedJWT)
-                            .get()
-                            .go();
+                                                   .authorization("JWT" + encodedJWT)
+                                                   .get()
+                                                   .go();
   }
 
   /**
@@ -1381,9 +1394,9 @@ public class PassportClient {
    */
   public ClientResponse<Void, Void> verifyEmail(String verificationId) {
     return start(Void.TYPE, Void.TYPE).uri("/api/user/verify-email")
-                            .urlSegment(verificationId)
-                            .post()
-                            .go();
+                                      .urlSegment(verificationId)
+                                      .post()
+                                      .go();
   }
 
   /**
@@ -1394,17 +1407,17 @@ public class PassportClient {
    */
   public ClientResponse<Void, Errors> verifyTwoFactor(TwoFactorRequest request) {
     return start(Void.TYPE, Errors.class).uri("/api/two-factor")
-                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
-                            .post()
-                            .go();
+                                         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                                         .post()
+                                         .go();
   }
 
   private <T, U> RESTClient<T, U> start(Class<T> type, Class<U> errorType) {
     return new RESTClient<>(type, errorType).authorization(apiKey)
-                                               .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
-                                               .errorResponseHandler(errorType != Void.TYPE ? new JSONResponseHandler<>(errorType, objectMapper) : null)
-                                               .url(baseURL)
-                                               .connectTimeout(connectTimeout)
-                                               .readTimeout(readTimeout);
+                                            .successResponseHandler(type != Void.TYPE ? new JSONResponseHandler<>(type, objectMapper) : null)
+                                            .errorResponseHandler(errorType != Void.TYPE ? new JSONResponseHandler<>(errorType, objectMapper) : null)
+                                            .url(baseURL)
+                                            .connectTimeout(connectTimeout)
+                                            .readTimeout(readTimeout);
   }
 }
