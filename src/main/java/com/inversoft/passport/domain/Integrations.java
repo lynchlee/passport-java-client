@@ -15,7 +15,7 @@ import com.inversoft.json.ToString;
 public class Integrations implements Buildable<Integrations> {
   public CleanSpeakConfiguration cleanspeak = new CleanSpeakConfiguration();
 
-  public TwillioConfiguration twillio = new TwillioConfiguration();
+  public TwilioConfiguration twilio = new TwilioConfiguration();
 
   @Override
   public boolean equals(Object o) {
@@ -27,12 +27,12 @@ public class Integrations implements Buildable<Integrations> {
     }
     Integrations that = (Integrations) o;
     return Objects.equals(cleanspeak, that.cleanspeak) &&
-        Objects.equals(twillio, that.twillio);
+        Objects.equals(twilio, that.twilio);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cleanspeak, twillio);
+    return Objects.hash(cleanspeak, twilio);
   }
 
   @Override

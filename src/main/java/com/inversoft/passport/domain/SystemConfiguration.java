@@ -239,8 +239,6 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
 
     public PasswordEncryptionConfiguration passwordEncryptionConfiguration = new PasswordEncryptionConfiguration();
 
-    public TwillioConfiguration twillioConfiguration = new TwillioConfiguration();
-
     public UIConfiguration uiConfiguration = new UIConfiguration();
 
     @Override
@@ -261,14 +259,13 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
           Objects.equals(maximumPasswordAge, that.maximumPasswordAge) &&
           Objects.equals(minimumPasswordAge, that.minimumPasswordAge) &&
           Objects.equals(passwordEncryptionConfiguration, that.passwordEncryptionConfiguration) &&
-          Objects.equals(twillioConfiguration, that.twillioConfiguration) &&
           Objects.equals(uiConfiguration, that.uiConfiguration);
     }
 
     @Override
     public int hashCode() {
       return Objects.hash(backendServers, cookieEncryptionIV, cookieEncryptionKey, eventConfiguration, failedAuthenticationConfiguration,
-                          jwtConfiguration, maximumPasswordAge, minimumPasswordAge, passwordEncryptionConfiguration, twillioConfiguration, uiConfiguration);
+                          jwtConfiguration, maximumPasswordAge, minimumPasswordAge, passwordEncryptionConfiguration, uiConfiguration);
     }
 
     @Override
