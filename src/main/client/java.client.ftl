@@ -34,6 +34,8 @@ import com.inversoft.passport.domain.api.AuditLogSearchRequest;
 import com.inversoft.passport.domain.api.AuditLogSearchResponse;
 import com.inversoft.passport.domain.api.EmailTemplateRequest;
 import com.inversoft.passport.domain.api.EmailTemplateResponse;
+import com.inversoft.passport.domain.api.IntegrationRequest;
+import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
 import com.inversoft.passport.domain.api.LoginResponse;
 import com.inversoft.passport.domain.api.PreviewRequest;
