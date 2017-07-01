@@ -10,7 +10,7 @@
   "methodName": "validateAccessToken",
   "successResponse": "ValidateResponse",
   "errorResponse": "Void",
-  "authorization": "\"JWT\" + encodedJWT",
+  "authorization": "\"JWT \" + encodedJWT",
   "params": [
     {
       "name": "encodedJWT",

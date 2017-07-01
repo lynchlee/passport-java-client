@@ -18,8 +18,6 @@
 using System;
 using System.Collections.Generic;
 using Inversoft.Error;
-using Inversoft.Passport.Domain;
-using Inversoft.Passport.Domain.Search;
 using Inversoft.Passport.Domain.Api;
 using Inversoft.Passport.Domain.Api.Users;
 using Inversoft.Passport.Domain.Api.Report;
@@ -37,7 +35,7 @@ namespace Com.Inversoft.Passport.Client
   {
     private readonly string apiKey;
 
-    private readonly string baseURL;
+    private readonly string baseUrl;
 
     private readonly IWebProxy webProxy;
 
@@ -45,16 +43,16 @@ namespace Com.Inversoft.Passport.Client
 
     public int readWriteTimeout = 2000;
 
-    public PassportClient(string apiKey, string baseURL)
+    public PassportClient(string apiKey, string baseUrl)
     {
       this.apiKey = apiKey;
-      this.baseURL = baseURL;
+      this.baseUrl = baseUrl;
     }
 
-    public PassportClient(string apiKey, string baseURL, IWebProxy webProxy)
+    public PassportClient(string apiKey, string baseUrl, IWebProxy webProxy)
     {
       this.apiKey = apiKey;
-      this.baseURL = baseURL;
+      this.baseUrl = baseUrl;
       this.webProxy = webProxy;
     }
 
@@ -76,7 +74,7 @@ namespace Com.Inversoft.Passport.Client
      */
     public ClientResponse<${global.convertType(api.successResponse, "csharp")}, ${global.convertType(api.errorResponse, "csharp")}> ${api.methodName?cap_first}(${global.methodParameters(api, "csharp")})
     {
-        return ${global.start(api, "csharp")}<${global.convertType(api.successResponse, "csharp")}>().Uri("${api.uri}")
+        return Start<${global.convertType(api.successResponse, "csharp")}, ${global.convertType(api.errorResponse, "csharp")}>().Uri("${api.uri}")
                                       [#if api.authorization??]
                                           .Authorization(${api.authorization})
                                       [/#if]
@@ -100,7 +98,7 @@ namespace Com.Inversoft.Passport.Client
       return new RESTClient<T, U>().Authorization(apiKey)
                                    .SuccessResponseHandler(typeof(T) == typeof(RESTVoid) ? null : new JSONResponseHandler<T>())
                                    .ErrorResponseHandler(typeof(U) == typeof(RESTVoid) ? null : new JSONResponseHandler<U>())
-                                   .Url(baseURL)
+                                   .Url(baseUrl)
                                    .Timeout(timeout)
                                    .ReadWriteTimeout(readWriteTimeout)
                                    .Proxy(webProxy);

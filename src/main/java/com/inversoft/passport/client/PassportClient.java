@@ -602,7 +602,7 @@ public class PassportClient {
    * client and revoke the refresh token stored. This API does nothing if the request does not contain an access
    * token or refresh token cookies.
    *
-   * @param global (Optional) When this value is set to true all of the refresh tokens issued to the owner of the
+   * @param global When this value is set to true all of the refresh tokens issued to the owner of the
   *     provided token will be revoked.
    * @param refreshToken (Optional) The refresh_token as a request parameter instead of coming in via a cookie.
   *     If provided this takes precedence over the cookie.
@@ -1382,7 +1382,7 @@ public class PassportClient {
    */
   public ClientResponse<ValidateResponse, Void> validateAccessToken(String encodedJWT) {
     return start(ValidateResponse.class, Void.TYPE).uri("/api/jwt/validate")
-                            .authorization("JWT" + encodedJWT)
+                            .authorization("JWT " + encodedJWT)
                             .get()
                             .go();
   }
