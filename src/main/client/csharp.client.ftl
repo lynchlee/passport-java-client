@@ -66,7 +66,7 @@ namespace Com.Inversoft.Passport.Client
      *
   [#list api.params![] as param]
     [#if !param.constant??]
-     * @param ${param.name} ${param.comments?join("\n  * ")}
+     * @param ${param.name} ${param.comments?join("\n     * ")}
     [/#if]
   [/#list]
      * @return When successful, the response will contain the log of the action. If there was a validation error or any
@@ -74,7 +74,8 @@ namespace Com.Inversoft.Passport.Client
      * contacted because it is down or experiencing a failure, the response will contain an Exception, which could be an
      * IOException.
      */
-    public ClientResponse<${global.convertType(api.successResponse, "csharp")}, ${global.convertType(api.errorResponse, "csharp")}> ${api.methodName?cap_first}(${global.methodParameters(api, "csharp")}) {
+    public ClientResponse<${global.convertType(api.successResponse, "csharp")}, ${global.convertType(api.errorResponse, "csharp")}> ${api.methodName?cap_first}(${global.methodParameters(api, "csharp")})
+    {
         return ${global.start(api, "csharp")}<${global.convertType(api.successResponse, "csharp")}>().Uri("${api.uri}")
                                       [#if api.authorization??]
                                           .Authorization(${api.authorization})
