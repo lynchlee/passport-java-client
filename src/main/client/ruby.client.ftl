@@ -1,4 +1,7 @@
 [#import "_macros.ftl" as global/]
+require 'inversoft/rest_client'
+require 'ostruct'
+
 #
 # Copyright (c) 2016-2017, Inversoft Inc., All Rights Reserved
 #
@@ -42,7 +45,7 @@ module Inversoft
     #
   [#list api.params![] as param]
     [#if !param.constant??]
-    # @param ${camel_to_underscores(param.name)} [${global.convertType(param.javaType, "ruby")}] ${param.comments?join("\n    #     ")}
+    # @param ${camel_to_underscores(param.name?replace("end", "_end"))} [${global.convertType(param.javaType, "ruby")}] ${param.comments?join("\n    #     ")}
     [/#if]
   [/#list]
     # @return [Inversoft::ClientResponse] The ClientResponse object.
@@ -56,7 +59,7 @@ module Inversoft
         [#if param.type == "urlSegment"]
            .url_segment(${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name))})
         [#elseif param.type == "urlParameter"]
-           .url_parameter('${param.parameterName}', ${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name))})
+           .url_parameter('${param.parameterName}', ${(param.constant?? && param.constant)?then(param.value, camel_to_underscores(param.name?replace("end", "_end")))})
         [#elseif param.type == "body"]
            .body_handler(Inversoft::JSONBodyHandler.new(${camel_to_underscores(param.name)}))
         [/#if]
