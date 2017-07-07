@@ -188,10 +188,8 @@ public class User implements Buildable<User> {
       return false;
     }
     User user = (User) o;
-    this.childIds.sort(UUID::compareTo);
-    user.childIds.sort(UUID::compareTo);
-    user.registrations.sort(Comparator.comparing(ur -> ur.applicationId));
-    this.registrations.sort(Comparator.comparing(ur -> ur.applicationId));
+    sort();
+    user.sort();
     return Objects.equals(active, user.active) &&
         Objects.equals(birthDate, user.birthDate) &&
         Objects.equals(childIds, user.childIds) &&
@@ -357,6 +355,12 @@ public class User implements Buildable<User> {
     encryptionScheme = null;
     twoFactorEnabled = twoFactorSecret != null;
     twoFactorSecret = null;
+    return this;
+  }
+
+  public User sort() {
+    this.childIds.sort(UUID::compareTo);
+    this.registrations.sort(Comparator.comparing(ur -> ur.applicationId));
     return this;
   }
 
