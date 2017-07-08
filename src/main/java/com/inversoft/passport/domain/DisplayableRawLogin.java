@@ -3,9 +3,7 @@
  */
 package com.inversoft.passport.domain;
 
-import java.time.ZonedDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 import com.inversoft.json.ToString;
 
