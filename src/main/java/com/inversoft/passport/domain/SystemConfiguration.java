@@ -156,11 +156,11 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
   }
 
   public static class EmailConfiguration implements Buildable<EmailConfiguration> {
-    public String host = "localhost";
+    public String host;
 
     public String password;
 
-    public int port = 25;
+    public int port;
 
     public EmailSecurityType security;
 
