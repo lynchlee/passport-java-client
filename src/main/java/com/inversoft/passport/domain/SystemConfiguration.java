@@ -156,11 +156,13 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
   }
 
   public static class EmailConfiguration implements Buildable<EmailConfiguration> {
+    public boolean enabled;
+
     public String host;
 
     public String password;
 
-    public int port;
+    public Integer port;
 
     public EmailSecurityType security;
 
