@@ -155,9 +155,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
     return ToString.toString(this);
   }
 
-  public static class EmailConfiguration implements Buildable<EmailConfiguration> {
-    public boolean enabled;
-
+  public static class EmailConfiguration extends Enableable implements Buildable<EmailConfiguration> {
     public String host;
 
     public String password;
@@ -180,7 +178,8 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
         return false;
       }
       EmailConfiguration that = (EmailConfiguration) o;
-      return Objects.equals(port, that.port) &&
+      return Objects.equals(enabled, that.enabled) &&
+          Objects.equals(port, that.port) &&
           Objects.equals(host, that.host) &&
           Objects.equals(password, that.password) &&
           security == that.security &&
@@ -189,7 +188,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
 
     @Override
     public int hashCode() {
-      return Objects.hash(host, password, port, security, username);
+      return Objects.hash(enabled, host, password, port, security, username);
     }
 
     @Override
