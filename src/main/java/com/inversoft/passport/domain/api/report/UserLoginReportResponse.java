@@ -18,7 +18,7 @@ package com.inversoft.passport.domain.api.report;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.inversoft.passport.domain.RawLogin;
+import com.inversoft.passport.domain.DisplayableRawLogin;
 
 /**
  * Response for the user login report.
@@ -26,5 +26,5 @@ import com.inversoft.passport.domain.RawLogin;
  * @author Seth Musselman
  */
 public class UserLoginReportResponse {
-  public List<RawLogin> logins = new ArrayList<>();
+  public List<DisplayableRawLogin> logins = new ArrayList<>();
 }
