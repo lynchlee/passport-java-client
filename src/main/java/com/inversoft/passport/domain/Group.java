@@ -3,20 +3,30 @@
  */
 package com.inversoft.passport.domain;
 
-import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
  * @author Tyler Scott
  */
-public class Group {
+public class Group implements Buildable<Group> {
+  public GroupData data = new GroupData();
+
   public UUID id;
 
   public String name;
 
-  public List<ApplicationRole> roles;
+  public Map<UUID, ApplicationRole> roles;
+
+  public Group() {
+  }
 
   public Group(String name) {
+    this.name = name;
+  }
+
+  public Group(UUID id, String name) {
+    this.id = id;
     this.name = name;
   }
 }

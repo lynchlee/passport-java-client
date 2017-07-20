@@ -45,6 +45,8 @@ public class User implements Buildable<User> {
 
   private final List<UserRegistration> registrations = new ArrayList<>();
 
+  private final List<GroupMembership> groups = new ArrayList<>();
+
   public boolean active;
 
   public LocalDate birthDate;
@@ -202,6 +204,7 @@ public class User implements Buildable<User> {
         Objects.equals(factor, user.factor) &&
         Objects.equals(firstName, user.firstName) &&
         Objects.equals(fullName, user.fullName) &&
+        Objects.equals(groups, user.groups) &&
         Objects.equals(imageUrl, user.imageUrl) &&
         Objects.equals(insertInstant, user.insertInstant) &&
         Objects.equals(lastLoginInstant, user.lastLoginInstant) &&
@@ -307,7 +310,7 @@ public class User implements Buildable<User> {
   @Override
   public int hashCode() {
     return Objects.hash(active, birthDate, childIds, cleanSpeakId, parentalConsentType, data, email, encryptionScheme, expiry,
-                        factor, firstName, fullName, imageUrl, insertInstant, lastLoginInstant, lastName, middleName, mobilePhone, parentId, password,
+                        factor, firstName, fullName, groups, imageUrl, insertInstant, lastLoginInstant, lastName, middleName, mobilePhone, parentId, password,
                         passwordChangeRequired, passwordLastUpdateInstant, registrations, salt, timezone, twoFactorSecret, username,
                         usernameStatus, verificationId, verificationIdCreateInstant, verified);
   }
