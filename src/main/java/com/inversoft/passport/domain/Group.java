@@ -14,7 +14,7 @@ public class Group {
 
   public String name;
 
-  public List<String> roles;
+  public List<ApplicationRole> roles;
 
   public Group(String name) {
     this.name = name;
