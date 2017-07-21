@@ -1,4 +1,4 @@
-{
+  {
   "uri": "/api/user",
   "comments": [
     "Deletes the user for the given id. This permanently deletes all information, metrics, reports and data associated",

@@ -1,0 +1,28 @@
+{
+  "uri": "/api/group",
+  "comments": [
+    "Creates a group with an optional id."
+  ],
+  "method": "post",
+  "methodName": "createGroup",
+  "successResponse": "GroupResponse",
+  "errorResponse": "Errors",
+  "params": [
+    {
+      "name": "groupId",
+      "comments": [
+        "(Optional) The id for the group."
+      ],
+      "type": "urlSegment",
+      "javaType": "UUID"
+    },
+    {
+      "name": "request",
+      "comments": [
+        "The group request that contains all of the information used to create the group."
+      ],
+      "type": "body",
+      "javaType": "GroupRequest"
+    }
+  ]
+}

@@ -33,6 +33,8 @@ import com.inversoft.passport.domain.api.AuditLogSearchRequest;
 import com.inversoft.passport.domain.api.AuditLogSearchResponse;
 import com.inversoft.passport.domain.api.EmailTemplateRequest;
 import com.inversoft.passport.domain.api.EmailTemplateResponse;
+import com.inversoft.passport.domain.api.GroupRequest;
+import com.inversoft.passport.domain.api.GroupResponse;
 import com.inversoft.passport.domain.api.IntegrationRequest;
 import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
@@ -258,6 +260,21 @@ public class PassportClient {
   }
 
   /**
+   * Creates a group with an optional id.
+   *
+   * @param groupId (Optional) The id for the group.
+   * @param request The group request that contains all of the information used to create the group.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<GroupResponse, Errors> createGroup(UUID groupId, GroupRequest request) {
+    return start(GroupResponse.class, Errors.class).uri("/api/group")
+                            .urlSegment(groupId)
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
+                            .go();
+  }
+
+  /**
    * Creates a user with an optional id.
    *
    * @param userId (Optional) The id for the user.
@@ -414,6 +431,19 @@ public class PassportClient {
   public ClientResponse<Void, Errors> deleteEmailTemplate(UUID emailTemplateId) {
     return start(Void.TYPE, Errors.class).uri("/api/email/template")
                             .urlSegment(emailTemplateId)
+                            .delete()
+                            .go();
+  }
+
+  /**
+   * Deletes the group for the given id. This permanently deletes the group.
+   *
+   * @param groupId The id of the group to delete.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> deleteGroup(UUID groupId) {
+    return start(Void.TYPE, Errors.class).uri("/api/group")
+                            .urlSegment(groupId)
                             .delete()
                             .go();
   }
@@ -822,6 +852,30 @@ public class PassportClient {
    */
   public ClientResponse<EmailTemplateResponse, Void> retrieveEmailTemplates() {
     return start(EmailTemplateResponse.class, Void.TYPE).uri("/api/email/template")
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves the group for the given id.
+   *
+   * @param groupId The id of the group.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<GroupResponse, Errors> retrieveGroup(UUID groupId) {
+    return start(GroupResponse.class, Errors.class).uri("/api/group")
+                            .urlSegment(groupId)
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves all of the groups.
+   *
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<GroupResponse, Void> retrieveGroups() {
+    return start(GroupResponse.class, Void.TYPE).uri("/api/group")
                             .get()
                             .go();
   }
