@@ -3,10 +3,14 @@
  */
 package com.inversoft.passport.domain;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 
 /**
@@ -19,8 +23,9 @@ public class Group implements Buildable<Group> {
 
   public String name;
 
-  public Map<UUID, ApplicationRole> roles;
+  public Map<UUID, List<ApplicationRole>> roles = new HashMap<>();
 
+  @JacksonConstructor
   public Group() {
   }
 
@@ -42,6 +47,8 @@ public class Group implements Buildable<Group> {
       return false;
     }
     Group group = (Group) o;
+    roles.values().forEach(Collections::sort);
+    this.roles.values().forEach(Collections::sort);
     return Objects.equals(data, group.data) &&
         Objects.equals(id, group.id) &&
         Objects.equals(name, group.name) &&
