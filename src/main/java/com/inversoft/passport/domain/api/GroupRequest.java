@@ -23,6 +23,11 @@ public class GroupRequest {
   public GroupRequest() {
   }
 
+  public GroupRequest(Group group, List<UUID> roleIds) {
+    this.group = group;
+    this.roleIds = roleIds;
+  }
+
   public GroupRequest(Group group) {
     this.group = group;
   }
