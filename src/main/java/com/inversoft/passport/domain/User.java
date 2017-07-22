@@ -35,17 +35,17 @@ import static com.inversoft.passport.domain.util.Normalizer.toLowerCase;
 import static com.inversoft.passport.domain.util.Normalizer.trim;
 
 /**
- * The global view of a User. This object contains all global information about the user including birth date,
- * registration information preferred languages, global attributes, etc.
+ * The global view of a User. This object contains all global information about the user including birth date, registration information
+ * preferred languages, global attributes, etc.
  *
  * @author Seth Musselman
  */
 public class User implements Buildable<User> {
   private final List<UUID> childIds = new ArrayList<>();
 
-  private final List<UserRegistration> registrations = new ArrayList<>();
-
   private final List<GroupMembership> groups = new ArrayList<>();
+
+  private final List<UserRegistration> registrations = new ArrayList<>();
 
   public boolean active;
 

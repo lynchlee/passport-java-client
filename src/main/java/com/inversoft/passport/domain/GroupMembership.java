@@ -4,7 +4,11 @@
 package com.inversoft.passport.domain;
 
 import java.time.ZonedDateTime;
+import java.util.Objects;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.inversoft.json.ToString;
 
 /**
  * A User's membership into a Group
@@ -18,5 +22,31 @@ public class GroupMembership implements Buildable<GroupMembership> {
 
   public ZonedDateTime insertInstant;
 
+  @JsonIgnore
   public UUID userId;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    GroupMembership that = (GroupMembership) o;
+    return Objects.equals(data, that.data) &&
+        Objects.equals(id, that.id) &&
+        Objects.equals(insertInstant, that.insertInstant) &&
+        Objects.equals(userId, that.userId);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(data, id, insertInstant, userId);
+  }
+
+  @Override
+  public String toString() {
+    return ToString.toString(this);
+  }
 }
