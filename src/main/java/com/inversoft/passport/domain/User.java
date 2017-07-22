@@ -43,7 +43,7 @@ import static com.inversoft.passport.domain.util.Normalizer.trim;
 public class User implements Buildable<User> {
   private final List<UUID> childIds = new ArrayList<>();
 
-  private final List<GroupMembership> groups = new ArrayList<>();
+  private final List<GroupMembership> memberships = new ArrayList<>();
 
   private final List<UserRegistration> registrations = new ArrayList<>();
 
@@ -204,11 +204,11 @@ public class User implements Buildable<User> {
         Objects.equals(factor, user.factor) &&
         Objects.equals(firstName, user.firstName) &&
         Objects.equals(fullName, user.fullName) &&
-        Objects.equals(groups, user.groups) &&
         Objects.equals(imageUrl, user.imageUrl) &&
         Objects.equals(insertInstant, user.insertInstant) &&
         Objects.equals(lastLoginInstant, user.lastLoginInstant) &&
         Objects.equals(lastName, user.lastName) &&
+        Objects.equals(memberships, user.memberships) &&
         Objects.equals(middleName, user.middleName) &&
         Objects.equals(mobilePhone, user.mobilePhone) &&
         Objects.equals(parentId, user.parentId) &&
@@ -253,6 +253,10 @@ public class User implements Buildable<User> {
   @JsonIgnore
   public String getLogin() {
     return email == null ? username : email;
+  }
+
+  public List<GroupMembership> getMemberships() {
+    return memberships;
   }
 
   @JsonIgnore
@@ -310,7 +314,7 @@ public class User implements Buildable<User> {
   @Override
   public int hashCode() {
     return Objects.hash(active, birthDate, childIds, cleanSpeakId, parentalConsentType, data, email, encryptionScheme, expiry,
-                        factor, firstName, fullName, groups, imageUrl, insertInstant, lastLoginInstant, lastName, middleName, mobilePhone, parentId, password,
+                        factor, firstName, fullName, imageUrl, insertInstant, lastLoginInstant, lastName, memberships, middleName, mobilePhone, parentId, password,
                         passwordChangeRequired, passwordLastUpdateInstant, registrations, salt, timezone, twoFactorSecret, username,
                         usernameStatus, verificationId, verificationIdCreateInstant, verified);
   }

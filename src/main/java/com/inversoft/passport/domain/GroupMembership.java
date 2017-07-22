@@ -18,6 +18,8 @@ import com.inversoft.json.ToString;
 public class GroupMembership implements Buildable<GroupMembership> {
   public GroupData data;
 
+  public UUID groupId;
+
   public UUID id;
 
   public ZonedDateTime insertInstant;
@@ -35,6 +37,7 @@ public class GroupMembership implements Buildable<GroupMembership> {
     }
     GroupMembership that = (GroupMembership) o;
     return Objects.equals(data, that.data) &&
+        Objects.equals(groupId, that.groupId) &&
         Objects.equals(id, that.id) &&
         Objects.equals(insertInstant, that.insertInstant) &&
         Objects.equals(userId, that.userId);
@@ -42,7 +45,7 @@ public class GroupMembership implements Buildable<GroupMembership> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, id, insertInstant, userId);
+    return Objects.hash(data, groupId, id, insertInstant, userId);
   }
 
   @Override
