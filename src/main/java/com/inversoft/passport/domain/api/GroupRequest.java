@@ -3,6 +3,9 @@
  */
 package com.inversoft.passport.domain.api;
 
+import java.util.List;
+import java.util.UUID;
+
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.passport.domain.Group;
 
@@ -13,6 +16,8 @@ import com.inversoft.passport.domain.Group;
  */
 public class GroupRequest {
   public Group group;
+
+  public List<UUID> roleIds;
 
   @JacksonConstructor
   public GroupRequest() {

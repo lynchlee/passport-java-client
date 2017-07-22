@@ -3,7 +3,7 @@
  */
 package com.inversoft.passport.domain;
 
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,8 +47,8 @@ public class Group implements Buildable<Group> {
       return false;
     }
     Group group = (Group) o;
-    roles.values().forEach(Collections::sort);
-    this.roles.values().forEach(Collections::sort);
+    roles.values().forEach(c -> c.sort(Comparator.comparing(r -> r.id)));
+    group.roles.values().forEach(c -> c.sort(Comparator.comparing(r -> r.id)));
     return Objects.equals(data, group.data) &&
         Objects.equals(id, group.id) &&
         Objects.equals(name, group.name) &&

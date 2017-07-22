@@ -30,9 +30,9 @@ import com.inversoft.passport.domain.ApplicationRole;
 public class ApplicationRequest {
   public Application application;
 
-  public List<UUID> webhookIds;
-
   public ApplicationRole role;
+
+  public List<UUID> webhookIds;
 
   @JacksonConstructor
   public ApplicationRequest() {
