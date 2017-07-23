@@ -1325,6 +1325,21 @@ public class PassportClient {
   }
 
   /**
+   * Updates the group with the given id.
+   *
+   * @param groupPid The id of the group to update.
+   * @param request The request that contains all of the new group information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<GroupResponse, Errors> updateGroup(UUID groupPid, GroupRequest request) {
+    return start(GroupResponse.class, Errors.class).uri("/api/group")
+                            .urlSegment(groupPid)
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .put()
+                            .go();
+  }
+
+  /**
    * Updates the available integrations.
    *
    * @param request The request that contains all of the new integration information.
