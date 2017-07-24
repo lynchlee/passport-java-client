@@ -43,7 +43,7 @@ import static com.inversoft.passport.domain.util.Normalizer.trim;
 public class User implements Buildable<User> {
   private final List<UUID> childIds = new ArrayList<>();
 
-  private final List<GroupMembership> memberships = new ArrayList<>();
+  private final List<GroupMember> memberships = new ArrayList<>();
 
   private final List<UserRegistration> registrations = new ArrayList<>();
 
@@ -255,7 +255,7 @@ public class User implements Buildable<User> {
     return email == null ? username : email;
   }
 
-  public List<GroupMembership> getMemberships() {
+  public List<GroupMember> getMemberships() {
     return memberships;
   }
 

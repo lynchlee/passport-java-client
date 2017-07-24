@@ -7,7 +7,6 @@ import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.inversoft.json.ToString;
 
 /**
@@ -15,7 +14,7 @@ import com.inversoft.json.ToString;
  *
  * @author Daniel DeGroff
  */
-public class GroupMembership implements Buildable<GroupMembership> {
+public class GroupMember implements Buildable<GroupMember> {
   public GroupData data;
 
   public UUID groupId;
@@ -24,7 +23,6 @@ public class GroupMembership implements Buildable<GroupMembership> {
 
   public ZonedDateTime insertInstant;
 
-  @JsonIgnore
   public UUID userId;
 
   @Override
@@ -35,7 +33,7 @@ public class GroupMembership implements Buildable<GroupMembership> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GroupMembership that = (GroupMembership) o;
+    GroupMember that = (GroupMember) o;
     return Objects.equals(data, that.data) &&
         Objects.equals(groupId, that.groupId) &&
         Objects.equals(id, that.id) &&
