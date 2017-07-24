@@ -3,6 +3,9 @@
  */
 package com.inversoft.passport.domain.api;
 
+import java.util.List;
+import java.util.UUID;
+
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.passport.domain.GroupMember;
 
@@ -12,13 +15,15 @@ import com.inversoft.passport.domain.GroupMember;
  * @author Daniel DeGroff
  */
 public class MemberRequest {
-  public GroupMember member;
+  public List<UUID> memberIds;
+
+  public List<GroupMember> members;
 
   @JacksonConstructor
   public MemberRequest() {
   }
 
-  public MemberRequest(GroupMember member) {
-    this.member = member;
+  public MemberRequest(List<GroupMember> members) {
+    this.members = members;
   }
 }

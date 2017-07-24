@@ -39,6 +39,8 @@ import com.inversoft.passport.domain.api.IntegrationRequest;
 import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
 import com.inversoft.passport.domain.api.LoginResponse;
+import com.inversoft.passport.domain.api.MemberRequest;
+import com.inversoft.passport.domain.api.MemberResponse;
 import com.inversoft.passport.domain.api.PreviewRequest;
 import com.inversoft.passport.domain.api.PreviewResponse;
 import com.inversoft.passport.domain.api.PublicKeyResponse;
@@ -130,6 +132,19 @@ public class PassportClient {
   public ClientResponse<ActionResponse, Errors> actionUser(UUID actioneeUserId, ActionRequest request) {
     return start(ActionResponse.class, Errors.class).uri("/api/user/action")
                             .urlSegment(actioneeUserId)
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
+                            .go();
+  }
+
+  /**
+   * Creates a member in a group.
+   *
+   * @param request The member request that contains all of the information used to create the group.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<MemberResponse, Errors> addGroupMembers(MemberRequest request) {
+    return start(MemberResponse.class, Errors.class).uri("/api/group/member")
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
                             .go();
@@ -720,6 +735,19 @@ public class PassportClient {
                             .urlSegment(userId)
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
+                            .go();
+  }
+
+  /**
+   * Removes users as members of a group.
+   *
+   * @param request The member request that contains all of the information used to remove members to the group.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<MemberResponse, Errors> removeGroupMembers(MemberRequest request) {
+    return start(MemberResponse.class, Errors.class).uri("/api/group/member")
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .delete()
                             .go();
   }
 
@@ -1327,13 +1355,13 @@ public class PassportClient {
   /**
    * Updates the group with the given id.
    *
-   * @param groupPid The id of the group to update.
+   * @param groupId The id of the group to update.
    * @param request The request that contains all of the new group information.
    * @return The ClientResponse object.
    */
-  public ClientResponse<GroupResponse, Errors> updateGroup(UUID groupPid, GroupRequest request) {
+  public ClientResponse<GroupResponse, Errors> updateGroup(UUID groupId, GroupRequest request) {
     return start(GroupResponse.class, Errors.class).uri("/api/group")
-                            .urlSegment(groupPid)
+                            .urlSegment(groupId)
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .put()
                             .go();

@@ -40,6 +40,8 @@ import com.inversoft.passport.domain.api.IntegrationRequest;
 import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
 import com.inversoft.passport.domain.api.LoginResponse;
+import com.inversoft.passport.domain.api.MemberRequest;
+import com.inversoft.passport.domain.api.MemberResponse;
 import com.inversoft.passport.domain.api.PreviewRequest;
 import com.inversoft.passport.domain.api.PreviewResponse;
 import com.inversoft.passport.domain.api.PublicKeyResponse;

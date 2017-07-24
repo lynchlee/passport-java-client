@@ -3,6 +3,8 @@
  */
 package com.inversoft.passport.domain.api;
 
+import java.util.List;
+
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.passport.domain.GroupMember;
 
@@ -12,13 +14,13 @@ import com.inversoft.passport.domain.GroupMember;
  * @author Daniel DeGroff
  */
 public class MemberResponse {
-  public GroupMember member;
+  public List<GroupMember> members;
 
   @JacksonConstructor
   public MemberResponse() {
   }
 
-  public MemberResponse(GroupMember member) {
-    this.member = member;
+  public MemberResponse(List<GroupMember> members) {
+    this.members = members;
   }
 }
