@@ -17,6 +17,7 @@ package com.inversoft.passport.domain;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,8 +69,8 @@ public class Webhook implements Buildable<Webhook> {
       return false;
     }
     Webhook that = (Webhook) o;
-    applicationIds.sort(UUID::compareTo);
-    that.applicationIds.sort(UUID::compareTo);
+    applicationIds.sort(Comparator.comparing(id -> id));
+    that.applicationIds.sort(Comparator.comparing(id -> id));
     return Objects.equals(global, that.global) &&
         Objects.equals(applicationIds, that.applicationIds) &&
         Objects.equals(connectTimeout, that.connectTimeout) &&
