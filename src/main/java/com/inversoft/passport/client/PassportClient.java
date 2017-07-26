@@ -33,10 +33,14 @@ import com.inversoft.passport.domain.api.AuditLogSearchRequest;
 import com.inversoft.passport.domain.api.AuditLogSearchResponse;
 import com.inversoft.passport.domain.api.EmailTemplateRequest;
 import com.inversoft.passport.domain.api.EmailTemplateResponse;
+import com.inversoft.passport.domain.api.GroupRequest;
+import com.inversoft.passport.domain.api.GroupResponse;
 import com.inversoft.passport.domain.api.IntegrationRequest;
 import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
 import com.inversoft.passport.domain.api.LoginResponse;
+import com.inversoft.passport.domain.api.MemberRequest;
+import com.inversoft.passport.domain.api.MemberResponse;
 import com.inversoft.passport.domain.api.PreviewRequest;
 import com.inversoft.passport.domain.api.PreviewResponse;
 import com.inversoft.passport.domain.api.PublicKeyResponse;
@@ -128,6 +132,19 @@ public class PassportClient {
   public ClientResponse<ActionResponse, Errors> actionUser(UUID actioneeUserId, ActionRequest request) {
     return start(ActionResponse.class, Errors.class).uri("/api/user/action")
                             .urlSegment(actioneeUserId)
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
+                            .go();
+  }
+
+  /**
+   * Creates a member in a group.
+   *
+   * @param request The member request that contains all of the information used to create the group.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<MemberResponse, Errors> addGroupMembers(MemberRequest request) {
+    return start(MemberResponse.class, Errors.class).uri("/api/group/member")
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
                             .go();
@@ -252,6 +269,21 @@ public class PassportClient {
   public ClientResponse<EmailTemplateResponse, Errors> createEmailTemplate(UUID emailTemplateId, EmailTemplateRequest request) {
     return start(EmailTemplateResponse.class, Errors.class).uri("/api/email/template")
                             .urlSegment(emailTemplateId)
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
+                            .go();
+  }
+
+  /**
+   * Creates a group with an optional id.
+   *
+   * @param groupId (Optional) The id for the group.
+   * @param request The group request that contains all of the information used to create the group.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<GroupResponse, Errors> createGroup(UUID groupId, GroupRequest request) {
+    return start(GroupResponse.class, Errors.class).uri("/api/group")
+                            .urlSegment(groupId)
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
                             .go();
@@ -414,6 +446,19 @@ public class PassportClient {
   public ClientResponse<Void, Errors> deleteEmailTemplate(UUID emailTemplateId) {
     return start(Void.TYPE, Errors.class).uri("/api/email/template")
                             .urlSegment(emailTemplateId)
+                            .delete()
+                            .go();
+  }
+
+  /**
+   * Deletes the group for the given id. This permanently deletes the group.
+   *
+   * @param groupId The id of the group to delete.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> deleteGroup(UUID groupId) {
+    return start(Void.TYPE, Errors.class).uri("/api/group")
+                            .urlSegment(groupId)
                             .delete()
                             .go();
   }
@@ -694,6 +739,19 @@ public class PassportClient {
   }
 
   /**
+   * Removes users as members of a group.
+   *
+   * @param request The member request that contains all of the information used to remove members to the group.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<MemberResponse, Errors> removeGroupMembers(MemberRequest request) {
+    return start(MemberResponse.class, Errors.class).uri("/api/group/member")
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .delete()
+                            .go();
+  }
+
+  /**
    * Re-sends the verification email to the user.
    *
    * @param email The email address of the user that needs a new verification email.
@@ -822,6 +880,30 @@ public class PassportClient {
    */
   public ClientResponse<EmailTemplateResponse, Void> retrieveEmailTemplates() {
     return start(EmailTemplateResponse.class, Void.TYPE).uri("/api/email/template")
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves the group for the given id.
+   *
+   * @param groupId The id of the group.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<GroupResponse, Errors> retrieveGroup(UUID groupId) {
+    return start(GroupResponse.class, Errors.class).uri("/api/group")
+                            .urlSegment(groupId)
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves all of the groups.
+   *
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<GroupResponse, Void> retrieveGroups() {
+    return start(GroupResponse.class, Void.TYPE).uri("/api/group")
                             .get()
                             .go();
   }
@@ -1265,6 +1347,21 @@ public class PassportClient {
   public ClientResponse<EmailTemplateResponse, Errors> updateEmailTemplate(UUID emailTemplateId, EmailTemplateRequest request) {
     return start(EmailTemplateResponse.class, Errors.class).uri("/api/email/template")
                             .urlSegment(emailTemplateId)
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .put()
+                            .go();
+  }
+
+  /**
+   * Updates the group with the given id.
+   *
+   * @param groupId The id of the group to update.
+   * @param request The request that contains all of the new group information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<GroupResponse, Errors> updateGroup(UUID groupId, GroupRequest request) {
+    return start(GroupResponse.class, Errors.class).uri("/api/group")
+                            .urlSegment(groupId)
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .put()
                             .go();
