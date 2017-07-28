@@ -9,7 +9,16 @@ Released versions can be downloaded from the Savant Repository.
  
  * http://savant.inversoft.org/com/inversoft/passport/passport-java-client/
 
-## Building
+# Maven 
+```xml
+<dependency>
+  <groupId>com.inversoft.passport</groupId>
+  <artifactId>passport-java-client</artifactId>
+  <version>1.13.0</version>
+</dependency>
+```
+
+## Building with Savant
 **Note:** This project uses the Savant build tool. To compile using using Savant, follow these instructions:
 
 ```bash
