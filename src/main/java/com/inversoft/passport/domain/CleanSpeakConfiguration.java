@@ -40,10 +40,10 @@ public class CleanSpeakConfiguration extends Enableable implements Buildable<Cle
   /**
    * Application Ids of CleanSpeak Applications. There may be one to many CleanSpeak applications associated with a
    * single Passport application.
-   * <p/>
+   * <p>
    * For example, a Forum Application in Passport may map to CleanSpeak applications Forum User Names, Forum Chat, Forum
    * Posts.
-   * <p/>
+   * <p>
    * If there is a 1 to 1 relationship between the Passport and CleanSpeak applications, the application Ids are
    * expected to be equal.
    */

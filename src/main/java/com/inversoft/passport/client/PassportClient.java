@@ -86,7 +86,7 @@ import com.inversoft.rest.RESTClient;
 
 /**
  * Client that connects to a Passport server and provides access to the full set of Passport APIs.
- * <p/>
+ * <p>
  * When any method is called the return value is always a ClientResponse object. When an API call was successful, the
  * response will contain the response from the server. This might be empty or contain an success object or an error
  * object. If there was a validation error or any other type of error, this will return the Errors object in the
@@ -592,7 +592,7 @@ public class PassportClient {
   /**
    * Issue a new access token (JWT) for the requested Application after ensuring the provided JWT is valid. A valid
    * access token is properly signed and not expired.
-   * <p/>
+   * <p>
    * This API may be used in an SSO configuration to issue new tokens for another application after the user has
    * obtained a valid token from authentication.
    *
@@ -1471,7 +1471,7 @@ public class PassportClient {
   /**
    * Validates the provided JWT (encoded JWT string) to ensure the token is valid. A valid access token is properly
    * signed and not expired.
-   * <p/>
+   * <p>
    * This API may be used to verify the JWT as well as decode the encoded JWT into human readable identity claims.
    *
    * @param encodedJWT The encoded JWT (access token).

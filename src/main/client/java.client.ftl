@@ -87,7 +87,7 @@ import com.inversoft.rest.RESTClient;
 
 /**
  * Client that connects to a Passport server and provides access to the full set of Passport APIs.
- * <p/>
+ * <p>
  * When any method is called the return value is always a ClientResponse object. When an API call was successful, the
  * response will contain the response from the server. This might be empty or contain an success object or an error
  * object. If there was a validation error or any other type of error, this will return the Errors object in the
