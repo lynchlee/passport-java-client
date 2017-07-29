@@ -59,11 +59,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.savant/cache/org/primeframework/prime-jwt/0.2.0/prime-jwt-0.2.0.jar!/" />
+          <root url="jar://$USER_HOME$/.savant/cache/com/inversoft/prime-jwt/0.2.1/prime-jwt-0.2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/.savant/cache/org/primeframework/prime-jwt/0.2.0/prime-jwt-0.2.0-src.jar!/" />
+          <root url="jar://$USER_HOME$/.savant/cache/com/inversoft/prime-jwt/0.2.1/prime-jwt-0.2.1-src.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -135,3 +135,4 @@
     </orderEntry>
   </component>
 </module>
+
