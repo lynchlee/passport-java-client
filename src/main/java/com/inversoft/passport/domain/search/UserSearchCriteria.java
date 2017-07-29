@@ -20,12 +20,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import com.inversoft.passport.domain.Buildable;
+
 /**
  * This class is the user query. It provides a build pattern as well as public fields for use on forms and in actions.
  *
  * @author Brian Pontarelli
  */
-public class UserSearchCriteria extends BaseSearchCriteria {
+public class UserSearchCriteria extends BaseSearchCriteria implements Buildable<UserSearchCriteria> {
   public String email;
 
   public String fullName;
