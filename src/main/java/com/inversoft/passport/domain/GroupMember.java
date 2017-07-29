@@ -25,6 +25,17 @@ public class GroupMember implements Buildable<GroupMember> {
 
   public UUID userId;
 
+  public GroupMember() {
+  }
+
+  public GroupMember(GroupMember member) {
+    this.data = member.data;
+    this.groupId = member.groupId;
+    this.id = member.id;
+    this.insertInstant = member.insertInstant;
+    this.userId = member.userId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

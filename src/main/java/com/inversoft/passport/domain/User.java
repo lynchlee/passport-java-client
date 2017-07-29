@@ -158,6 +158,7 @@ public class User implements Buildable<User> {
     this.insertInstant = user.insertInstant;
     this.lastLoginInstant = user.lastLoginInstant;
     this.lastName = user.lastName;
+    this.memberships.addAll(user.memberships.stream().map(GroupMember::new).collect(Collectors.toList()));
     this.middleName = user.middleName;
     this.mobilePhone = user.mobilePhone;
     this.parentalConsentType = user.parentalConsentType;
