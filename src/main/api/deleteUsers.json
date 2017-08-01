@@ -9,20 +9,12 @@
   "errorResponse": "Errors",
   "params": [
     {
-      "name": "userIds",
+      "name": "request",
       "comments": [
         "The ids of the users to delete."
       ],
-      "type": "urlParameter",
-      "parameterName": "userId",
-      "javaType": "Collection<UUID>"
-    },
-    {
-      "constant": true,
-      "name": "hardDelete",
-      "type": "urlParameter",
-      "parameterName": "hardDelete",
-      "value": "true"
+      "type": "body",
+      "javaType": "UserDeleteRequest"
     }
   ]
 }

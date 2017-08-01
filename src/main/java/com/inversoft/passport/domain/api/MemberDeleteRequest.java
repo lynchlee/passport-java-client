@@ -8,21 +8,26 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
-import com.inversoft.passport.domain.GroupMember;
 
 /**
- * Group Member Response
+ * Group Member Delete Request
  *
  * @author Daniel DeGroff
  */
-public class MemberResponse {
-  public Map<UUID, List<GroupMember>> members;
+public class MemberDeleteRequest {
+  public List<UUID> memberIds;
+
+  public Map<UUID, List<UUID>> members;
 
   @JacksonConstructor
-  public MemberResponse() {
+  public MemberDeleteRequest() {
   }
 
-  public MemberResponse(Map<UUID, List<GroupMember>> members) {
+  public MemberDeleteRequest(List<UUID> memberIds) {
+    this.memberIds = memberIds;
+  }
+
+  public MemberDeleteRequest(Map<UUID, List<UUID>> members) {
     this.members = members;
   }
 }

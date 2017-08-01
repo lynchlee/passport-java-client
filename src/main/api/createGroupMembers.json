@@ -1,17 +1,17 @@
 {
   "uri": "/api/group/member",
   "comments": [
-    "Removes users as members of a group."
+    "Creates a member in a group."
   ],
-  "method": "delete",
-  "methodName": "removeGroupMembers",
+  "method": "post",
+  "methodName": "createGroupMembers",
   "successResponse": "MemberResponse",
   "errorResponse": "Errors",
   "params": [
     {
       "name": "request",
       "comments": [
-        "The member request that contains all of the information used to remove members to the group."
+        "The member request that contains all of the information used to create the group."
       ],
       "type": "body",
       "javaType": "MemberRequest"

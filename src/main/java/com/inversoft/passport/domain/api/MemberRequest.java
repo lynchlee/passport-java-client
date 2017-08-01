@@ -3,7 +3,9 @@
  */
 package com.inversoft.passport.domain.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
@@ -15,15 +17,18 @@ import com.inversoft.passport.domain.GroupMember;
  * @author Daniel DeGroff
  */
 public class MemberRequest {
-  public List<UUID> memberIds;
-
-  public List<GroupMember> members;
+  public Map<UUID, List<GroupMember>> members;
 
   @JacksonConstructor
   public MemberRequest() {
   }
 
-  public MemberRequest(List<GroupMember> members) {
+  public MemberRequest(Map<UUID, List<GroupMember>> members) {
     this.members = members;
+  }
+
+  public MemberRequest(UUID groupId, List<GroupMember> members) {
+    this.members = new HashMap<>(1);
+    this.members.put(groupId, members);
   }
 }
