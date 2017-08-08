@@ -47,7 +47,6 @@ public class GroupMember implements Buildable<GroupMember> {
     GroupMember that = (GroupMember) o;
     return Objects.equals(data, that.data) &&
         Objects.equals(groupId, that.groupId) &&
-        Objects.equals(id, that.id) &&
         Objects.equals(insertInstant, that.insertInstant) &&
         Objects.equals(userId, that.userId);
   }

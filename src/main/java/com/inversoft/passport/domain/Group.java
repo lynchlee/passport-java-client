@@ -50,7 +50,6 @@ public class Group implements Buildable<Group> {
     roles.values().forEach(c -> c.sort(Comparator.comparing(r -> r.id)));
     group.roles.values().forEach(c -> c.sort(Comparator.comparing(r -> r.id)));
     return Objects.equals(data, group.data) &&
-        Objects.equals(id, group.id) &&
         Objects.equals(name, group.name) &&
         Objects.equals(roles, group.roles);
   }
