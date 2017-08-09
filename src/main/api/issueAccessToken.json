@@ -3,7 +3,7 @@
   "comments": [
     "Issue a new access token (JWT) for the requested Application after ensuring the provided JWT is valid. A valid",
     "access token is properly signed and not expired.",
-    "<p/>",
+    "<p>",
     "This API may be used in an SSO configuration to issue new tokens for another application after the user has",
     "obtained a valid token from authentication."
   ],
