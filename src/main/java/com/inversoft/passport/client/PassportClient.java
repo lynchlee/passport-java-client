@@ -1178,6 +1178,20 @@ public class PassportClient {
   }
 
   /**
+   * Retrieves the user by a verificationId. The intended use of this API is to retrieve a user after the forgot
+   * password workflow has been initiated and you may not know the user's email or username.
+   *
+   * @param verificationId The unique verification Id that has been set on the user object.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<UserResponse, Errors> retrieveUserByVerificationId(String verificationId) {
+    return start(UserResponse.class, Errors.class).uri("/api/user")
+                            .urlParameter("verificationId", verificationId)
+                            .get()
+                            .go();
+  }
+
+  /**
    * Retrieves all of the comments for the user with the given id.
    *
    * @param userId The id of the user.
