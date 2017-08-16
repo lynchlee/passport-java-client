@@ -14,7 +14,7 @@ Released versions can be downloaded from the Savant Repository.
 <dependency>
   <groupId>com.inversoft.passport</groupId>
   <artifactId>passport-java-client</artifactId>
-  <version>1.13.0</version>
+  <version>1.13.1</version>
 </dependency>
 ```
 
