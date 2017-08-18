@@ -38,7 +38,7 @@ public class UserSearchCriteria extends BaseSearchCriteria implements Buildable<
 
   public String queryString;
 
-  public List<SortField> sortFields = new ArrayList<>(Arrays.asList(new SortField("email"), new SortField("username")));
+  public List<SortField> sortFields = new ArrayList<>();
 
   public String username;
 
