@@ -25,6 +25,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.inversoft.json.ToString;
 import static com.inversoft.passport.domain.util.Normalizer.trim;
+import static com.inversoft.passport.domain.util.Normalizer.trimToNull;
 
 /**
  * User registration information for a single application.
@@ -118,6 +119,7 @@ public class UserRegistration implements Buildable<UserRegistration> {
   }
 
   public void normalize() {
+    authenticationToken = trimToNull(authenticationToken);
     username = trim(username);
     if (data != null) {
       data.normalize();

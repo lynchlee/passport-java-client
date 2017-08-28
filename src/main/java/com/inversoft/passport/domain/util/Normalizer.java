@@ -78,6 +78,25 @@ public final class Normalizer {
   }
 
   /**
+   * Trims the String in a null safe manner and if the String ends up being empty, then this returns null.
+   *
+   * @param str The String to trim.
+   * @return The trimmed String or null.
+   */
+  public static String trimToNull(String str) {
+    if (str == null) {
+      return null;
+    }
+
+    str = str.trim();
+    if (str.isEmpty()) {
+      return null;
+    }
+
+    return str;
+  }
+
+  /**
    * Cleans the map by trimming all of the values.
    *
    * @param map The map to clean.
