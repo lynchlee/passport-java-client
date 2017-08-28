@@ -44,6 +44,8 @@ public class LoginRequest implements Buildable<LoginRequest> {
    */
   public MetaData metaData;
 
+  public boolean noJWT;
+
   public String password;
 
   @JacksonConstructor

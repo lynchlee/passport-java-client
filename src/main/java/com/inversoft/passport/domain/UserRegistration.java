@@ -37,6 +37,8 @@ public class UserRegistration implements Buildable<UserRegistration> {
 
   public UUID applicationId;
 
+  public String authenticationToken;
+
   public UUID cleanSpeakId;
 
   public UserData data;
@@ -104,6 +106,7 @@ public class UserRegistration implements Buildable<UserRegistration> {
         Objects.equals(insertInstant, that.insertInstant) &&
         Objects.equals(lastLoginInstant, that.lastLoginInstant) &&
         Objects.equals(roles, that.roles) &&
+        Objects.equals(authenticationToken, that.authenticationToken) &&
         Objects.equals(userId, that.userId) &&
         Objects.equals(username, that.username) &&
         Objects.equals(usernameStatus, that.usernameStatus);
@@ -111,7 +114,7 @@ public class UserRegistration implements Buildable<UserRegistration> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(applicationId, cleanSpeakId, data, insertInstant, lastLoginInstant, roles, userId, username, usernameStatus);
+    return Objects.hash(applicationId, cleanSpeakId, data, insertInstant, lastLoginInstant, roles, authenticationToken, userId, username, usernameStatus);
   }
 
   public void normalize() {
