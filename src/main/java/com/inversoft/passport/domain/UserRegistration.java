@@ -25,6 +25,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.inversoft.json.ToString;
 import static com.inversoft.passport.domain.util.Normalizer.trim;
+import static com.inversoft.passport.domain.util.Normalizer.trimToNull;
 
 /**
  * User registration information for a single application.
@@ -36,6 +37,8 @@ public class UserRegistration implements Buildable<UserRegistration> {
   public Application application;
 
   public UUID applicationId;
+
+  public String authenticationToken;
 
   public UUID cleanSpeakId;
 
@@ -104,6 +107,7 @@ public class UserRegistration implements Buildable<UserRegistration> {
         Objects.equals(insertInstant, that.insertInstant) &&
         Objects.equals(lastLoginInstant, that.lastLoginInstant) &&
         Objects.equals(roles, that.roles) &&
+        Objects.equals(authenticationToken, that.authenticationToken) &&
         Objects.equals(userId, that.userId) &&
         Objects.equals(username, that.username) &&
         Objects.equals(usernameStatus, that.usernameStatus);
@@ -111,10 +115,11 @@ public class UserRegistration implements Buildable<UserRegistration> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(applicationId, cleanSpeakId, data, insertInstant, lastLoginInstant, roles, userId, username, usernameStatus);
+    return Objects.hash(applicationId, cleanSpeakId, data, insertInstant, lastLoginInstant, roles, authenticationToken, userId, username, usernameStatus);
   }
 
   public void normalize() {
+    authenticationToken = trimToNull(authenticationToken);
     username = trim(username);
     if (data != null) {
       data.normalize();

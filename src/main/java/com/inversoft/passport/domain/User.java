@@ -279,7 +279,7 @@ public class User implements Buildable<User> {
 
   public UserRegistration getRegistrationForApplication(UUID id) {
     return getRegistrations().stream()
-                             .filter((reg) -> reg.applicationId.equals(id))
+                             .filter(reg -> reg.applicationId.equals(id))
                              .findFirst()
                              .orElse(null);
   }

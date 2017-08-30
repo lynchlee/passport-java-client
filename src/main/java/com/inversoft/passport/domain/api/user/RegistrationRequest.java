@@ -25,6 +25,8 @@ import com.inversoft.passport.domain.UserRegistration;
  * @author Brian Pontarelli
  */
 public class RegistrationRequest {
+  public boolean generateAuthenticationToken;
+
   public UserRegistration registration;
 
   public boolean sendSetPasswordEmail;
@@ -42,8 +44,7 @@ public class RegistrationRequest {
     this.registration = registration;
   }
 
-  public RegistrationRequest(User user, UserRegistration registration, boolean sendSetPasswordEmail,
-                             boolean skipVerification) {
+  public RegistrationRequest(User user, UserRegistration registration, boolean sendSetPasswordEmail, boolean skipVerification) {
     this.user = user;
     this.registration = registration;
     this.sendSetPasswordEmail = sendSetPasswordEmail;

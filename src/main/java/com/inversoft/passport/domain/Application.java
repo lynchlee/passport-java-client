@@ -146,6 +146,8 @@ public class Application implements Buildable<Application> {
   public static class ApplicationConfiguration {
     public JWTConfiguration jwtConfiguration;
 
+    public AuthenticationTokenConfiguration authenticationTokenConfiguration = new AuthenticationTokenConfiguration();
+
     @Override
     public boolean equals(Object o) {
       if (this == o) {
@@ -155,17 +157,21 @@ public class Application implements Buildable<Application> {
         return false;
       }
       ApplicationConfiguration that = (ApplicationConfiguration) o;
-      return Objects.equals(jwtConfiguration, that.jwtConfiguration);
+      return Objects.equals(jwtConfiguration, that.jwtConfiguration) &&
+          Objects.equals(authenticationTokenConfiguration, that.authenticationTokenConfiguration);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(jwtConfiguration);
+      return Objects.hash(jwtConfiguration, authenticationTokenConfiguration);
     }
 
     @Override
     public String toString() {
       return ToString.toString(this);
+    }
+
+    public static class AuthenticationTokenConfiguration extends Enableable {
     }
   }
 }
