@@ -146,7 +146,7 @@ public class Application implements Buildable<Application> {
   public static class ApplicationConfiguration {
     public JWTConfiguration jwtConfiguration;
 
-    public SecurityConfiguration securityConfiguration = new SecurityConfiguration();
+    public AuthenticationTokenConfiguration authenticationTokenConfiguration = new AuthenticationTokenConfiguration();
 
     @Override
     public boolean equals(Object o) {
@@ -158,12 +158,12 @@ public class Application implements Buildable<Application> {
       }
       ApplicationConfiguration that = (ApplicationConfiguration) o;
       return Objects.equals(jwtConfiguration, that.jwtConfiguration) &&
-          Objects.equals(securityConfiguration, that.securityConfiguration);
+          Objects.equals(authenticationTokenConfiguration, that.authenticationTokenConfiguration);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(jwtConfiguration, securityConfiguration);
+      return Objects.hash(jwtConfiguration, authenticationTokenConfiguration);
     }
 
     @Override
@@ -171,25 +171,7 @@ public class Application implements Buildable<Application> {
       return ToString.toString(this);
     }
 
-    public static class SecurityConfiguration {
-      public boolean enableAuthenticationTokens;
-
-      @Override
-      public boolean equals(Object o) {
-        if (this == o) {
-          return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-          return false;
-        }
-        SecurityConfiguration that = (SecurityConfiguration) o;
-        return enableAuthenticationTokens == that.enableAuthenticationTokens;
-      }
-
-      @Override
-      public int hashCode() {
-        return Objects.hash(enableAuthenticationTokens);
-      }
+    public static class AuthenticationTokenConfiguration extends Enableable {
     }
   }
 }
