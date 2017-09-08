@@ -35,6 +35,12 @@ public class KafkaConfiguration extends Enableable implements Buildable<KafkaCon
     return Objects.hash(defaultTopic, enabled, producer);
   }
 
+  public void normalize() {
+    if (!producer.containsKey("bootstrap.servers")) {
+      producer.put("bootstrap.servers", "localhost:9092");
+    }
+  }
+
   @Override
   public String toString() {
     return ToString.toString(this);
