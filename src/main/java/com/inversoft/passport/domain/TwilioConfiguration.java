@@ -44,7 +44,7 @@ public class TwilioConfiguration extends Enableable implements Buildable<TwilioC
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountSID, authToken, fromPhoneNumber, messagingServiceSid, url);
+    return Objects.hash(accountSID, authToken, enabled, fromPhoneNumber, messagingServiceSid, url);
   }
 
   @Override
