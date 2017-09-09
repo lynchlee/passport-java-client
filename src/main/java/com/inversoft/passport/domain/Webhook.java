@@ -33,7 +33,7 @@ import com.inversoft.passport.domain.util.Normalizer;
  *
  * @author Brian Pontarelli
  */
-public class Webhook implements Buildable<Webhook> {
+public class Webhook implements Buildable<Webhook>, EventReceiver {
   public List<UUID> applicationIds = new ArrayList<>();
 
   public Integer connectTimeout;
