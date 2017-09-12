@@ -6,5 +6,5 @@ package com.inversoft.passport.domain;
 /**
  * @author Daniel DeGroff
  */
-public interface EventReceiver {
+public interface EventSender {
 }
