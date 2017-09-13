@@ -13,7 +13,7 @@ import com.inversoft.json.ToString;
  *
  * @author Daniel DeGroff
  */
-public class TwilioConfiguration extends Enableable implements Buildable<TwilioConfiguration> {
+public class TwilioConfiguration extends Enableable implements Buildable<TwilioConfiguration>, Integration {
   public String accountSID;
 
   public String authToken;

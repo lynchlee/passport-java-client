@@ -30,7 +30,7 @@ import static com.inversoft.passport.domain.util.Normalizer.trim;
  *
  * @author Brian Pontarelli
  */
-public class CleanSpeakConfiguration extends Enableable implements Buildable<CleanSpeakConfiguration> {
+public class CleanSpeakConfiguration extends Enableable implements Buildable<CleanSpeakConfiguration>, Integration {
   /**
    * API Key used to connect to the CleanSpeak API. This may be null some versions of CleanSpeak do not require an API
    * key.

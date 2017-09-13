@@ -11,7 +11,7 @@ import com.inversoft.json.ToString;
 /**
  * @author Daniel DeGroff
  */
-public class KafkaConfiguration extends Enableable implements Buildable<KafkaConfiguration> {
+public class KafkaConfiguration extends Enableable implements Buildable<KafkaConfiguration>, Integration {
   public String defaultTopic;
 
   public Properties producer = new Properties();
