@@ -13,7 +13,7 @@ import com.inversoft.json.ToString;
  *
  * @author Daniel DeGroff
  */
-public class TwilioConfiguration extends Enableable implements Buildable<TwilioConfiguration> {
+public class TwilioConfiguration extends Enableable implements Buildable<TwilioConfiguration>, Integration {
   public String accountSID;
 
   public String authToken;
@@ -44,7 +44,7 @@ public class TwilioConfiguration extends Enableable implements Buildable<TwilioC
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountSID, authToken, fromPhoneNumber, messagingServiceSid, url);
+    return Objects.hash(accountSID, authToken, enabled, fromPhoneNumber, messagingServiceSid, url);
   }
 
   @Override

@@ -3,6 +3,9 @@
  */
 package com.inversoft.passport.domain.event;
 
+import java.time.ZonedDateTime;
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -25,6 +28,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @Type(value = JWTPublicKeyUpdateEvent.class, name = "jwt.public-key.update")
 })
 public abstract class BaseEvent {
+  public ZonedDateTime createInstant;
+
+  public UUID id;
+
   /**
    * @return The type of this event.
    */

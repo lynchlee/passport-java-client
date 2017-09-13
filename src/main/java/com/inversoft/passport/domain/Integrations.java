@@ -15,6 +15,8 @@ import com.inversoft.json.ToString;
 public class Integrations implements Buildable<Integrations> {
   public CleanSpeakConfiguration cleanspeak = new CleanSpeakConfiguration();
 
+  public KafkaConfiguration kafka = new KafkaConfiguration();
+
   public TwilioConfiguration twilio = new TwilioConfiguration();
 
   @Override
@@ -27,12 +29,13 @@ public class Integrations implements Buildable<Integrations> {
     }
     Integrations that = (Integrations) o;
     return Objects.equals(cleanspeak, that.cleanspeak) &&
+        Objects.equals(kafka, that.kafka) &&
         Objects.equals(twilio, that.twilio);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cleanspeak, twilio);
+    return Objects.hash(cleanspeak, kafka, twilio);
   }
 
   @Override
