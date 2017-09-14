@@ -49,15 +49,6 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
 
   public String comment;
 
-  /**
-   * Added so we can show when the action was taken in the front end
-   */
-  public ZonedDateTime createInstant;
-
-  /**
-   * The email that the webhook should email to the user. This should only be included if notifyUser is true
-   * (i think)
-   */
   public Email email;
 
   public ZonedDateTime expiry;
@@ -139,6 +130,11 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
   }
 
   @Override
+  public List<UUID> applicationIds() {
+    return applicationIds;
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
@@ -166,11 +162,6 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
         Objects.equals(phase, that.phase) &&
         Objects.equals(reason, that.reason) &&
         Objects.equals(reasonCode, that.reasonCode);
-  }
-
-  @Override
-  public List<UUID> applicationIds() {
-    return applicationIds;
   }
 
   @Override

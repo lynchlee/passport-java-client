@@ -38,7 +38,8 @@ public class KafkaConfiguration extends Enableable implements Buildable<KafkaCon
   public void normalize() {
     if (!producer.containsKey("bootstrap.servers")) {
       producer.setProperty("bootstrap.servers", "localhost:9092");
-      producer.setProperty("request.timeout.ms", "5000");
+      producer.setProperty("max.block.ms", "5000");
+      producer.setProperty("request.timeout.ms", "2000");
     }
   }
 
