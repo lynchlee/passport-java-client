@@ -25,6 +25,7 @@ public class UserUpdateEvent extends BaseEvent implements Buildable<UserUpdateEv
   }
 
   public UserUpdateEvent(User original, User user) {
+    this.original = original;
     this.user = user;
   }
 
