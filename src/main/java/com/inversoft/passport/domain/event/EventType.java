@@ -31,7 +31,9 @@ public enum EventType {
 
   JWTRefreshTokenRevoke("jwt.refresh-token.revoke"),
 
-  JWTPublicKeyUpdate("jwt.public-key.update");
+  JWTPublicKeyUpdate("jwt.public-key.update"),
+
+  Test("test");
 
   private static Map<String, EventType> nameMap = new HashMap<>(EventType.values().length);
 

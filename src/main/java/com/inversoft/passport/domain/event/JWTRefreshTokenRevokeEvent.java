@@ -56,14 +56,16 @@ public class JWTRefreshTokenRevokeEvent extends BaseEvent implements Buildable<J
       return false;
     }
     JWTRefreshTokenRevokeEvent that = (JWTRefreshTokenRevokeEvent) o;
-    return Objects.equals(applicationTimeToLiveInSeconds, that.applicationTimeToLiveInSeconds) && Objects.equals(userId, that.userId);
+    return super.equals(o) &&
+        Objects.equals(applicationTimeToLiveInSeconds, that.applicationTimeToLiveInSeconds) && Objects.equals(userId, that.userId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(applicationTimeToLiveInSeconds, userId);
+    return Objects.hash(super.hashCode(), applicationTimeToLiveInSeconds, userId);
   }
 
+  @Override
   public String toString() {
     return ToString.toString(this);
   }

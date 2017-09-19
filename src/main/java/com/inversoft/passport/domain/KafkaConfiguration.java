@@ -4,7 +4,7 @@
 package com.inversoft.passport.domain;
 
 import java.util.Objects;
-import java.util.Properties;
+import java.util.TreeMap;
 
 import com.inversoft.json.ToString;
 
@@ -14,7 +14,7 @@ import com.inversoft.json.ToString;
 public class KafkaConfiguration extends Enableable implements Buildable<KafkaConfiguration>, Integration {
   public String defaultTopic;
 
-  public Properties producer = new Properties();
+  public TreeMap<String, String> producer = new TreeMap<>();
 
   @Override
   public boolean equals(Object o) {
@@ -25,21 +25,21 @@ public class KafkaConfiguration extends Enableable implements Buildable<KafkaCon
       return false;
     }
     KafkaConfiguration that = (KafkaConfiguration) o;
-    return Objects.equals(defaultTopic, that.defaultTopic) &&
-        Objects.equals(enabled, that.enabled) &&
+    return super.equals(o) &&
+        Objects.equals(defaultTopic, that.defaultTopic) &&
         Objects.equals(producer, that.producer);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(defaultTopic, enabled, producer);
+    return Objects.hash(super.hashCode(), defaultTopic, producer);
   }
 
   public void normalize() {
     if (!producer.containsKey("bootstrap.servers")) {
-      producer.setProperty("bootstrap.servers", "localhost:9092");
-      producer.setProperty("max.block.ms", "5000");
-      producer.setProperty("request.timeout.ms", "2000");
+      producer.put("bootstrap.servers", "localhost:9092");
+      producer.put("max.block.ms", "5000");
+      producer.put("request.timeout.ms", "2000");
     }
   }
 

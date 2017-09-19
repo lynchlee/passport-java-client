@@ -22,13 +22,13 @@ public class RememberPreviousPasswords extends Enableable {
       return false;
     }
     RememberPreviousPasswords that = (RememberPreviousPasswords) o;
-    return Objects.equals(count, that.count) &&
-        Objects.equals(enabled, that.enabled);
+    return super.equals(o) &&
+        Objects.equals(count, that.count);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(count, enabled);
+    return Objects.hash(super.hashCode(), count);
   }
 
   @Override

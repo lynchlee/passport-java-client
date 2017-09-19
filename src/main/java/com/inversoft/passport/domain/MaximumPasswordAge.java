@@ -22,13 +22,13 @@ public class MaximumPasswordAge extends Enableable {
       return false;
     }
     MaximumPasswordAge that = (MaximumPasswordAge) o;
-    return Objects.equals(days, that.days) &&
-        Objects.equals(enabled, that.enabled);
+    return super.equals(o) &&
+        Objects.equals(days, that.days);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(days, enabled);
+    return Objects.hash(super.hashCode(), days);
   }
 
   @Override

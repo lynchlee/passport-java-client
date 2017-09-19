@@ -21,8 +21,8 @@ import com.inversoft.json.ToString;
 import org.primeframework.jwt.domain.Algorithm;
 
 /**
- * JWT Configuration. A JWT Configuration for an Application may not be active if it is using the global configuration,
- * the configuration may be <code>enabled = false</code>.
+ * JWT Configuration. A JWT Configuration for an Application may not be active if it is using the global configuration, the configuration
+ * may be <code>enabled = false</code>.
  *
  * @author Daniel DeGroff
  */
@@ -46,8 +46,7 @@ public class JWTConfiguration extends Enableable implements Buildable<JWTConfigu
   public String publicKey;
 
   /**
-   * The length of time in minutes a Refresh Token is valid from the time it was issued. This should be a non-zero
-   * value.
+   * The length of time in minutes a Refresh Token is valid from the time it was issued. This should be a non-zero value.
    */
   public Integer refreshTokenTimeToLiveInMinutes;
 
@@ -73,8 +72,8 @@ public class JWTConfiguration extends Enableable implements Buildable<JWTConfigu
       return false;
     }
     JWTConfiguration that = (JWTConfiguration) o;
-    return Objects.equals(algorithm, that.algorithm) &&
-        Objects.equals(enabled, that.enabled) &&
+    return super.equals(o) &&
+        Objects.equals(algorithm, that.algorithm) &&
         Objects.equals(issuer, that.issuer) &&
         Objects.equals(privateKey, that.privateKey) &&
         Objects.equals(publicKey, that.publicKey) &&
@@ -85,7 +84,7 @@ public class JWTConfiguration extends Enableable implements Buildable<JWTConfigu
 
   @Override
   public int hashCode() {
-    return Objects.hash(algorithm, enabled, issuer, privateKey, publicKey, refreshTokenTimeToLiveInMinutes, secret, timeToLiveInSeconds);
+    return Objects.hash(super.hashCode(), algorithm, issuer, privateKey, publicKey, refreshTokenTimeToLiveInMinutes, secret, timeToLiveInSeconds);
   }
 
   public void normalize() {

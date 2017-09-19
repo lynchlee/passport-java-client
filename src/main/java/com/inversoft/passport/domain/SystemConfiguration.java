@@ -46,16 +46,15 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
   public UUID forgotEmailTemplateId;
 
   /**
-   * Time in seconds until an inactive session will be invalidated. Used when creating a new session in the
-   * Passport-FrontEnd.
+   * Time in seconds until an inactive session will be invalidated. Used when creating a new session in the Passport-FrontEnd.
    * <p>
    * Default is 60 minutes.
    */
   public int httpSessionMaxInactiveInterval = 3600;
 
   /**
-   * Logout redirect URL when calling the <code>/oauth2/logout</code> endpoint. If this the
-   * <code>Application.oauthConfiguration.logoutURL</code> is defined it will be used instead.
+   * Logout redirect URL when calling the <code>/oauth2/logout</code> endpoint. If this the <code>Application.oauthConfiguration.logoutURL</code>
+   * is defined it will be used instead.
    */
   public URI logoutURL;
 
@@ -178,7 +177,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
         return false;
       }
       EmailConfiguration that = (EmailConfiguration) o;
-      return Objects.equals(enabled, that.enabled) &&
+      return super.equals(o) &&
           Objects.equals(port, that.port) &&
           Objects.equals(host, that.host) &&
           Objects.equals(password, that.password) &&
@@ -188,7 +187,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
 
     @Override
     public int hashCode() {
-      return Objects.hash(enabled, host, password, port, security, username);
+      return Objects.hash(super.hashCode(), host, password, port, security, username);
     }
 
     @Override
@@ -205,20 +204,17 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
 
   public static class SystemConfigurationData {
     /**
-     * List of one or more Passport Backend Servers. This list of systems is used to distribute cache reload
-     * notifications.
+     * List of one or more Passport Backend Servers. This list of systems is used to distribute cache reload notifications.
      */
     public List<URI> backendServers = new ArrayList<>(1);
 
     /**
-     * Base64 encoded Initialization Vector for prime-mvc. This is currently only used to encrypt and de-crypt saved
-     * request cookies.
+     * Base64 encoded Initialization Vector for prime-mvc. This is currently only used to encrypt and de-crypt saved request cookies.
      */
     public String cookieEncryptionIV;
 
     /**
-     * Base64 encoded Encryption Key for prime-mvc. This is currently only used to encrypt and de-crypt saved request
-     * cookies.
+     * Base64 encoded Encryption Key for prime-mvc. This is currently only used to encrypt and de-crypt saved request cookies.
      */
     public String cookieEncryptionKey;
 
@@ -320,13 +316,13 @@ public class SystemConfiguration implements Buildable<SystemConfiguration> {
             return false;
           }
           EventConfigurationData that = (EventConfigurationData) o;
-          return Objects.equals(enabled, that.enabled) &&
+          return super.equals(o) &&
               Objects.equals(transactionType, that.transactionType);
         }
 
         @Override
         public int hashCode() {
-          return Objects.hash(enabled, transactionType);
+          return Objects.hash(super.hashCode(), transactionType);
         }
 
         @Override

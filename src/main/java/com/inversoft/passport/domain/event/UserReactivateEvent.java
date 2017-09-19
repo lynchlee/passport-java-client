@@ -35,14 +35,16 @@ public class UserReactivateEvent extends BaseEvent implements Buildable<UserReac
       return false;
     }
     UserReactivateEvent that = (UserReactivateEvent) o;
-    return Objects.equals(user, that.user);
+    return super.equals(o) &&
+        Objects.equals(user, that.user);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(user);
+    return Objects.hash(super.hashCode(), user);
   }
 
+  @Override
   public String toString() {
     return ToString.toString(this);
   }

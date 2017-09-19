@@ -32,20 +32,17 @@ import static com.inversoft.passport.domain.util.Normalizer.trim;
  */
 public class CleanSpeakConfiguration extends Enableable implements Buildable<CleanSpeakConfiguration>, Integration {
   /**
-   * API Key used to connect to the CleanSpeak API. This may be null some versions of CleanSpeak do not require an API
-   * key.
+   * API Key used to connect to the CleanSpeak API. This may be null some versions of CleanSpeak do not require an API key.
    */
   public String apiKey;
 
   /**
-   * Application Ids of CleanSpeak Applications. There may be one to many CleanSpeak applications associated with a
-   * single Passport application.
+   * Application Ids of CleanSpeak Applications. There may be one to many CleanSpeak applications associated with a single Passport
+   * application.
    * <p>
-   * For example, a Forum Application in Passport may map to CleanSpeak applications Forum User Names, Forum Chat, Forum
-   * Posts.
+   * For example, a Forum Application in Passport may map to CleanSpeak applications Forum User Names, Forum Chat, Forum Posts.
    * <p>
-   * If there is a 1 to 1 relationship between the Passport and CleanSpeak applications, the application Ids are
-   * expected to be equal.
+   * If there is a 1 to 1 relationship between the Passport and CleanSpeak applications, the application Ids are expected to be equal.
    */
   public List<UUID> applicationIds = new ArrayList<>();
 
@@ -79,15 +76,15 @@ public class CleanSpeakConfiguration extends Enableable implements Buildable<Cle
       return false;
     }
     CleanSpeakConfiguration that = (CleanSpeakConfiguration) o;
-    return Objects.equals(apiKey, that.apiKey) &&
-        Objects.equals(enabled, that.enabled) &&
+    return super.equals(o) &&
+        Objects.equals(apiKey, that.apiKey) &&
         Objects.equals(usernameModeration, that.usernameModeration) &&
         Objects.equals(url, that.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(apiKey, enabled, usernameModeration, url);
+    return Objects.hash(super.hashCode(), apiKey, usernameModeration, url);
   }
 
   public void normalize() {
@@ -119,13 +116,13 @@ public class CleanSpeakConfiguration extends Enableable implements Buildable<Cle
         return false;
       }
       UsernameModeration that = (UsernameModeration) o;
-      return Objects.equals(applicationId, that.applicationId) &&
-          Objects.equals(enabled, that.enabled);
+      return super.equals(o) &&
+          Objects.equals(applicationId, that.applicationId);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(applicationId, enabled);
+      return Objects.hash(super.hashCode(), applicationId);
     }
 
     @Override

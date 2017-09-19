@@ -22,13 +22,13 @@ public class MinimumPasswordAge extends Enableable {
       return false;
     }
     MinimumPasswordAge that = (MinimumPasswordAge) o;
-    return Objects.equals(enabled, that.enabled) &&
+    return super.equals(o) &&
         Objects.equals(seconds, that.seconds);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(enabled, seconds);
+    return Objects.hash(super.hashCode(), seconds);
   }
 
   @Override

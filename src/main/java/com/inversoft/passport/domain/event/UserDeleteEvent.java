@@ -36,14 +36,16 @@ public class UserDeleteEvent extends BaseEvent implements Buildable<UserDeleteEv
       return false;
     }
     UserDeleteEvent that = (UserDeleteEvent) o;
-    return Objects.equals(user, that.user);
+    return super.equals(o) &&
+        Objects.equals(user, that.user);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(user);
+    return Objects.hash(super.hashCode(), user);
   }
 
+  @Override
   public String toString() {
     return ToString.toString(this);
   }

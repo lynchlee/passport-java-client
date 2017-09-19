@@ -49,14 +49,16 @@ public class JWTPublicKeyUpdateEvent extends BaseEvent implements Buildable<JWTP
       return false;
     }
     JWTPublicKeyUpdateEvent that = (JWTPublicKeyUpdateEvent) o;
-    return Objects.equals(applicationIds, that.applicationIds);
+    return super.equals(o) &&
+        Objects.equals(applicationIds, that.applicationIds);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(applicationIds);
+    return Objects.hash(super.hashCode(), applicationIds);
   }
 
+  @Override
   public String toString() {
     return ToString.toString(this);
   }

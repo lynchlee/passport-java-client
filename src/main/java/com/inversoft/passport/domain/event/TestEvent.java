@@ -8,22 +8,20 @@ import java.util.Objects;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import com.inversoft.passport.domain.Buildable;
-import com.inversoft.passport.domain.User;
 
 /**
- * Models the User Create Event (and can be converted to JSON).
- *
- * @author Brian Pontarelli
+ * @author Daniel DeGroff
  */
-public class UserCreateEvent extends BaseEvent implements Buildable<UserCreateEvent> {
-  public User user;
+public class TestEvent extends BaseEvent implements Buildable<TestEvent> {
+  public String message;
 
   @JacksonConstructor
-  public UserCreateEvent() {
+  public TestEvent() {
+    message = "Example Passport Event.";
   }
 
-  public UserCreateEvent(User user) {
-    this.user = user;
+  public TestEvent(String message) {
+    this.message = message;
   }
 
   @Override
@@ -34,14 +32,14 @@ public class UserCreateEvent extends BaseEvent implements Buildable<UserCreateEv
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserCreateEvent that = (UserCreateEvent) o;
+    TestEvent that = (TestEvent) o;
     return super.equals(o) &&
-        Objects.equals(user, that.user);
+        Objects.equals(message, that.message);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), user);
+    return Objects.hash(super.hashCode(), message);
   }
 
   @Override
@@ -51,6 +49,6 @@ public class UserCreateEvent extends BaseEvent implements Buildable<UserCreateEv
 
   @Override
   public EventType type() {
-    return EventType.UserCreate;
+    return EventType.Test;
   }
 }

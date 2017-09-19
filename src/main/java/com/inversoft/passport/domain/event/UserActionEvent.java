@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import com.inversoft.passport.domain.Buildable;
 import com.inversoft.passport.domain.email.Email;
@@ -73,6 +74,7 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
 
   public String reasonCode;
 
+  @JacksonConstructor
   public UserActionEvent() {
   }
 
@@ -143,7 +145,8 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
       return false;
     }
     UserActionEvent that = (UserActionEvent) o;
-    return Objects.equals(actionId, that.actionId) &&
+    return super.equals(o) &&
+        Objects.equals(actionId, that.actionId) &&
         Objects.equals(notifyUser, that.notifyUser) &&
         Objects.equals(passportEmailedUser, that.passportEmailedUser) &&
         Objects.equals(applicationIds, that.applicationIds) &&
@@ -151,7 +154,6 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
         Objects.equals(actioneeUserId, that.actioneeUserId) &&
         Objects.equals(actionerUserId, that.actionerUserId) &&
         Objects.equals(comment, that.comment) &&
-        Objects.equals(createInstant, that.createInstant) &&
         Objects.equals(email, that.email) &&
         Objects.equals(expiry, that.expiry) &&
         Objects.equals(localizedAction, that.localizedAction) &&
@@ -166,11 +168,12 @@ public class UserActionEvent extends BaseEvent implements Buildable<UserActionEv
 
   @Override
   public int hashCode() {
-    return Objects.hash(actionId, applicationIds, action, actioneeUserId, actionerUserId, comment, createInstant, email, expiry,
+    return Objects.hash(super.hashCode(), actionId, applicationIds, action, actioneeUserId, actionerUserId, comment, email, expiry,
                         localizedAction, localizedDuration, localizedOption, localizedReason, notifyUser, option, passportEmailedUser,
                         phase, reason, reasonCode);
   }
 
+  @Override
   public String toString() {
     return ToString.toString(this);
   }

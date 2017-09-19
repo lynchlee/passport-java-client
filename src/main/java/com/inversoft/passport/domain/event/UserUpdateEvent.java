@@ -38,14 +38,16 @@ public class UserUpdateEvent extends BaseEvent implements Buildable<UserUpdateEv
       return false;
     }
     UserUpdateEvent that = (UserUpdateEvent) o;
-    return Objects.equals(user, that.user) && Objects.equals(original, that.original);
+    return super.equals(o) &&
+        Objects.equals(user, that.user) && Objects.equals(original, that.original);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(user, original);
+    return Objects.hash(super.hashCode(), user, original);
   }
 
+  @Override
   public String toString() {
     return ToString.toString(this);
   }

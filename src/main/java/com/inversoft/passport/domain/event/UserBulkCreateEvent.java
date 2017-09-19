@@ -36,14 +36,16 @@ public class UserBulkCreateEvent extends BaseEvent implements Buildable<UserBulk
       return false;
     }
     UserBulkCreateEvent that = (UserBulkCreateEvent) o;
-    return Objects.equals(users, that.users);
+    return super.equals(o) &&
+        Objects.equals(users, that.users);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(users);
+    return Objects.hash(super.hashCode(), users);
   }
 
+  @Override
   public String toString() {
     return ToString.toString(this);
   }

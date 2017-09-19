@@ -33,9 +33,9 @@ public class TwilioConfiguration extends Enableable implements Buildable<TwilioC
       return false;
     }
     TwilioConfiguration that = (TwilioConfiguration) o;
-    return Objects.equals(accountSID, that.accountSID) &&
+    return super.equals(o) &&
+        Objects.equals(accountSID, that.accountSID) &&
         Objects.equals(authToken, that.authToken) &&
-        Objects.equals(enabled, that.enabled) &&
         Objects.equals(fromPhoneNumber, that.fromPhoneNumber) &&
         Objects.equals(messagingServiceSid, that.messagingServiceSid) &&
         Objects.equals(url, that.url);
@@ -44,7 +44,7 @@ public class TwilioConfiguration extends Enableable implements Buildable<TwilioC
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountSID, authToken, enabled, fromPhoneNumber, messagingServiceSid, url);
+    return Objects.hash(super.hashCode(), accountSID, authToken, fromPhoneNumber, messagingServiceSid, url);
   }
 
   @Override
