@@ -50,8 +50,6 @@ public class UserActionLog implements Buildable<UserActionLog> {
 
   public Boolean endEventSent;
 
-  public UserActionEvent event;
-
   public ZonedDateTime expiry;
 
   public LogHistory history;

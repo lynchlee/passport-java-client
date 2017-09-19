@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, Inversoft Inc., All Rights Reserved
+ * Copyright (c) 2015-2017, Inversoft Inc., All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import java.util.Objects;
 import java.util.UUID;
 
 import com.inversoft.json.ToString;
-import com.inversoft.passport.domain.event.UserActionEvent;
 import static com.inversoft.passport.domain.util.Normalizer.trim;
 
 /**
@@ -54,10 +53,7 @@ public class UserComment {
     return new UserActionLog().with((l) -> l.actioneeUserId = userComment.userId)
                               .with((l) -> l.actionerUserId = userComment.commenterId)
                               .with((l) -> l.comment = userComment.comment)
-                              .with((l) -> l.createInstant = userComment.createInstant)
-                              .with((l) -> l.event = new UserActionEvent().with((n) -> n.actioneeUserId = userComment.userId)
-                                                                          .with((n) -> n.actionerUserId = userComment.commenterId)
-                                                                          .with((n) -> n.comment = userComment.comment));
+                              .with((l) -> l.createInstant = userComment.createInstant);
   }
 
   @Override
