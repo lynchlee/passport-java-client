@@ -16,7 +16,7 @@
       [#return "string"/]
     [/#if]
   [#elseif language == "js"]
-    [#if type == "UUID" || type == "String"]
+    [#if type == "UUID" || type == "Integer" || type == "String"]
       [#return "string"/]
     [#elseif type?starts_with("Collection")]
       [#return "Array"/]
