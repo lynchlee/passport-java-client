@@ -15,6 +15,8 @@ import com.inversoft.json.ToString;
 public class IdentityProvider implements Buildable<IdentityProvider> {
   public List<String> domains;
 
+  public String keyId;
+
   public String name;
 
   public String publicKey;
@@ -31,6 +33,7 @@ public class IdentityProvider implements Buildable<IdentityProvider> {
     }
     IdentityProvider that = (IdentityProvider) o;
     return Objects.equals(domains, that.domains) &&
+        Objects.equals(keyId, that.keyId) &&
         Objects.equals(name, that.name) &&
         Objects.equals(publicKey, that.publicKey) &&
         Objects.equals(url, that.url);
@@ -38,7 +41,7 @@ public class IdentityProvider implements Buildable<IdentityProvider> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(domains, name, publicKey, url);
+    return Objects.hash(domains, keyId, name, publicKey, url);
   }
 
   @Override
