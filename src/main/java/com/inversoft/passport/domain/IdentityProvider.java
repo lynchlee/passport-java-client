@@ -3,25 +3,26 @@
  */
 package com.inversoft.passport.domain;
 
-import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.inversoft.json.ToString;
 
 /**
  * @author Daniel DeGroff
  */
 public class IdentityProvider implements Buildable<IdentityProvider> {
-  public List<String> domains;
+  @JsonUnwrapped
+  public IdentityProviderData data = new IdentityProviderData();
 
-  public String keyId;
+  public List<String> domains = new ArrayList<>();
+
+  public UUID id;
 
   public String name;
-
-  public String publicKey;
-
-  public URI url;
 
   @Override
   public boolean equals(Object o) {
@@ -32,16 +33,14 @@ public class IdentityProvider implements Buildable<IdentityProvider> {
       return false;
     }
     IdentityProvider that = (IdentityProvider) o;
-    return Objects.equals(domains, that.domains) &&
-        Objects.equals(keyId, that.keyId) &&
-        Objects.equals(name, that.name) &&
-        Objects.equals(publicKey, that.publicKey) &&
-        Objects.equals(url, that.url);
+    return Objects.equals(data, that.data) &&
+        Objects.equals(domains, that.domains) &&
+        Objects.equals(name, that.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(domains, keyId, name, publicKey, url);
+    return Objects.hash(data, domains, name);
   }
 
   @Override
