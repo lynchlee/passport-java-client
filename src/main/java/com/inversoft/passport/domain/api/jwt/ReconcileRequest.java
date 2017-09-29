@@ -3,6 +3,8 @@
  */
 package com.inversoft.passport.domain.api.jwt;
 
+import java.net.URI;
+
 import com.inversoft.json.JacksonConstructor;
 
 /**
@@ -12,11 +14,14 @@ public class ReconcileRequest {
 
   public String encodedJWT;
 
+  public URI url;
+
   @JacksonConstructor
   public ReconcileRequest() {
   }
 
-  public ReconcileRequest(String encodedJWT) {
+  public ReconcileRequest(URI url, String encodedJWT) {
+    this.url = url;
     this.encodedJWT = encodedJWT;
   }
 }

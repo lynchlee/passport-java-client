@@ -3,9 +3,10 @@
  */
 package com.inversoft.passport.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URI;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
@@ -18,11 +19,13 @@ public class IdentityProvider implements Buildable<IdentityProvider> {
   @JsonUnwrapped
   public IdentityProviderData data = new IdentityProviderData();
 
-  public List<String> domains = new ArrayList<>();
+  public Set<String> domains = new HashSet<>();
 
   public UUID id;
 
   public String name;
+
+  public URI url;
 
   @Override
   public boolean equals(Object o) {
@@ -35,12 +38,13 @@ public class IdentityProvider implements Buildable<IdentityProvider> {
     IdentityProvider that = (IdentityProvider) o;
     return Objects.equals(data, that.data) &&
         Objects.equals(domains, that.domains) &&
-        Objects.equals(name, that.name);
+        Objects.equals(name, that.name) &&
+        Objects.equals(url, that.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, domains, name);
+    return Objects.hash(data, domains, name, url);
   }
 
   @Override

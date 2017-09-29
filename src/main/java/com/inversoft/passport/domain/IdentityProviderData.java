@@ -3,7 +3,7 @@
  */
 package com.inversoft.passport.domain;
 
-import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -16,9 +16,7 @@ public class IdentityProviderData implements Buildable<IdentityProviderData> {
   /**
    * Map of keys used for signature validation for this provider. Key Id to PEM encoded certificate of public key.
    */
-  public Map<String, String> keys;
-
-  public URI url;
+  public Map<String, String> keys = new HashMap<>();
 
   @Override
   public boolean equals(Object o) {
@@ -29,13 +27,12 @@ public class IdentityProviderData implements Buildable<IdentityProviderData> {
       return false;
     }
     com.inversoft.passport.domain.IdentityProviderData that = (com.inversoft.passport.domain.IdentityProviderData) o;
-    return Objects.equals(keys, that.keys) &&
-        Objects.equals(url, that.url);
+    return Objects.equals(keys, that.keys);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(keys, url);
+    return Objects.hash(keys);
   }
 
   @Override
