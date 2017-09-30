@@ -4,6 +4,7 @@
 package com.inversoft.passport.domain;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -13,6 +14,8 @@ import com.inversoft.json.ToString;
  * @author Daniel DeGroff
  */
 public class IdentityProviderData implements Buildable<IdentityProviderData> {
+  public final Map<String, Object> attributes = new LinkedHashMap<>();
+
   /**
    * Map of keys used for signature validation for this provider. Key Id to PEM encoded certificate of public key.
    */
@@ -27,12 +30,13 @@ public class IdentityProviderData implements Buildable<IdentityProviderData> {
       return false;
     }
     com.inversoft.passport.domain.IdentityProviderData that = (com.inversoft.passport.domain.IdentityProviderData) o;
-    return Objects.equals(keys, that.keys);
+    return Objects.equals(attributes, that.attributes) &&
+        Objects.equals(keys, that.keys);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(keys);
+    return Objects.hash(attributes, keys);
   }
 
   @Override
