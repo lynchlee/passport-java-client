@@ -3,7 +3,6 @@
  */
 package com.inversoft.passport.domain;
 
-import java.net.URI;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -25,8 +24,6 @@ public class IdentityProvider implements Buildable<IdentityProvider> {
 
   public String name;
 
-  public URI url;
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -38,13 +35,20 @@ public class IdentityProvider implements Buildable<IdentityProvider> {
     IdentityProvider that = (IdentityProvider) o;
     return Objects.equals(data, that.data) &&
         Objects.equals(domains, that.domains) &&
-        Objects.equals(name, that.name) &&
-        Objects.equals(url, that.url);
+        Objects.equals(name, that.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, domains, name, url);
+    return Objects.hash(data, domains, name);
+  }
+
+  public void normalize() {
+    // Normalize Line returns in the public keys
+    if (data.keys != null) {
+      data.keys.keySet().forEach(keyId ->
+                                     data.keys.put(keyId, data.keys.get(keyId).replace("\r\n", "\n").replace("\r", "\n")));
+    }
   }
 
   @Override

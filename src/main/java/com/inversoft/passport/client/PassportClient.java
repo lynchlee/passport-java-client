@@ -35,6 +35,8 @@ import com.inversoft.passport.domain.api.EmailTemplateRequest;
 import com.inversoft.passport.domain.api.EmailTemplateResponse;
 import com.inversoft.passport.domain.api.GroupRequest;
 import com.inversoft.passport.domain.api.GroupResponse;
+import com.inversoft.passport.domain.api.IdentityProviderRequest;
+import com.inversoft.passport.domain.api.IdentityProviderResponse;
 import com.inversoft.passport.domain.api.IntegrationRequest;
 import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
@@ -188,7 +190,7 @@ public class PassportClient {
   /**
    * Adds a comment to the user's account.
    *
-   * @param request The comment request that contains all of the information used to add the comment to the user.
+   * @param request The request object that contains all of the information used to create the user comment.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> commentOnUser(UserCommentRequest request) {
@@ -199,10 +201,10 @@ public class PassportClient {
   }
 
   /**
-   * Creates an application. You can optionally specify an id for the application, but this is not required.
+   * Creates an application. You can optionally specify an Id for the application, if not provided one will be generated.
    *
    * @param applicationId (Optional) The id to use for the application.
-   * @param request The application request that contains all of the information used to create the application.
+   * @param request The request object that contains all of the information used to create the application.
    * @return The ClientResponse object.
    */
   public ClientResponse<ApplicationResponse, Errors> createApplication(UUID applicationId, ApplicationRequest request) {
@@ -215,11 +217,11 @@ public class PassportClient {
 
   /**
    * Creates a new role for an application. You must specify the id of the application you are creating the role for.
-   * You can optionally specify an id for the role inside the ApplicationRole object itself, but this is not required.
+   * You can optionally specify an Id for the role inside the ApplicationRole object itself, if not provided one will be generated.
    *
    * @param applicationId The id of the application to create the role on.
    * @param roleId (Optional) The id of the role. Defaults to a secure UUID.
-   * @param request The application request that contains all of the information used to create the role.
+   * @param request The request object that contains all of the information used to create the application role.
    * @return The ClientResponse object.
    */
   public ClientResponse<ApplicationResponse, Errors> createApplicationRole(UUID applicationId, UUID roleId, ApplicationRequest request) {
@@ -237,7 +239,7 @@ public class PassportClient {
    * make changes to the Passport database. When using the Passport Backend web interface, any changes are automatically
    * written to the audit log. However, if you are accessing the API, you must write the audit logs yourself.
    *
-   * @param request The audit log request that contains all of the information used to create the audit log entry.
+   * @param request The request object that contains all of the information used to create the audit log entry.
    * @return The ClientResponse object.
    */
   public ClientResponse<AuditLogResponse, Errors> createAuditLog(AuditLogRequest request) {
@@ -248,11 +250,10 @@ public class PassportClient {
   }
 
   /**
-   * Creates an email template. You can optionally specify an id for the email template when calling this method, but it
-   * is not required.
+   * Creates an email template. You can optionally specify an Id for the template, if not provided one will be generated.
    *
    * @param emailTemplateId (Optional) The id for the template.
-   * @param request The email template request that contains all of the information used to create the email template.
+   * @param request The request object that contains all of the information used to create the email template.
    * @return The ClientResponse object.
    */
   public ClientResponse<EmailTemplateResponse, Errors> createEmailTemplate(UUID emailTemplateId, EmailTemplateRequest request) {
@@ -264,10 +265,10 @@ public class PassportClient {
   }
 
   /**
-   * Creates a group with an optional id.
+   * Creates a group. You can optionally specify an Id for the group, if not provided one will be generated.
    *
    * @param groupId (Optional) The id for the group.
-   * @param request The group request that contains all of the information used to create the group.
+   * @param request The request object that contains all of the information used to create the group.
    * @return The ClientResponse object.
    */
   public ClientResponse<GroupResponse, Errors> createGroup(UUID groupId, GroupRequest request) {
@@ -281,7 +282,7 @@ public class PassportClient {
   /**
    * Creates a member in a group.
    *
-   * @param request The member request that contains all of the information used to create the group.
+   * @param request The request object that contains all of the information used to create the group member(s).
    * @return The ClientResponse object.
    */
   public ClientResponse<MemberResponse, Errors> createGroupMembers(MemberRequest request) {
@@ -292,10 +293,25 @@ public class PassportClient {
   }
 
   /**
-   * Creates a user with an optional id.
+   * Creates an identity provider. You can optionally specify an Id for the identity provider, if not provided one will be generated.
+   *
+   * @param identityProviderId (Optional) The Id of the identity provider.
+   * @param request The request object that contains all of the information used to create the identity provider.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IdentityProviderResponse, Errors> createIdentityProvider(UUID identityProviderId, IdentityProviderRequest request) {
+    return start(IdentityProviderResponse.class, Errors.class).uri("/api/identity-provider")
+                            .urlSegment(identityProviderId)
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
+                            .go();
+  }
+
+  /**
+   * Creates a user. You can optionally specify an Id for the user, if not provided one will be generated.
    *
    * @param userId (Optional) The id for the user.
-   * @param request The user request that contains all of the information used to create the user.
+   * @param request The request object that contains all of the information used to create the user.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserResponse, Errors> createUser(UUID userId, UserRequest request) {
@@ -311,7 +327,7 @@ public class PassportClient {
    * that the user action can be applied to any user.
    *
    * @param userActionId (Optional) The id for the user action.
-   * @param request The user action request that contains all of the information used to create the user action.
+   * @param request The request object that contains all of the information used to create the user action.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserActionResponse, Errors> createUserAction(UUID userActionId, UserActionRequest request) {
@@ -327,7 +343,7 @@ public class PassportClient {
    * successfully. Anytime after that the user action reason can be used.
    *
    * @param userActionReasonId (Optional) The id for the user action reason.
-   * @param request The user action reason request that contains all of the information used to create the user action reason.
+   * @param request The request object that contains all of the information used to create the user action reason.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserActionReasonResponse, Errors> createUserActionReason(UUID userActionReasonId, UserActionReasonRequest request) {
@@ -339,10 +355,10 @@ public class PassportClient {
   }
 
   /**
-   * Creates a webhook. You can optionally specify an id for the webhook when calling this method, but it is not required.
+   * Creates a webhook. You can optionally specify an Id for the webhook, if not provided one will be generated.
    *
    * @param webhookId (Optional) The id for the webhook.
-   * @param request The webhook request that contains all of the information used to create the webhook.
+   * @param request The request object that contains all of the information used to create the webhook.
    * @return The ClientResponse object.
    */
   public ClientResponse<WebhookResponse, Errors> createWebhook(UUID webhookId, WebhookRequest request) {
@@ -905,6 +921,30 @@ public class PassportClient {
    */
   public ClientResponse<GroupResponse, Void> retrieveGroups() {
     return start(GroupResponse.class, Void.TYPE).uri("/api/group")
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves the identity provider for the given id or all of the identity providers if the id is null.
+   *
+   * @param identityProviderId (Optional) The identity provider id.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IdentityProviderResponse, Void> retrieveIdentityProvider(UUID identityProviderId) {
+    return start(IdentityProviderResponse.class, Void.TYPE).uri("/api/identity-provider")
+                            .urlSegment(identityProviderId)
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves all of the identity providers.
+   *
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IdentityProviderResponse, Void> retrieveIdentityProviders() {
+    return start(IdentityProviderResponse.class, Void.TYPE).uri("/api/identity-provider")
                             .get()
                             .go();
   }

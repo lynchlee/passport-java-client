@@ -1,7 +1,7 @@
 {
   "uri": "/api/group",
   "comments": [
-    "Creates a group with an optional id."
+    "Creates a group. You can optionally specify an Id for the group, if not provided one will be generated."
   ],
   "method": "post",
   "methodName": "createGroup",
@@ -19,7 +19,7 @@
     {
       "name": "request",
       "comments": [
-        "The group request that contains all of the information used to create the group."
+        "The request object that contains all of the information used to create the group."
       ],
       "type": "body",
       "javaType": "GroupRequest"

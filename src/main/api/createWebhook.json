@@ -1,7 +1,7 @@
 {
   "uri": "/api/webhook",
   "comments": [
-    "Creates a webhook. You can optionally specify an id for the webhook when calling this method, but it is not required."
+    "Creates a webhook. You can optionally specify an Id for the webhook, if not provided one will be generated."
   ],
   "method": "post",
   "methodName": "createWebhook",
@@ -19,7 +19,7 @@
     {
       "name": "request",
       "comments": [
-        "The webhook request that contains all of the information used to create the webhook."
+        "The request object that contains all of the information used to create the webhook."
       ],
       "type": "body",
       "javaType": "WebhookRequest"

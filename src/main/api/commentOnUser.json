@@ -11,7 +11,7 @@
     {
       "name": "request",
       "comments": [
-        "The comment request that contains all of the information used to add the comment to the user."
+        "The request object that contains all of the information used to create the user comment."
       ],
       "type": "body",
       "javaType": "UserCommentRequest"

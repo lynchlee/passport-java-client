@@ -12,6 +12,9 @@ public class ReconcileResponse {
 
   public String token;
 
+  public String refreshToken;
+
+
   @JacksonConstructor
   public ReconcileResponse() {
   }

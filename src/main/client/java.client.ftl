@@ -36,6 +36,8 @@ import com.inversoft.passport.domain.api.EmailTemplateRequest;
 import com.inversoft.passport.domain.api.EmailTemplateResponse;
 import com.inversoft.passport.domain.api.GroupRequest;
 import com.inversoft.passport.domain.api.GroupResponse;
+import com.inversoft.passport.domain.api.IdentityProviderRequest;
+import com.inversoft.passport.domain.api.IdentityProviderResponse;
 import com.inversoft.passport.domain.api.IntegrationRequest;
 import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;

@@ -1,7 +1,7 @@
 {
   "uri": "/api/application",
   "comments": [
-    "Creates an application. You can optionally specify an id for the application, but this is not required."
+    "Creates an application. You can optionally specify an Id for the application, if not provided one will be generated."
   ],
   "method": "post",
   "methodName": "createApplication",
@@ -19,7 +19,7 @@
     {
       "name": "request",
       "comments": [
-        "The application request that contains all of the information used to create the application."
+        "The request object that contains all of the information used to create the application."
       ],
       "type": "body",
       "javaType": "ApplicationRequest"
