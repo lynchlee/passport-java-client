@@ -17,6 +17,11 @@ public class IdentityProviderData implements Buildable<IdentityProviderData> {
   public final Map<String, Object> attributes = new LinkedHashMap<>();
 
   /**
+   * The name of the claim that uniquely identifies the user in Passport. Generally this will be <code>sub</code> or <code>upn</code>.
+   */
+  public String emailClaim;
+
+  /**
    * Map of keys used for signature validation for this provider. Key Id to PEM encoded certificate of public key.
    */
   public Map<String, String> keys = new HashMap<>();
@@ -31,12 +36,14 @@ public class IdentityProviderData implements Buildable<IdentityProviderData> {
     }
     com.inversoft.passport.domain.IdentityProviderData that = (com.inversoft.passport.domain.IdentityProviderData) o;
     return Objects.equals(attributes, that.attributes) &&
+        Objects.equals(emailClaim, that.emailClaim) &&
         Objects.equals(keys, that.keys);
+
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(attributes, keys);
+    return Objects.hash(attributes, emailClaim, keys);
   }
 
   @Override

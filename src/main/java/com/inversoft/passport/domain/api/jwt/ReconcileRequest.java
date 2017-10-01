@@ -4,6 +4,7 @@
 package com.inversoft.passport.domain.api.jwt;
 
 import java.net.URI;
+import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
 
@@ -11,8 +12,11 @@ import com.inversoft.json.JacksonConstructor;
  * @author Daniel DeGroff
  */
 public class ReconcileRequest {
+  public UUID applicationId;
 
   public String encodedJWT;
+
+  public String ipAddress;
 
   public URI url;
 
@@ -20,7 +24,8 @@ public class ReconcileRequest {
   public ReconcileRequest() {
   }
 
-  public ReconcileRequest(URI url, String encodedJWT) {
+  public ReconcileRequest(UUID applicationId, URI url, String encodedJWT) {
+    this.applicationId = applicationId;
     this.url = url;
     this.encodedJWT = encodedJWT;
   }
