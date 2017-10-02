@@ -13,7 +13,7 @@ import com.inversoft.json.ToString;
  * @author Daniel DeGroff
  */
 public class IdentityProviderData implements Buildable<IdentityProviderData> {
-  public IdentityProviderConfiguration configuration;
+  public IdentityProviderConfiguration configuration = new IdentityProviderConfiguration();
 
   /**
    * Map of keys used for signature validation for this provider. Key Id to PEM encoded certificate of public key.
@@ -24,9 +24,9 @@ public class IdentityProviderData implements Buildable<IdentityProviderData> {
    * The name of the claim that uniquely identifies the user in Passport, this is an email address or username. Generally this will be
    * <code>email</code>.
    */
-  public String uniqueIdentityClaim = "email";
+  public String uniqueIdentityClaim;
 
-  public UniqueIdentityClaimType uniqueIdentityClaimType = UniqueIdentityClaimType.Email;
+  public UniqueIdentityClaimType uniqueIdentityClaimType;
 
   @Override
   public boolean equals(Object o) {
