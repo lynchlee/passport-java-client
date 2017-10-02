@@ -11,7 +11,7 @@
     {
       "name": "applicationId",
       "comments": [
-        "(Optional) The id to use for the application."
+        "(Optional) The Id to use for the application. If not provided a secure random UUID will be generated."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

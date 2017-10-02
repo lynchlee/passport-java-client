@@ -11,7 +11,7 @@
     {
       "name": "webhookId",
       "comments": [
-        "(Optional) The id for the webhook."
+        "(Optional) The Id for the webhook. If not provided a secure random UUID will be generated."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

@@ -1,7 +1,7 @@
 {
   "uri": "/api/application",
   "comments": [
-    "Deactivates the application with the given id."
+    "Deactivates the application with the given Id."
   ],
   "method": "delete",
   "methodName": "deactivateApplication",
@@ -11,7 +11,7 @@
     {
       "name": "applicationId",
       "comments": [
-        "The id of the application to deactivate."
+        "The Id of the application to deactivate."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

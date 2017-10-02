@@ -1,7 +1,7 @@
 {
   "uri": "/api/group",
   "comments": [
-    "Retrieves the group for the given id."
+    "Retrieves the group for the given Id."
   ],
   "method": "get",
   "methodName": "retrieveGroup",
@@ -11,7 +11,7 @@
     {
       "name": "groupId",
       "comments": [
-        "The id of the group."
+        "The Id of the group."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

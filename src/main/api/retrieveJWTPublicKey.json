@@ -13,7 +13,7 @@
     {
       "name": "keyId",
       "comments": [
-        "(Optional) The id of the public key."
+        "(Optional) The Id of the public key."
       ],
       "type": "urlSegment",
       "javaType": "String"

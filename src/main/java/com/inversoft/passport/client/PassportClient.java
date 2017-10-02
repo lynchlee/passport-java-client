@@ -203,7 +203,7 @@ public class PassportClient {
   /**
    * Creates an application. You can optionally specify an Id for the application, if not provided one will be generated.
    *
-   * @param applicationId (Optional) The id to use for the application.
+   * @param applicationId (Optional) The Id to use for the application. If not provided a secure random UUID will be generated.
    * @param request The request object that contains all of the information used to create the application.
    * @return The ClientResponse object.
    */
@@ -219,8 +219,8 @@ public class PassportClient {
    * Creates a new role for an application. You must specify the id of the application you are creating the role for.
    * You can optionally specify an Id for the role inside the ApplicationRole object itself, if not provided one will be generated.
    *
-   * @param applicationId The id of the application to create the role on.
-   * @param roleId (Optional) The id of the role. Defaults to a secure UUID.
+   * @param applicationId The Id of the application to create the role on.
+   * @param roleId (Optional) The Id of the role. If not provided a secure random UUID will be generated.
    * @param request The request object that contains all of the information used to create the application role.
    * @return The ClientResponse object.
    */
@@ -252,7 +252,7 @@ public class PassportClient {
   /**
    * Creates an email template. You can optionally specify an Id for the template, if not provided one will be generated.
    *
-   * @param emailTemplateId (Optional) The id for the template.
+   * @param emailTemplateId (Optional) The Id for the template. If not provided a secure random UUID will be generated.
    * @param request The request object that contains all of the information used to create the email template.
    * @return The ClientResponse object.
    */
@@ -267,7 +267,7 @@ public class PassportClient {
   /**
    * Creates a group. You can optionally specify an Id for the group, if not provided one will be generated.
    *
-   * @param groupId (Optional) The id for the group.
+   * @param groupId (Optional) The Id for the group. If not provided a secure random UUID will be generated.
    * @param request The request object that contains all of the information used to create the group.
    * @return The ClientResponse object.
    */
@@ -295,7 +295,7 @@ public class PassportClient {
   /**
    * Creates an identity provider. You can optionally specify an Id for the identity provider, if not provided one will be generated.
    *
-   * @param identityProviderId (Optional) The Id of the identity provider.
+   * @param identityProviderId (Optional) The Id of the identity provider. If not provided a secure random UUID will be generated.
    * @param request The request object that contains all of the information used to create the identity provider.
    * @return The ClientResponse object.
    */
@@ -310,7 +310,7 @@ public class PassportClient {
   /**
    * Creates a user. You can optionally specify an Id for the user, if not provided one will be generated.
    *
-   * @param userId (Optional) The id for the user.
+   * @param userId (Optional) The Id for the user. If not provided a secure random UUID will be generated.
    * @param request The request object that contains all of the information used to create the user.
    * @return The ClientResponse object.
    */
@@ -326,7 +326,7 @@ public class PassportClient {
    * Creates a user action. This action cannot be taken on a user until this call successfully returns. Anytime after
    * that the user action can be applied to any user.
    *
-   * @param userActionId (Optional) The id for the user action.
+   * @param userActionId (Optional) The Id for the user action. If not provided a secure random UUID will be generated.
    * @param request The request object that contains all of the information used to create the user action.
    * @return The ClientResponse object.
    */
@@ -342,7 +342,7 @@ public class PassportClient {
    * Creates a user reason. This user action reason cannot be used when actioning a user until this call completes
    * successfully. Anytime after that the user action reason can be used.
    *
-   * @param userActionReasonId (Optional) The id for the user action reason.
+   * @param userActionReasonId (Optional) The Id for the user action reason. If not provided a secure random UUID will be generated.
    * @param request The request object that contains all of the information used to create the user action reason.
    * @return The ClientResponse object.
    */
@@ -357,7 +357,7 @@ public class PassportClient {
   /**
    * Creates a webhook. You can optionally specify an Id for the webhook, if not provided one will be generated.
    *
-   * @param webhookId (Optional) The id for the webhook.
+   * @param webhookId (Optional) The Id for the webhook. If not provided a secure random UUID will be generated.
    * @param request The request object that contains all of the information used to create the webhook.
    * @return The ClientResponse object.
    */
@@ -370,9 +370,9 @@ public class PassportClient {
   }
 
   /**
-   * Deactivates the application with the given id.
+   * Deactivates the application with the given Id.
    *
-   * @param applicationId The id of the application to deactivate.
+   * @param applicationId The Id of the application to deactivate.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deactivateApplication(UUID applicationId) {
@@ -383,9 +383,9 @@ public class PassportClient {
   }
 
   /**
-   * Deactivates the user with the given id.
+   * Deactivates the user with the given Id.
    *
-   * @param userId The id of the user to deactivate.
+   * @param userId The Id of the user to deactivate.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deactivateUser(UUID userId) {
@@ -396,9 +396,9 @@ public class PassportClient {
   }
 
   /**
-   * Deactivates the user action with the given id.
+   * Deactivates the user action with the given Id.
    *
-   * @param userActionId The id of the user action to deactivate.
+   * @param userActionId The Id of the user action to deactivate.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deactivateUserAction(UUID userActionId) {
@@ -427,7 +427,7 @@ public class PassportClient {
    * roles for the application, and any other data associated with the application. This operation could take a very
    * long time, depending on the amount of data in your database.
    *
-   * @param applicationId The id of the application to delete.
+   * @param applicationId The Id of the application to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteApplication(UUID applicationId) {
@@ -442,8 +442,8 @@ public class PassportClient {
    * Hard deletes an application role. This is a dangerous operation and should not be used in most circumstances. This
    * permanently removes the given role from all users that had it.
    *
-   * @param applicationId The id of the application to deactivate.
-   * @param roleId The id of the role to delete.
+   * @param applicationId The Id of the application to deactivate.
+   * @param roleId The Id of the role to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteApplicationRole(UUID applicationId, UUID roleId) {
@@ -456,9 +456,9 @@ public class PassportClient {
   }
 
   /**
-   * Deletes the email template for the given id.
+   * Deletes the email template for the given Id.
    *
-   * @param emailTemplateId The id of the email template to delete.
+   * @param emailTemplateId The Id of the email template to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteEmailTemplate(UUID emailTemplateId) {
@@ -469,9 +469,9 @@ public class PassportClient {
   }
 
   /**
-   * Deletes the group for the given id. This permanently deletes the group.
+   * Deletes the group for the given Id.
    *
-   * @param groupId The id of the group to delete.
+   * @param groupId The Id of the group to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteGroup(UUID groupId) {
@@ -495,10 +495,23 @@ public class PassportClient {
   }
 
   /**
+   * Deletes the identity provider for the given Id.
+   *
+   * @param identityProviderId The Id of the identity provider to delete.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> deleteIdentityProvider(UUID identityProviderId) {
+    return start(Void.TYPE, Errors.class).uri("/api/identity-provider")
+                            .urlSegment(identityProviderId)
+                            .delete()
+                            .go();
+  }
+
+  /**
    * Deletes the user registration for the given user and application.
    *
-   * @param userId The id of the user whose registration is being deleted.
-   * @param applicationId The id of the application to remove the registration for.
+   * @param userId The Id of the user whose registration is being deleted.
+   * @param applicationId The Id of the application to remove the registration for.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteRegistration(UUID userId, UUID applicationId) {
@@ -510,10 +523,10 @@ public class PassportClient {
   }
 
   /**
-   * Deletes the user for the given id. This permanently deletes all information, metrics, reports and data associated
+   * Deletes the user for the given Id. This permanently deletes all information, metrics, reports and data associated
    * with the user.
    *
-   * @param userId The id of the user to delete.
+   * @param userId The Id of the user to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteUser(UUID userId) {
@@ -525,10 +538,10 @@ public class PassportClient {
   }
 
   /**
-   * Deletes the user action for the given id. This permanently deletes the user action and also any history and logs of
+   * Deletes the user action for the given Id. This permanently deletes the user action and also any history and logs of
    * the action being applied to any users.
    *
-   * @param userActionId The id of the user action to delete.
+   * @param userActionId The Id of the user action to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteUserAction(UUID userActionId) {
@@ -540,9 +553,9 @@ public class PassportClient {
   }
 
   /**
-   * Deletes the user action reason for the given id.
+   * Deletes the user action reason for the given Id.
    *
-   * @param userActionReasonId The id of the user action reason to delete.
+   * @param userActionReasonId The Id of the user action reason to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteUserActionReason(UUID userActionReasonId) {
@@ -566,9 +579,9 @@ public class PassportClient {
   }
 
   /**
-   * Deletes the webhook for the given id.
+   * Deletes the webhook for the given Id.
    *
-   * @param webhookId The id of the webhook to delete.
+   * @param webhookId The Id of the webhook to delete.
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> deleteWebhook(UUID webhookId) {
@@ -657,8 +670,8 @@ public class PassportClient {
    * application where they no longer have a session. This helps correctly track login counts, times and helps with
    * reporting.
    *
-   * @param userId The id of the user that was logged in.
-   * @param applicationId The id of the application that they logged into.
+   * @param userId The Id of the user that was logged in.
+   * @param applicationId The Id of the application that they logged into.
    * @param callerIPAddress (Optional) The IP address of the end-user that is logging in. If a null value is provided
   *     the IP address will be that of the client or last proxy that sent the request.
    * @return The ClientResponse object.
@@ -695,7 +708,7 @@ public class PassportClient {
    * Modifies a temporal user action by changing the expiration of the action and optionally adding a comment to the
    * action.
    *
-   * @param actionId The id of the action to modify. This is technically the user action log id.
+   * @param actionId The Id of the action to modify. This is technically the user action log id.
    * @param request The request that contains all of the information about the modification.
    * @return The ClientResponse object.
    */
@@ -708,9 +721,9 @@ public class PassportClient {
   }
 
   /**
-   * Reactivates the application with the given id.
+   * Reactivates the application with the given Id.
    *
-   * @param applicationId The id of the application to reactivate.
+   * @param applicationId The Id of the application to reactivate.
    * @return The ClientResponse object.
    */
   public ClientResponse<ApplicationResponse, Errors> reactivateApplication(UUID applicationId) {
@@ -722,9 +735,9 @@ public class PassportClient {
   }
 
   /**
-   * Reactivates the user with the given id.
+   * Reactivates the user with the given Id.
    *
-   * @param userId The id of the user to reactivate.
+   * @param userId The Id of the user to reactivate.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserResponse, Errors> reactivateUser(UUID userId) {
@@ -736,9 +749,9 @@ public class PassportClient {
   }
 
   /**
-   * Reactivates the user action with the given id.
+   * Reactivates the user action with the given Id.
    *
-   * @param userActionId The id of the user action to reactivate.
+   * @param userActionId The Id of the user action to reactivate.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserActionResponse, Errors> reactivateUserAction(UUID userActionId) {
@@ -756,7 +769,7 @@ public class PassportClient {
    * application. The user id can also be provided and it will either be used to look up an existing user or it will be
    * used for the newly created User.
    *
-   * @param userId (Optional) The id of the user being registered for the application and optionally created.
+   * @param userId (Optional) The Id of the user being registered for the application and optionally created.
    * @param request The request that optionally contains the User and must contain the UserRegistration.
    * @return The ClientResponse object.
    */
@@ -782,9 +795,9 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves a single action log (the log of a user action that was taken on a user previously) for the given id.
+   * Retrieves a single action log (the log of a user action that was taken on a user previously) for the given Id.
    *
-   * @param actionId The id of the action to retrieve.
+   * @param actionId The Id of the action to retrieve.
    * @return The ClientResponse object.
    */
   public ClientResponse<ActionResponse, Errors> retrieveAction(UUID actionId) {
@@ -795,9 +808,9 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves all of the actions for the user with the given id.
+   * Retrieves all of the actions for the user with the given Id.
    *
-   * @param userId The id of the user to fetch the actions for.
+   * @param userId The Id of the user to fetch the actions for.
    * @return The ClientResponse object.
    */
   public ClientResponse<ActionResponse, Errors> retrieveActions(UUID userId) {
@@ -832,9 +845,9 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves a single audit log for the given id.
+   * Retrieves a single audit log for the given Id.
    *
-   * @param auditLogId The id of the audit log to retrieve.
+   * @param auditLogId The Id of the audit log to retrieve.
    * @return The ClientResponse object.
    */
   public ClientResponse<AuditLogResponse, Errors> retrieveAuditLog(Integer auditLogId) {
@@ -863,9 +876,9 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves the email template for the given id. If you don't specify the id, this will return all of the email templates.
+   * Retrieves the email template for the given Id. If you don't specify the id, this will return all of the email templates.
    *
-   * @param emailTemplateId (Optional) The id of the email template.
+   * @param emailTemplateId (Optional) The Id of the email template.
    * @return The ClientResponse object.
    */
   public ClientResponse<EmailTemplateResponse, Void> retrieveEmailTemplate(UUID emailTemplateId) {
@@ -902,9 +915,9 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves the group for the given id.
+   * Retrieves the group for the given Id.
    *
-   * @param groupId The id of the group.
+   * @param groupId The Id of the group.
    * @return The ClientResponse object.
    */
   public ClientResponse<GroupResponse, Errors> retrieveGroup(UUID groupId) {
@@ -989,7 +1002,7 @@ public class PassportClient {
    * single public key will be returned if one is found by that id. If the optional parameter key Id is not provided all
    * public keys will be returned.
    *
-   * @param keyId (Optional) The id of the public key.
+   * @param keyId (Optional) The Id of the public key.
    * @return The ClientResponse object.
    */
   public ClientResponse<PublicKeyResponse, Void> retrieveJWTPublicKey(String keyId) {
@@ -1047,9 +1060,9 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves the refresh tokens that belong to the user with the given id.
+   * Retrieves the refresh tokens that belong to the user with the given Id.
    *
-   * @param userId The id of the user.
+   * @param userId The Id of the user.
    * @return The ClientResponse object.
    */
   public ClientResponse<RefreshResponse, Errors> retrieveRefreshTokens(UUID userId) {
@@ -1062,8 +1075,8 @@ public class PassportClient {
   /**
    * Retrieves the user registration for the user with the given id and the given application id.
    *
-   * @param userId The id of the user.
-   * @param applicationId The id of the application.
+   * @param userId The Id of the user.
+   * @param applicationId The Id of the application.
    * @return The ClientResponse object.
    */
   public ClientResponse<RegistrationResponse, Errors> retrieveRegistration(UUID userId, UUID applicationId) {
@@ -1116,9 +1129,9 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves the user for the given id.
+   * Retrieves the user for the given Id.
    *
-   * @param userId The id of the user.
+   * @param userId The Id of the user.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserResponse, Errors> retrieveUser(UUID userId) {
@@ -1129,10 +1142,10 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves the user action for the given id. If you pass in null for the id, this will return all of the user
+   * Retrieves the user action for the given Id. If you pass in null for the id, this will return all of the user
    * actions.
    *
-   * @param userActionId (Optional) The id of the user action.
+   * @param userActionId (Optional) The Id of the user action.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserActionResponse, Void> retrieveUserAction(UUID userActionId) {
@@ -1143,10 +1156,10 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves the user action reason for the given id. If you pass in null for the id, this will return all of the user
+   * Retrieves the user action reason for the given Id. If you pass in null for the id, this will return all of the user
    * action reasons.
    *
-   * @param userActionReasonId (Optional) The id of the user action reason.
+   * @param userActionReasonId (Optional) The Id of the user action reason.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserActionReasonResponse, Void> retrieveUserActionReason(UUID userActionReasonId) {
@@ -1232,9 +1245,9 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves all of the comments for the user with the given id.
+   * Retrieves all of the comments for the user with the given Id.
    *
-   * @param userId The id of the user.
+   * @param userId The Id of the user.
    * @return The ClientResponse object.
    */
   public ClientResponse<UserCommentResponse, Errors> retrieveUserComments(UUID userId) {
@@ -1247,7 +1260,7 @@ public class PassportClient {
   /**
    * Retrieves the last number of login records for a user.
    *
-   * @param userId The id of the user.
+   * @param userId The Id of the user.
    * @param offset The initial record. e.g. 0 is the last login, 100 will be the 100th most recent login.
    * @param limit (Optional, defaults to 10) The number of records to retrieve.
    * @return The ClientResponse object.
@@ -1262,9 +1275,9 @@ public class PassportClient {
   }
 
   /**
-   * Retrieves the webhook for the given id. If you pass in null for the id, this will return all the webhooks.
+   * Retrieves the webhook for the given Id. If you pass in null for the id, this will return all the webhooks.
    *
-   * @param webhookId (Optional) The id of the webhook.
+   * @param webhookId (Optional) The Id of the webhook.
    * @return The ClientResponse object.
    */
   public ClientResponse<WebhookResponse, Void> retrieveWebhook(UUID webhookId) {
@@ -1360,9 +1373,9 @@ public class PassportClient {
   }
 
   /**
-   * Updates the application with the given id.
+   * Updates the application with the given Id.
    *
-   * @param applicationId The id of the application to update.
+   * @param applicationId The Id of the application to update.
    * @param request The request that contains all of the new application information.
    * @return The ClientResponse object.
    */
@@ -1377,8 +1390,8 @@ public class PassportClient {
   /**
    * Updates the application role with the given id for the application.
    *
-   * @param applicationId The id of the application that the role belongs to.
-   * @param roleId The id of the role to update.
+   * @param applicationId The Id of the application that the role belongs to.
+   * @param roleId The Id of the role to update.
    * @param request The request that contains all of the new role information.
    * @return The ClientResponse object.
    */
@@ -1393,9 +1406,9 @@ public class PassportClient {
   }
 
   /**
-   * Updates the email template with the given id.
+   * Updates the email template with the given Id.
    *
-   * @param emailTemplateId The id of the email template to update.
+   * @param emailTemplateId The Id of the email template to update.
    * @param request The request that contains all of the new email template information.
    * @return The ClientResponse object.
    */
@@ -1408,15 +1421,30 @@ public class PassportClient {
   }
 
   /**
-   * Updates the group with the given id.
+   * Updates the group with the given Id.
    *
-   * @param groupId The id of the group to update.
+   * @param groupId The Id of the group to update.
    * @param request The request that contains all of the new group information.
    * @return The ClientResponse object.
    */
   public ClientResponse<GroupResponse, Errors> updateGroup(UUID groupId, GroupRequest request) {
     return start(GroupResponse.class, Errors.class).uri("/api/group")
                             .urlSegment(groupId)
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .put()
+                            .go();
+  }
+
+  /**
+   * Updates the identity provider with the given Id.
+   *
+   * @param identityProviderId The Id of the identity provider to update.
+   * @param request The request object that contains the updated identity provider.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IdentityProviderResponse, Errors> updateIdentityProvider(UUID identityProviderId, IdentityProviderRequest request) {
+    return start(IdentityProviderResponse.class, Errors.class).uri("/api/identity-provider")
+                            .urlSegment(identityProviderId)
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .put()
                             .go();
@@ -1438,7 +1466,7 @@ public class PassportClient {
   /**
    * Updates the registration for the user with the given id and the application defined in the request.
    *
-   * @param userId The id of the user whose registration is going to be updated.
+   * @param userId The Id of the user whose registration is going to be updated.
    * @param request The request that contains all of the new registration information.
    * @return The ClientResponse object.
    */
@@ -1464,9 +1492,9 @@ public class PassportClient {
   }
 
   /**
-   * Updates the user with the given id.
+   * Updates the user with the given Id.
    *
-   * @param userId The id of the user to update.
+   * @param userId The Id of the user to update.
    * @param request The request that contains all of the new user information.
    * @return The ClientResponse object.
    */
@@ -1479,9 +1507,9 @@ public class PassportClient {
   }
 
   /**
-   * Updates the user action with the given id.
+   * Updates the user action with the given Id.
    *
-   * @param userActionId The id of the user action to update.
+   * @param userActionId The Id of the user action to update.
    * @param request The request that contains all of the new user action information.
    * @return The ClientResponse object.
    */
@@ -1494,9 +1522,9 @@ public class PassportClient {
   }
 
   /**
-   * Updates the user action reason with the given id.
+   * Updates the user action reason with the given Id.
    *
-   * @param userActionReasonId The id of the user action reason to update.
+   * @param userActionReasonId The Id of the user action reason to update.
    * @param request The request that contains all of the new user action reason information.
    * @return The ClientResponse object.
    */
@@ -1509,9 +1537,9 @@ public class PassportClient {
   }
 
   /**
-   * Updates the webhook with the given id.
+   * Updates the webhook with the given Id.
    *
-   * @param webhookId The id of the webhook to update.
+   * @param webhookId The Id of the webhook to update.
    * @param request The request that contains all of the new webhook information.
    * @return The ClientResponse object.
    */

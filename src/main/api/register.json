@@ -15,7 +15,7 @@
     {
       "name": "userId",
       "comments": [
-        "(Optional) The id of the user being registered for the application and optionally created."
+        "(Optional) The Id of the user being registered for the application and optionally created."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

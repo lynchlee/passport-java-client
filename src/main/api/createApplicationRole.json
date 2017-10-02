@@ -12,7 +12,7 @@
     {
       "name": "applicationId",
       "comments": [
-        "The id of the application to create the role on."
+        "The Id of the application to create the role on."
       ],
       "type": "urlSegment",
       "javaType": "UUID"
@@ -26,7 +26,7 @@
     {
       "name": "roleId",
       "comments": [
-        "(Optional) The id of the role. Defaults to a secure UUID."
+        "(Optional) The Id of the role. If not provided a secure random UUID will be generated."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

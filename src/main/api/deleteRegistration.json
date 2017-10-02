@@ -11,7 +11,7 @@
     {
       "name": "userId",
       "comments": [
-        "The id of the user whose registration is being deleted."
+        "The Id of the user whose registration is being deleted."
       ],
       "type": "urlSegment",
       "javaType": "UUID"
@@ -19,7 +19,7 @@
     {
       "name": "applicationId",
       "comments": [
-        "The id of the application to remove the registration for."
+        "The Id of the application to remove the registration for."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

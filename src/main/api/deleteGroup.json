@@ -1,7 +1,7 @@
 {
   "uri": "/api/group",
   "comments": [
-    "Deletes the group for the given id. This permanently deletes the group."
+    "Deletes the group for the given Id."
   ],
   "method": "delete",
   "methodName": "deleteGroup",
@@ -11,7 +11,7 @@
     {
       "name": "groupId",
       "comments": [
-        "The id of the group to delete."
+        "The Id of the group to delete."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

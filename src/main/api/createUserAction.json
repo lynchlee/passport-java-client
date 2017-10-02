@@ -12,7 +12,7 @@
     {
       "name": "userActionId",
       "comments": [
-        "(Optional) The id for the user action."
+        "(Optional) The Id for the user action. If not provided a secure random UUID will be generated."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

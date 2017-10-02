@@ -1,7 +1,7 @@
 {
   "uri": "/api/user-action",
   "comments": [
-    "Deactivates the user action with the given id."
+    "Deactivates the user action with the given Id."
   ],
   "method": "delete",
   "methodName": "deactivateUserAction",
@@ -11,7 +11,7 @@
     {
       "name": "userActionId",
       "comments": [
-        "The id of the user action to deactivate."
+        "The Id of the user action to deactivate."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

@@ -1,7 +1,7 @@
 {
   "uri": "/api/user",
   "comments": [
-    "Deactivates the user with the given id."
+    "Deactivates the user with the given Id."
   ],
   "method": "delete",
   "methodName": "deactivateUser",
@@ -11,7 +11,7 @@
     {
       "name": "userId",
       "comments": [
-        "The id of the user to deactivate."
+        "The Id of the user to deactivate."
       ],
       "type": "urlSegment",
       "javaType": "UUID"
