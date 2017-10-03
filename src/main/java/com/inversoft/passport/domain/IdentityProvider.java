@@ -44,10 +44,10 @@ public class IdentityProvider implements Buildable<IdentityProvider> {
   }
 
   public void normalize() {
-    // Normalize Line returns in the public keys
+    // Normalize Line returns in the PEM encoded keys
     if (data.keys != null) {
-      data.keys.keySet().forEach(keyId ->
-                                     data.keys.put(keyId, data.keys.get(keyId).replace("\r\n", "\n").replace("\r", "\n")));
+      data.keys.stream().filter(p -> p.encodedKey != null)
+               .forEach(key -> key.encodedKey = key.encodedKey.replace("\r\n", "\n").replace("\r", "\n"));
     }
   }
 

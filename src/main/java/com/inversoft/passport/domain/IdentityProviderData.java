@@ -3,8 +3,8 @@
  */
 package com.inversoft.passport.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.inversoft.json.ToString;
@@ -15,15 +15,8 @@ import com.inversoft.json.ToString;
 public class IdentityProviderData implements Buildable<IdentityProviderData> {
   public IdentityProviderConfiguration configuration = new IdentityProviderConfiguration();
 
-  /**
-   * Map of keys used for signature validation for this provider. Key Id to PEM encoded certificate of public key.
-   */
-  public Map<String, String> keys = new HashMap<>();
+  public List<IdentityProviderKey> keys = new ArrayList<>();
 
-  /**
-   * The name of the claim that uniquely identifies the user in Passport, this is an email address or username. Generally this will be
-   * <code>email</code>.
-   */
   public String uniqueIdentityClaim;
 
   public UniqueIdentityClaimType uniqueIdentityClaimType;
