@@ -9,11 +9,9 @@ import com.inversoft.json.JacksonConstructor;
  * @author Daniel DeGroff
  */
 public class ReconcileResponse {
-
-  public String token;
-
   public String refreshToken;
 
+  public String token;
 
   @JacksonConstructor
   public ReconcileResponse() {

@@ -13,7 +13,6 @@ import com.inversoft.passport.domain.jwt.RefreshToken.MetaData;
  * @author Daniel DeGroff
  */
 public class ReconcileRequest implements Buildable<ReconcileRequest> {
-
   public UUID applicationId;
 
   public String device;
