@@ -1,7 +1,7 @@
 {
   "uri": "/api/application",
   "comments": [
-    "Updates the application with the given id."
+    "Updates the application with the given Id."
   ],
   "method": "put",
   "methodName": "updateApplication",
@@ -11,7 +11,7 @@
     {
       "name": "applicationId",
       "comments": [
-        "The id of the application to update."
+        "The Id of the application to update."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

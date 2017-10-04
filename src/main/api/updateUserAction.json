@@ -1,7 +1,7 @@
 {
   "uri": "/api/user-action",
   "comments": [
-    "Updates the user action with the given id."
+    "Updates the user action with the given Id."
   ],
   "method": "put",
   "methodName": "updateUserAction",
@@ -11,7 +11,7 @@
     {
       "name": "userActionId",
       "comments": [
-        "The id of the user action to update."
+        "The Id of the user action to update."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

@@ -1,7 +1,7 @@
 {
   "uri": "/api/email/template",
   "comments": [
-    "Retrieves the email template for the given id. If you don't specify the id, this will return all of the email templates."
+    "Retrieves the email template for the given Id. If you don't specify the id, this will return all of the email templates."
   ],
   "method": "get",
   "methodName": "retrieveEmailTemplate",
@@ -11,7 +11,7 @@
     {
       "name": "emailTemplateId",
       "comments": [
-        "(Optional) The id of the email template."
+        "(Optional) The Id of the email template."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

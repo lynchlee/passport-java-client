@@ -1,7 +1,7 @@
 {
   "uri": "/api/user",
   "comments": [
-    "Updates the user with the given id."
+    "Updates the user with the given Id."
   ],
   "method": "put",
   "methodName": "updateUser",
@@ -11,7 +11,7 @@
     {
       "name": "userId",
       "comments": [
-        "The id of the user to update."
+        "The Id of the user to update."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

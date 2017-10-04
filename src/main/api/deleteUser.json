@@ -1,7 +1,7 @@
   {
   "uri": "/api/user",
   "comments": [
-    "Deletes the user for the given id. This permanently deletes all information, metrics, reports and data associated",
+    "Deletes the user for the given Id. This permanently deletes all information, metrics, reports and data associated",
     "with the user."
   ],
   "method": "delete",
@@ -12,7 +12,7 @@
     {
       "name": "userId",
       "comments": [
-        "The id of the user to delete."
+        "The Id of the user to delete."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

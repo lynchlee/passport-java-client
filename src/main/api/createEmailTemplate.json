@@ -1,8 +1,7 @@
 {
   "uri": "/api/email/template",
   "comments": [
-    "Creates an email template. You can optionally specify an id for the email template when calling this method, but it",
-    "is not required."
+    "Creates an email template. You can optionally specify an Id for the template, if not provided one will be generated."
   ],
   "method": "post",
   "methodName": "createEmailTemplate",
@@ -12,7 +11,7 @@
     {
       "name": "emailTemplateId",
       "comments": [
-        "(Optional) The id for the template."
+        "(Optional) The Id for the template. If not provided a secure random UUID will be generated."
       ],
       "type": "urlSegment",
       "javaType": "UUID"
@@ -20,7 +19,7 @@
     {
       "name": "request",
       "comments": [
-        "The email template request that contains all of the information used to create the email template."
+        "The request object that contains all of the information used to create the email template."
       ],
       "type": "body",
       "javaType": "EmailTemplateRequest"

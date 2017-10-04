@@ -1,7 +1,7 @@
 {
   "uri": "/api/email/template",
   "comments": [
-    "Updates the email template with the given id."
+    "Updates the email template with the given Id."
   ],
   "method": "put",
   "methodName": "updateEmailTemplate",
@@ -11,7 +11,7 @@
     {
       "name": "emailTemplateId",
       "comments": [
-        "The id of the email template to update."
+        "The Id of the email template to update."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

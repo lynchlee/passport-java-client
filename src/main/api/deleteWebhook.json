@@ -1,7 +1,7 @@
 {
   "uri": "/api/webhook",
   "comments": [
-    "Deletes the webhook for the given id."
+    "Deletes the webhook for the given Id."
   ],
   "method": "delete",
   "methodName": "deleteWebhook",
@@ -11,7 +11,7 @@
     {
       "name": "webhookId",
       "comments": [
-        "The id of the webhook to delete."
+        "The Id of the webhook to delete."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

@@ -11,7 +11,7 @@
     {
       "name": "userId",
       "comments": [
-        "The id of the user."
+        "The Id of the user."
       ],
       "type": "urlSegment",
       "javaType": "UUID"
@@ -19,7 +19,7 @@
     {
       "name": "applicationId",
       "comments": [
-        "The id of the application."
+        "The Id of the application."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

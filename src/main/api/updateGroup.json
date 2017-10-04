@@ -1,7 +1,7 @@
 {
   "uri": "/api/group",
   "comments": [
-    "Updates the group with the given id."
+    "Updates the group with the given Id."
   ],
   "method": "put",
   "methodName": "updateGroup",
@@ -11,7 +11,7 @@
     {
       "name": "groupId",
       "comments": [
-        "The id of the group to update."
+        "The Id of the group to update."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

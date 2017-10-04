@@ -1,7 +1,7 @@
 {
   "uri": "/api/user",
   "comments": [
-    "Creates a user with an optional id."
+    "Creates a user. You can optionally specify an Id for the user, if not provided one will be generated."
   ],
   "method": "post",
   "methodName": "createUser",
@@ -11,7 +11,7 @@
     {
       "name": "userId",
       "comments": [
-        "(Optional) The id for the user."
+        "(Optional) The Id for the user. If not provided a secure random UUID will be generated."
       ],
       "type": "urlSegment",
       "javaType": "UUID"
@@ -19,7 +19,7 @@
     {
       "name": "request",
       "comments": [
-        "The user request that contains all of the information used to create the user."
+        "The request object that contains all of the information used to create the user."
       ],
       "type": "body",
       "javaType": "UserRequest"

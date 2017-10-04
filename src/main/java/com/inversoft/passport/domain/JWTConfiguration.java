@@ -27,7 +27,9 @@ import org.primeframework.jwt.domain.Algorithm;
  * @author Daniel DeGroff
  */
 public class JWTConfiguration extends Enableable implements Buildable<JWTConfiguration> {
-
+  /**
+   * The configured algorithm used for signing and verification of JWTs.
+   */
   public Algorithm algorithm;
 
   /**
@@ -59,9 +61,6 @@ public class JWTConfiguration extends Enableable implements Buildable<JWTConfigu
    * The length of time in seconds this JWT is valid from the time it was issued. This should be a non-zero value.
    */
   public int timeToLiveInSeconds;
-
-  public JWTConfiguration() {
-  }
 
   @Override
   public boolean equals(Object o) {

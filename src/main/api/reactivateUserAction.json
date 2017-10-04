@@ -1,7 +1,7 @@
 {
   "uri": "/api/user-action",
   "comments": [
-    "Reactivates the user action with the given id."
+    "Reactivates the user action with the given Id."
   ],
   "method": "put",
   "methodName": "reactivateUserAction",
@@ -11,7 +11,7 @@
     {
       "name": "userActionId",
       "comments": [
-        "The id of the user action to reactivate."
+        "The Id of the user action to reactivate."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

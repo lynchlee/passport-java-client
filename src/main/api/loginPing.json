@@ -14,7 +14,7 @@
     {
       "name": "userId",
       "comments": [
-        "The id of the user that was logged in."
+        "The Id of the user that was logged in."
       ],
       "type": "urlSegment",
       "javaType": "UUID"
@@ -22,7 +22,7 @@
     {
       "name": "applicationId",
       "comments": [
-        "The id of the application that they logged into."
+        "The Id of the application that they logged into."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

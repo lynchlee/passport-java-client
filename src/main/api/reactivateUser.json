@@ -1,7 +1,7 @@
 {
   "uri": "/api/user",
   "comments": [
-    "Reactivates the user with the given id."
+    "Reactivates the user with the given Id."
   ],
   "method": "put",
   "methodName": "reactivateUser",
@@ -11,7 +11,7 @@
     {
       "name": "userId",
       "comments": [
-        "The id of the user to reactivate."
+        "The Id of the user to reactivate."
       ],
       "type": "urlSegment",
       "javaType": "UUID"

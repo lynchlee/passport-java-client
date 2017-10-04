@@ -3,6 +3,7 @@
   "comments": [
     "Exchange a refresh token for a new Access Token (JWT)."
   ],
+  "deprecated": "since 1.16.0. Renamed to {@link #exchangeRefreshTokenForJWT}.",
   "method": "post",
   "methodName": "exchangeRefreshTokenForAccessToken",
   "successResponse": "RefreshResponse",

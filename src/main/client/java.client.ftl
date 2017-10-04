@@ -36,6 +36,8 @@ import com.inversoft.passport.domain.api.EmailTemplateRequest;
 import com.inversoft.passport.domain.api.EmailTemplateResponse;
 import com.inversoft.passport.domain.api.GroupRequest;
 import com.inversoft.passport.domain.api.GroupResponse;
+import com.inversoft.passport.domain.api.IdentityProviderRequest;
+import com.inversoft.passport.domain.api.IdentityProviderResponse;
 import com.inversoft.passport.domain.api.IntegrationRequest;
 import com.inversoft.passport.domain.api.IntegrationResponse;
 import com.inversoft.passport.domain.api.LoginRequest;
@@ -62,7 +64,10 @@ import com.inversoft.passport.domain.api.WebhookRequest;
 import com.inversoft.passport.domain.api.WebhookResponse;
 import com.inversoft.passport.domain.api.email.SendRequest;
 import com.inversoft.passport.domain.api.email.SendResponse;
+import com.inversoft.passport.domain.api.identityProvider.LookupResponse;
 import com.inversoft.passport.domain.api.jwt.IssueResponse;
+import com.inversoft.passport.domain.api.jwt.ReconcileRequest;
+import com.inversoft.passport.domain.api.jwt.ReconcileResponse;
 import com.inversoft.passport.domain.api.jwt.RefreshRequest;
 import com.inversoft.passport.domain.api.jwt.RefreshResponse;
 import com.inversoft.passport.domain.api.jwt.ValidateResponse;
@@ -134,7 +139,13 @@ public class PassportClient {
     [/#if]
   [/#list]
    * @return The ClientResponse object.
+[#if api.deprecated??]
+   * @deprecated ${api.deprecated}
+[/#if]
    */
+[#if api.deprecated??]
+  @Deprecated
+[/#if]
   public ClientResponse<${api.successResponse}, ${api.errorResponse}> ${api.methodName}(${global.methodParameters(api, "java")}) {
     return start(${api.successResponse}.${(api.successResponse == 'Void')?then('TYPE', 'class')}, ${api.errorResponse}.${(api.errorResponse == 'Void')?then('TYPE', 'class')}).uri("${api.uri}")
                         [#if api.authorization??]

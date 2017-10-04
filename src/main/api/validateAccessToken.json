@@ -6,6 +6,7 @@
     "<p>",
     "This API may be used to verify the JWT as well as decode the encoded JWT into human readable identity claims."
   ],
+  "deprecated": "since 1.16.0. Renamed to {@link #validateJWT}.",
   "method": "get",
   "methodName": "validateAccessToken",
   "successResponse": "ValidateResponse",

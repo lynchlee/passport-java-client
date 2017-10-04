@@ -11,7 +11,7 @@
     {
       "name": "userId",
       "comments": [
-        "The id of the user."
+        "The Id of the user."
       ],
       "type": "urlParameter",
       "parameterName": "userId",

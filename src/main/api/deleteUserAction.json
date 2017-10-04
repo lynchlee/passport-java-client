@@ -1,7 +1,7 @@
 {
   "uri": "/api/user-action",
   "comments": [
-    "Deletes the user action for the given id. This permanently deletes the user action and also any history and logs of",
+    "Deletes the user action for the given Id. This permanently deletes the user action and also any history and logs of",
     "the action being applied to any users."
   ],
   "method": "delete",
@@ -12,7 +12,7 @@
     {
       "name": "userActionId",
       "comments": [
-        "The id of the user action to delete."
+        "The Id of the user action to delete."
       ],
       "type": "urlSegment",
       "javaType": "UUID"
