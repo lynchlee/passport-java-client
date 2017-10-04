@@ -12,7 +12,7 @@ import com.inversoft.json.ToString;
 /**
  * @author Daniel DeGroff
  */
-public class IdentityProviderConfiguration implements Buildable<IdentityProviderConfiguration> {
+public class IdentityProviderOauth2Configuration implements Buildable<IdentityProviderOauth2Configuration> {
   @JsonProperty("authorization_endpoint")
   public URI authorizationEndpoint;
 
@@ -24,10 +24,10 @@ public class IdentityProviderConfiguration implements Buildable<IdentityProvider
     if (this == o) {
       return true;
     }
-    if (!(o instanceof IdentityProviderConfiguration)) {
+    if (!(o instanceof IdentityProviderOauth2Configuration)) {
       return false;
     }
-    IdentityProviderConfiguration that = (IdentityProviderConfiguration) o;
+    IdentityProviderOauth2Configuration that = (IdentityProviderOauth2Configuration) o;
     return Objects.equals(authorizationEndpoint, that.authorizationEndpoint) &&
         Objects.equals(tokenEndpoint, that.tokenEndpoint);
   }

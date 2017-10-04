@@ -3,8 +3,8 @@
  */
 package com.inversoft.passport.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import com.inversoft.json.ToString;
@@ -13,9 +13,12 @@ import com.inversoft.json.ToString;
  * @author Daniel DeGroff
  */
 public class IdentityProviderData implements Buildable<IdentityProviderData> {
-  public IdentityProviderConfiguration configuration = new IdentityProviderConfiguration();
+  /**
+   * Map of keys used for signature validation for this provider. Key Id to PEM encoded certificate of public key.
+   */
+  public Map<String, String> keys = new HashMap<>();
 
-  public List<IdentityProviderKey> keys = new ArrayList<>();
+  public IdentityProviderOauth2Configuration oauth2 = new IdentityProviderOauth2Configuration();
 
   public String uniqueIdentityClaim;
 
@@ -30,8 +33,8 @@ public class IdentityProviderData implements Buildable<IdentityProviderData> {
       return false;
     }
     com.inversoft.passport.domain.IdentityProviderData that = (com.inversoft.passport.domain.IdentityProviderData) o;
-    return Objects.equals(configuration, that.configuration) &&
-        Objects.equals(keys, that.keys) &&
+    return Objects.equals(keys, that.keys) &&
+        Objects.equals(oauth2, that.oauth2) &&
         Objects.equals(uniqueIdentityClaim, that.uniqueIdentityClaim) &&
         Objects.equals(uniqueIdentityClaimType, that.uniqueIdentityClaimType);
 
@@ -39,7 +42,7 @@ public class IdentityProviderData implements Buildable<IdentityProviderData> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(configuration, keys, uniqueIdentityClaim, uniqueIdentityClaimType);
+    return Objects.hash(keys, oauth2, uniqueIdentityClaim, uniqueIdentityClaimType);
   }
 
   @Override
