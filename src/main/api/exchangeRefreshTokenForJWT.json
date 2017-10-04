@@ -1,11 +1,10 @@
 {
   "uri": "/api/jwt/refresh",
   "comments": [
-    "Exchange a refresh token for a new Access Token (JWT)."
+    "Exchange a refresh token for a new JWT."
   ],
-  "deprecated": "since 1.16.0. Renamed to {@link #exchangeRefreshTokenForJWT}.",
   "method": "post",
-  "methodName": "exchangeRefreshTokenForAccessToken",
+  "methodName": "exchangeRefreshTokenForJWT",
   "successResponse": "RefreshResponse",
   "errorResponse": "Errors",
   "params": [

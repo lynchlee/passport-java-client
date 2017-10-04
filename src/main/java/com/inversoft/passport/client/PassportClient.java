@@ -63,7 +63,10 @@ import com.inversoft.passport.domain.api.WebhookRequest;
 import com.inversoft.passport.domain.api.WebhookResponse;
 import com.inversoft.passport.domain.api.email.SendRequest;
 import com.inversoft.passport.domain.api.email.SendResponse;
+import com.inversoft.passport.domain.api.identityProvider.LookupResponse;
 import com.inversoft.passport.domain.api.jwt.IssueResponse;
+import com.inversoft.passport.domain.api.jwt.ReconcileRequest;
+import com.inversoft.passport.domain.api.jwt.ReconcileResponse;
 import com.inversoft.passport.domain.api.jwt.RefreshRequest;
 import com.inversoft.passport.domain.api.jwt.RefreshResponse;
 import com.inversoft.passport.domain.api.jwt.ValidateResponse;
@@ -596,8 +599,23 @@ public class PassportClient {
    *
    * @param request The refresh request.
    * @return The ClientResponse object.
+   * @deprecated since 1.16.0. Renamed to {@link #exchangeRefreshTokenForJWT}.
    */
+  @Deprecated
   public ClientResponse<RefreshResponse, Errors> exchangeRefreshTokenForAccessToken(RefreshRequest request) {
+    return start(RefreshResponse.class, Errors.class).uri("/api/jwt/refresh")
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
+                            .go();
+  }
+
+  /**
+   * Exchange a refresh token for a new JWT.
+   *
+   * @param request The refresh request.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<RefreshResponse, Errors> exchangeRefreshTokenForJWT(RefreshRequest request) {
     return start(RefreshResponse.class, Errors.class).uri("/api/jwt/refresh")
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
@@ -642,8 +660,29 @@ public class PassportClient {
    * @param applicationId The Application Id for which you are requesting a new access token be issued.
    * @param encodedJWT The encoded JWT (access token).
    * @return The ClientResponse object.
+   * @deprecated since 1.16.0. Renamed to {@link #issueJWT}.
    */
+  @Deprecated
   public ClientResponse<IssueResponse, Errors> issueAccessToken(UUID applicationId, String encodedJWT) {
+    return start(IssueResponse.class, Errors.class).uri("/api/jwt/issue")
+                            .authorization("JWT " + encodedJWT)
+                            .urlParameter("applicationId", applicationId)
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Issue a new access token (JWT) for the requested Application after ensuring the provided JWT is valid. A valid
+   * access token is properly signed and not expired.
+   * <p>
+   * This API may be used in an SSO configuration to issue new tokens for another application after the user has
+   * obtained a valid token from authentication.
+   *
+   * @param applicationId The Application Id for which you are requesting a new access token be issued.
+   * @param encodedJWT The encoded JWT (access token).
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IssueResponse, Errors> issueJWT(UUID applicationId, String encodedJWT) {
     return start(IssueResponse.class, Errors.class).uri("/api/jwt/issue")
                             .authorization("JWT " + encodedJWT)
                             .urlParameter("applicationId", applicationId)
@@ -705,6 +744,20 @@ public class PassportClient {
   }
 
   /**
+   * Retrieves the identity provider for the given domain. A 200 response code indicates the domain is managed
+   * by a registered identity provider. A 404 indicates the domain is not managed.
+   *
+   * @param domain The domain or email address to lookup.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<LookupResponse, Void> lookupIdentityProvider(String domain) {
+    return start(LookupResponse.class, Void.TYPE).uri("/api/identity-provider/lookup")
+                            .urlParameter("domain", domain)
+                            .get()
+                            .go();
+  }
+
+  /**
    * Modifies a temporal user action by changing the expiration of the action and optionally adding a comment to the
    * action.
    *
@@ -759,6 +812,19 @@ public class PassportClient {
                             .urlSegment(userActionId)
                             .urlParameter("reactivate", true)
                             .put()
+                            .go();
+  }
+
+  /**
+   * Reconcile a User to Passport using JWT issued from another Identity Provider.
+   *
+   * @param request The reconcile request that contains the data to reconcile the User.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<ReconcileResponse, Errors> reconcileJWT(ReconcileRequest request) {
+    return start(ReconcileResponse.class, Errors.class).uri("/api/jwt/reconcile")
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
                             .go();
   }
 
@@ -1559,8 +1625,26 @@ public class PassportClient {
    *
    * @param encodedJWT The encoded JWT (access token).
    * @return The ClientResponse object.
+   * @deprecated since 1.16.0. Renamed to {@link #validateJWT}.
    */
+  @Deprecated
   public ClientResponse<ValidateResponse, Void> validateAccessToken(String encodedJWT) {
+    return start(ValidateResponse.class, Void.TYPE).uri("/api/jwt/validate")
+                            .authorization("JWT " + encodedJWT)
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Validates the provided JWT (encoded JWT string) to ensure the token is valid. A valid access token is properly
+   * signed and not expired.
+   * <p>
+   * This API may be used to verify the JWT as well as decode the encoded JWT into human readable identity claims.
+   *
+   * @param encodedJWT The encoded JWT (access token).
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<ValidateResponse, Void> validateJWT(String encodedJWT) {
     return start(ValidateResponse.class, Void.TYPE).uri("/api/jwt/validate")
                             .authorization("JWT " + encodedJWT)
                             .get()

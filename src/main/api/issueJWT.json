@@ -7,9 +7,8 @@
     "This API may be used in an SSO configuration to issue new tokens for another application after the user has",
     "obtained a valid token from authentication."
   ],
-  "deprecated": "since 1.16.0. Renamed to {@link #issueJWT}.",
   "method": "get",
-  "methodName": "issueAccessToken",
+  "methodName": "issueJWT",
   "successResponse": "IssueResponse",
   "errorResponse": "Errors",
   "authorization": "\"JWT \" + encodedJWT",
