@@ -95,6 +95,8 @@ public class User implements Buildable<User> {
 
   public String timezone;
 
+  public TwoFactorCodeDelivery twoFactorCodeDelivery;
+
   public boolean twoFactorEnabled;
 
   public String twoFactorSecret;
@@ -219,6 +221,7 @@ public class User implements Buildable<User> {
         Objects.equals(registrations, user.registrations) &&
         Objects.equals(salt, user.salt) &&
         Objects.equals(timezone, user.timezone) &&
+        Objects.equals(twoFactorCodeDelivery, user.twoFactorCodeDelivery) &&
         Objects.equals(twoFactorSecret, user.twoFactorSecret) &&
         Objects.equals(username, user.username) &&
         Objects.equals(usernameStatus, user.usernameStatus) &&
@@ -316,7 +319,7 @@ public class User implements Buildable<User> {
   public int hashCode() {
     return Objects.hash(active, birthDate, childIds, cleanSpeakId, parentalConsentType, data, email, encryptionScheme, expiry,
                         factor, firstName, fullName, imageUrl, insertInstant, lastLoginInstant, lastName, memberships, middleName, mobilePhone, parentId, password,
-                        passwordChangeRequired, passwordLastUpdateInstant, registrations, salt, timezone, twoFactorSecret, username,
+                        passwordChangeRequired, passwordLastUpdateInstant, registrations, salt, timezone, twoFactorCodeDelivery, twoFactorSecret, username,
                         usernameStatus, verificationId, verificationIdCreateInstant, verified);
   }
 
