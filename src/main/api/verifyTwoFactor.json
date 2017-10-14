@@ -1,5 +1,5 @@
 {
-  "uri": "/api/two-factor",
+  "uri": "/api/two-factor/validate",
   "comments": [
     "Confirms a two factor authentication code."
   ],

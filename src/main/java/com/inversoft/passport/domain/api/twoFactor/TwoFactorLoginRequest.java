@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package com.inversoft.passport.domain.api.jwt;
+package com.inversoft.passport.domain.api.twoFactor;
 
 import java.util.UUID;
 
@@ -24,25 +24,25 @@ import com.inversoft.passport.domain.api.BaseLoginRequest;
 /**
  * @author Daniel DeGroff
  */
-public class ReconcileRequest extends BaseLoginRequest implements Buildable<ReconcileRequest> {
-  public String encodedJWT;
+public class TwoFactorLoginRequest extends BaseLoginRequest implements Buildable<TwoFactorLoginRequest> {
+  public String code;
 
-  public UUID identityProviderId;
+  public String verificationId;
 
   @JacksonConstructor
-  public ReconcileRequest() {
+  public TwoFactorLoginRequest() {
   }
 
-  public ReconcileRequest(UUID identityProviderId, UUID applicationId, String encodedJWT) {
-    this.identityProviderId = identityProviderId;
+  public TwoFactorLoginRequest(UUID applicationId, String code, String verificationId) {
     this.applicationId = applicationId;
-    this.encodedJWT = encodedJWT;
+    this.code = code;
+    this.verificationId = verificationId;
   }
 
-  public ReconcileRequest(UUID identityProviderId, UUID applicationId, String encodedJWT, String ipAddress) {
-    this.identityProviderId = identityProviderId;
+  public TwoFactorLoginRequest(UUID applicationId, String code, String verificationId, String ipAddress) {
     this.applicationId = applicationId;
-    this.encodedJWT = encodedJWT;
+    this.code = code;
+    this.verificationId = verificationId;
     this.ipAddress = ipAddress;
   }
 }

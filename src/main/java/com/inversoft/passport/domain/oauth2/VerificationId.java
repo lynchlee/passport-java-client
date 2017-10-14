@@ -13,22 +13,21 @@
  * either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package com.inversoft.passport.domain.api;
+package com.inversoft.passport.domain.oauth2;
 
 import com.inversoft.json.JacksonConstructor;
-import com.inversoft.passport.domain.search.AuditLogSearchCriteria;
 
 /**
- * @author Brian Pontarelli
+ * @author Daniel DeGroff
  */
-public class AuditLogSearchRequest {
-  public AuditLogSearchCriteria search;
+public class VerificationId implements OAuthResponse {
+  public String verificationId;
 
-  @JacksonConstructor
-  public AuditLogSearchRequest() {
+  public VerificationId(String verificationId) {
+    this.verificationId = verificationId;
   }
 
-  public AuditLogSearchRequest(AuditLogSearchCriteria search) {
-    this.search = search;
+  @JacksonConstructor
+  public VerificationId() {
   }
 }

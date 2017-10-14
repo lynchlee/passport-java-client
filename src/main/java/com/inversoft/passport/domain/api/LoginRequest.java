@@ -19,30 +19,14 @@ import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.passport.domain.Buildable;
-import com.inversoft.passport.domain.jwt.RefreshToken.MetaData;
 
 /**
  * Login API request object.
  *
  * @author Seth Musselman
  */
-public class LoginRequest implements Buildable<LoginRequest> {
-  public UUID applicationId;
-
-  /**
-   * Optional parameter on the Login Request. When logging in with an application Id and a device the response will
-   * contain a refresh token.
-   */
-  public String device;
-
-  public String ipAddress;
-
+public class LoginRequest extends BaseLoginRequest implements Buildable<LoginRequest> {
   public String loginId;
-
-  /**
-   * Optional parameter allowing the caller to specify meta data about the login. Device information, etc.
-   */
-  public MetaData metaData;
 
   public boolean noJWT;
 

@@ -13,22 +13,18 @@
  * either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package com.inversoft.passport.domain.api;
-
-import com.inversoft.json.JacksonConstructor;
-import com.inversoft.passport.domain.search.AuditLogSearchCriteria;
+package com.inversoft.passport.domain;
 
 /**
- * @author Brian Pontarelli
+ * @author Daniel DeGroff
  */
-public class AuditLogSearchRequest {
-  public AuditLogSearchCriteria search;
-
-  @JacksonConstructor
-  public AuditLogSearchRequest() {
-  }
-
-  public AuditLogSearchRequest(AuditLogSearchCriteria search) {
-    this.search = search;
-  }
+public enum TwoFactorDelivery {
+  /**
+   * No delivery mechanism provided by Passport. Code must be entered manually from a code generator such as Google Authenticator.
+   */
+  None,
+  /**
+   * SMS Push is utilized if available.
+   */
+  TextMessage
 }

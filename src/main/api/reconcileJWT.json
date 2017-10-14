@@ -5,7 +5,7 @@
   ],
   "method": "post",
   "methodName": "reconcileJWT",
-  "successResponse": "ReconcileResponse",
+  "successResponse": "LoginResponse",
   "errorResponse": "Errors",
   "params": [
     {

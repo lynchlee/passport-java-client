@@ -66,7 +66,6 @@ import com.inversoft.passport.domain.api.email.SendResponse;
 import com.inversoft.passport.domain.api.identityProvider.LookupResponse;
 import com.inversoft.passport.domain.api.jwt.IssueResponse;
 import com.inversoft.passport.domain.api.jwt.ReconcileRequest;
-import com.inversoft.passport.domain.api.jwt.ReconcileResponse;
 import com.inversoft.passport.domain.api.jwt.RefreshRequest;
 import com.inversoft.passport.domain.api.jwt.RefreshResponse;
 import com.inversoft.passport.domain.api.jwt.ValidateResponse;
@@ -76,6 +75,7 @@ import com.inversoft.passport.domain.api.report.MonthlyActiveUserReportResponse;
 import com.inversoft.passport.domain.api.report.RegistrationReportResponse;
 import com.inversoft.passport.domain.api.report.TotalsReportResponse;
 import com.inversoft.passport.domain.api.report.UserLoginReportResponse;
+import com.inversoft.passport.domain.api.twoFactor.TwoFactorLoginRequest;
 import com.inversoft.passport.domain.api.user.ActionRequest;
 import com.inversoft.passport.domain.api.user.ActionResponse;
 import com.inversoft.passport.domain.api.user.ChangePasswordRequest;
@@ -821,8 +821,8 @@ public class PassportClient {
    * @param request The reconcile request that contains the data to reconcile the User.
    * @return The ClientResponse object.
    */
-  public ClientResponse<ReconcileResponse, Errors> reconcileJWT(ReconcileRequest request) {
-    return start(ReconcileResponse.class, Errors.class).uri("/api/jwt/reconcile")
+  public ClientResponse<LoginResponse, Errors> reconcileJWT(ReconcileRequest request) {
+    return start(LoginResponse.class, Errors.class).uri("/api/jwt/reconcile")
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
                             .go();
@@ -1439,6 +1439,19 @@ public class PassportClient {
   }
 
   /**
+   * Complete login using a 2FA challenge
+   *
+   * @param request The login request that contains the user credentials used to log them in.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<LoginResponse, Errors> twoFactorLogin(TwoFactorLoginRequest request) {
+    return start(LoginResponse.class, Errors.class).uri("/api/two-factor/login")
+                            .bodyHandler(new JSONBodyHandler(request, objectMapper))
+                            .post()
+                            .go();
+  }
+
+  /**
    * Updates the application with the given Id.
    *
    * @param applicationId The Id of the application to update.
@@ -1671,7 +1684,7 @@ public class PassportClient {
    * @return The ClientResponse object.
    */
   public ClientResponse<Void, Errors> verifyTwoFactor(TwoFactorRequest request) {
-    return start(Void.TYPE, Errors.class).uri("/api/two-factor")
+    return start(Void.TYPE, Errors.class).uri("/api/two-factor/validate")
                             .bodyHandler(new JSONBodyHandler(request, objectMapper))
                             .post()
                             .go();

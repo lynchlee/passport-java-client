@@ -32,8 +32,20 @@ public class LoginResponse {
 
   public User user;
 
+  public String verificationId;
+
   @JacksonConstructor
   public LoginResponse() {
+  }
+
+  public LoginResponse(User user, String token) {
+    this.user = user;
+    this.token = token;
+  }
+
+
+  public LoginResponse(String verificationId) {
+    this.verificationId = verificationId;
   }
 
   public LoginResponse(User user) {

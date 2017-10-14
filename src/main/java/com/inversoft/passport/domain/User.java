@@ -95,10 +95,51 @@ public class User implements Buildable<User> {
 
   public String timezone;
 
-  public TwoFactorCodeDelivery twoFactorCodeDelivery;
+  public TwoFactorDelivery twoFactorDelivery;
 
-  public boolean twoFactorEnabled;
+  // new field - only way flip this on, is through an 'Enable 2FA' API call, /api/user/2fa/enable - takes a code, must match secret.
 
+  // TODO
+  // 1. add 2FAEnabled to db  [DONE]
+
+  // Enable 2FA API - 2FA Code Generator - Application
+  //   [POST]
+  //     1. Authorize: identity (API Key, JWT)
+  //     2. Return a secret to generate a QRCode, etc?
+
+  //    User takes photo of QR Code to sync their App with the 2FA secret
+  //       - Now they get a code from their app.
+
+  //    User Calls API :
+  //       1. Authorize: identity (API Key, JWT or Verification Id)
+  //       2. Send in Code
+
+  //      [200] OK. User is updated, set to twFactorEnabled = true
+  //      [400] Nope, you suck.
+  //
+
+
+  // Enable 2FA API - Push - SMS
+  //   [POST]
+  //     1. Authorize: identity (API Key, JWT)
+  //     2. Send mobile number - or omit if the user already has mobile configured, noop if it has it.
+  //     3. Backend sends push after saving new secret to user, twoFactorEnabled = false, twoFactorDelivery = Text
+  //
+  //        [200] OK, wait for SMS to mobile.
+
+  //    User receives push, now they have a code.
+
+  //    User Calls API :
+  //       1. Authorize: identity (API Key, JWT or Verification Id)
+  //       2. Send in Code
+
+  //      [200] OK. User is updated, set to twFactorEnabled = true
+  //      [400] Nope, you suck.
+  //
+  //
+  //
+
+public boolean twoFactorEnabled;
   public String twoFactorSecret;
 
   public String username;
@@ -221,7 +262,7 @@ public class User implements Buildable<User> {
         Objects.equals(registrations, user.registrations) &&
         Objects.equals(salt, user.salt) &&
         Objects.equals(timezone, user.timezone) &&
-        Objects.equals(twoFactorCodeDelivery, user.twoFactorCodeDelivery) &&
+        Objects.equals(twoFactorDelivery, user.twoFactorDelivery) &&
         Objects.equals(twoFactorSecret, user.twoFactorSecret) &&
         Objects.equals(username, user.username) &&
         Objects.equals(usernameStatus, user.usernameStatus) &&
@@ -319,7 +360,7 @@ public class User implements Buildable<User> {
   public int hashCode() {
     return Objects.hash(active, birthDate, childIds, cleanSpeakId, parentalConsentType, data, email, encryptionScheme, expiry,
                         factor, firstName, fullName, imageUrl, insertInstant, lastLoginInstant, lastName, memberships, middleName, mobilePhone, parentId, password,
-                        passwordChangeRequired, passwordLastUpdateInstant, registrations, salt, timezone, twoFactorCodeDelivery, twoFactorSecret, username,
+                        passwordChangeRequired, passwordLastUpdateInstant, registrations, salt, timezone, twoFactorDelivery, twoFactorSecret, username,
                         usernameStatus, verificationId, verificationIdCreateInstant, verified);
   }
 
@@ -364,7 +405,6 @@ public class User implements Buildable<User> {
     password = null;
     factor = null;
     encryptionScheme = null;
-    twoFactorEnabled = twoFactorSecret != null;
     twoFactorSecret = null;
     return this;
   }

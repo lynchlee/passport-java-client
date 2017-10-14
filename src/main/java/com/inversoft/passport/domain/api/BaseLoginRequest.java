@@ -15,20 +15,19 @@
  */
 package com.inversoft.passport.domain.api;
 
-import com.inversoft.json.JacksonConstructor;
-import com.inversoft.passport.domain.search.AuditLogSearchCriteria;
+import java.util.UUID;
+
+import com.inversoft.passport.domain.jwt.RefreshToken.MetaData;
 
 /**
- * @author Brian Pontarelli
+ * @author Daniel DeGroff
  */
-public class AuditLogSearchRequest {
-  public AuditLogSearchCriteria search;
+public class BaseLoginRequest {
+  public UUID applicationId;
 
-  @JacksonConstructor
-  public AuditLogSearchRequest() {
-  }
+  public String device;
 
-  public AuditLogSearchRequest(AuditLogSearchCriteria search) {
-    this.search = search;
-  }
+  public String ipAddress;
+
+  public MetaData metaData;
 }
