@@ -53,7 +53,7 @@ module Inversoft
     def ${camel_to_underscores(api.methodName)}(${global.methodParameters(api, "ruby")})
       start.uri('${api.uri}')
       [#if api.authorization??]
-           .authorization(${api.authorization})
+           .authorization(${api.authorization?replace('encodedJWT', 'encoded_jwt')?replace('\"', '\'')})
       [/#if]
       [#list api.params![] as param]
         [#if param.type == "urlSegment"]

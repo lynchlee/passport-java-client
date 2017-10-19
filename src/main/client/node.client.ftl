@@ -47,7 +47,7 @@ PassportClient.prototype = {
       this._start()
           .uri('${api.uri}')
       [#if api.authorization??]
-          .authorization(${api.authorization})
+          .authorization(${api.authorization?replace('\"', '\'')})
       [/#if]
       [#list api.params![] as param]
         [#if param.type == "urlSegment"]
