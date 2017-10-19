@@ -1,0 +1,20 @@
+{
+  "uri": "/api/application/oauth-configuration",
+  "comments": [
+    "Retrieves the Oauth2 configuration for the application for the given application Id."
+  ],
+  "method": "get",
+  "methodName": "retrieveOauthConfiguration",
+  "successResponse": "OAuthConfigurationResponse",
+  "errorResponse": "Void",
+  "params": [
+    {
+      "name": "applicationId",
+      "comments": [
+        "The application id."
+      ],
+      "type": "urlSegment",
+      "javaType": "UUID"
+    }
+  ]
+}

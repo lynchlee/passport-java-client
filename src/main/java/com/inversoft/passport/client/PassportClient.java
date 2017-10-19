@@ -44,6 +44,8 @@ import com.inversoft.passport.domain.api.LoginResponse;
 import com.inversoft.passport.domain.api.MemberDeleteRequest;
 import com.inversoft.passport.domain.api.MemberRequest;
 import com.inversoft.passport.domain.api.MemberResponse;
+import com.inversoft.passport.domain.api.OAuthConfigurationResponse;
+import com.inversoft.passport.domain.api.PasswordValidationRulesResponse;
 import com.inversoft.passport.domain.api.PreviewRequest;
 import com.inversoft.passport.domain.api.PreviewResponse;
 import com.inversoft.passport.domain.api.PublicKeyResponse;
@@ -774,6 +776,19 @@ public class PassportClient {
   }
 
   /**
+   * Send a two factor authentication code to a user.
+   *
+   * @param verificationId The verification id used to find the user.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Void> pushTwoFactorCode(String verificationId) {
+    return start(Void.TYPE, Void.TYPE).uri("/api/two-factor/send")
+                            .urlSegment(verificationId)
+                            .post()
+                            .go();
+  }
+
+  /**
    * Reactivates the application with the given Id.
    *
    * @param applicationId The Id of the application to reactivate.
@@ -1126,6 +1141,30 @@ public class PassportClient {
   }
 
   /**
+   * Retrieves the Oauth2 configuration for the application for the given application Id.
+   *
+   * @param applicationId The application id.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<OAuthConfigurationResponse, Void> retrieveOauthConfiguration(UUID applicationId) {
+    return start(OAuthConfigurationResponse.class, Void.TYPE).uri("/api/application/oauth-configuration")
+                            .urlSegment(applicationId)
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves the password validation rules.
+   *
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<PasswordValidationRulesResponse, Void> retrievePasswordValidationRules() {
+    return start(PasswordValidationRulesResponse.class, Void.TYPE).uri("/api/system-configuration/password-validation-rules")
+                            .get()
+                            .go();
+  }
+
+  /**
    * Retrieves the refresh tokens that belong to the user with the given Id.
    *
    * @param userId The Id of the user.
@@ -1336,6 +1375,19 @@ public class PassportClient {
                             .urlParameter("userId", userId)
                             .urlParameter("offset", offset)
                             .urlParameter("limit", limit)
+                            .get()
+                            .go();
+  }
+
+  /**
+   * Retrieves the user for the given Id. This method does not use an API key, instead it uses a JSON Web Token (JWT) for authentication.
+   *
+   * @param encodedJWT The encoded JWT (access token).
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<UserResponse, Errors> retrieveUserUsingJWT(String encodedJWT) {
+    return start(UserResponse.class, Errors.class).uri("/api/user")
+                            .authorization("JWT " + encodedJWT)
                             .get()
                             .go();
   }

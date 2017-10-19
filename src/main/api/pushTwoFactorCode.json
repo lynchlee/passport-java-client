@@ -1,0 +1,20 @@
+{
+  "uri": "/api/two-factor/send",
+  "comments": [
+    "Send a two factor authentication code to a user."
+  ],
+  "method": "post",
+  "methodName": "pushTwoFactorCode",
+  "successResponse": "Void",
+  "errorResponse": "Void",
+  "params": [
+    {
+      "name": "verificationId",
+      "comments": [
+        "The verification id used to find the user."
+      ],
+      "type": "urlSegment",
+      "javaType": "String"
+    }
+  ]
+}
